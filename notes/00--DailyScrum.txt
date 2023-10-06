@@ -1,0 +1,234 @@
+         ____        _ __         _____                         
+        / __ \____ _(_) /_  __   / ___/____________  ______ ___ 
+       / / / / __ `/ / / / / /   \__ \/ ___/ ___/ / / / __ `__ \          
+      / /_/ / /_/ / / / /_/ /   ___/ / /__/ /  / /_/ / / / / / /
+     /_____/\__,_/_/_/\__, /   /____/\___/_/   \__,_/_/ /_/ /_/      
+                     /____/                                     
+===============================================================================
+Team #3:
+	Dustin Ruck
+	Meredith White
+	Soliloquy Yarrow
+
+Project: Clotho | Depop Clone
+
+===============================================================================
+Day00: 2023-10-05 R
+===================
+
+Dustin:
+	Todo Before Next Scrum:
+		- Set up Cloud:
+			- Heroku
+			- Azure DB
+				- No Tables
+				- Schema (Send DB name to Meredith)
+				- Create DBA god-user (also send to Meredith)
+			- S3
+		- Sign up for Stripe / Payment-Processing Account
+
+Soli:
+	Todo Before Next Scrum:
+		- Organize & send notes to group
+			- This Doc
+			- Proposal Feedback
+		- (After Meredith makes directories)
+			- Setup Client Directory
+			- Initialize React App
+		- Create Skeleton Views/Pages/Components for:
+			- Login/Register
+				- Bypass Auth
+				- Redirect to Admin Portal
+		- Create Admin Portal/Dashboard:
+			- (placeholder) stats/charts
+			- User management
+				- Create admin user
+				- Create non-admin user
+				- (placeholder) view all users 
+				  & show delete/edit-role buttons
+			- (placeholder) category management
+	
+Meredith: 
+	Todo Before Next Scrum:
+		- Submit completed proposal to Lea
+		- Set up project directory structure & push to GitHub
+			- GroupProject
+				- Clotho-App
+					- Server
+					- Client
+				- Misc
+		- Initialize Server (most basic)
+			- Model
+			- Route
+			- Controller
+		- Finalize DB design
+			- Update diagram with accurate names (for reference)
+		- (After Dustin finishes hosting DB)
+			- Sync Sequelize DB model to DB
+
+===============================================================================
+Day01: 2023-10-05 F
+===================
+
+Dustin:
+	Done:
+		- Setup DB (Azure Server)
+
+	Not-Done:
+		- Setup S3
+		- Setup Heroku
+		- Setup Stripe (Acct)
+
+	Needs Assistance:
+		- Will need testing of Azure
+
+	Todo Before Next Scrum:
+		- Setup S3
+		- Setup Heroku
+		- Setup Stripe (Acct)
+		- Put credentials into OneDrive
+
+Soli:
+	Done:
+		- Scrum Doc Start
+		- Proposal Feedback consolidate
+
+	Not-Done:
+		- Setup Client Directory
+		- Initialize
+		- Login Page (bypasses auth)
+		- Admin Dashboard skeleton page
+
+	Needs Assistance:
+		- FE-BE "cheat sheet"
+
+	Todo Before Next Scrum:
+		- Setup Client Directory
+		- Initialize
+		- Research simple table/flow diagram for FE-BE cheat sheet
+		- Login Page (bypasses auth)
+		- Admin Dashboar skeleton page
+
+Meredith: 
+	Done:
+		- Setup repo 
+		- setup trello
+		- setup node server
+		- wrote initial models in sequelize
+		
+	Not-Done:
+		- Any controllers or routes other than one to test
+	
+	Needs Assistance:
+		- Will want notes/instructions for views
+
+	Todo Before Next Scrum:
+		- Start document (cheat sheet) for models and api routes
+		- Start controllers and routes (admin first) 
+		-
+
+===============================================================================
+Day03: 2023-10-10 T
+===================
+
+Dustin:
+	Done:
+		- 
+		
+	Not-Done:
+		- 
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- 
+
+Soli:
+	Done:
+		- Made this scrum file & organized directory/notes to-date
+		- Created & Initialized Client
+	Not-Done:
+		- 
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- 
+
+Meredith: 
+	Done:
+		- 
+		
+	Not-Done:
+		- 
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- 
+
+
+
+
+
+
+
+
+
+===============================================================================
+===============================================================================
+===============================================================================
+      ____  ____  __  __  ____  __      __   ____  ____   
+     (_  _)( ___)(  \/  )(  _ \(  )    /__\ (_  _)( ___) ()
+       )(   )__)  )    (  )___/ )(__  /(__)\  )(   )__)   
+      (__) (____)(_/\/\_)(__)  (____)(__)(__)(__) (____) ()            
+===============================================================================
+DayXX: 2023-10-YY Z
+===================
+
+Dustin:
+	Done:
+		- 
+		
+	Not-Done:
+		- 
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- 
+
+Soli:
+	Done:
+		- 
+		
+	Not-Done:
+		- 
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- 
+
+Meredith: 
+	Done:
+		- 
+		
+	Not-Done:
+		- 
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- 
+
+
+====
+END
+====
