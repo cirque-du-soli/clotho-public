@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             defaultValue: 0
         },
-        avatarImg: {
+        avatar: {
             type: DataTypes.STRING(200),
             allowNull: false
         }
