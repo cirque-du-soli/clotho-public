@@ -24,7 +24,7 @@ app.use("/api/admin/sizes", sizeRouter);
 
 // {alter: true} // {force: true} // <-- use as arg in .sync() below if needed
 
-db.sequelize.sync({}).then(() => {
+db.sequelize.sync().then(() => {
     app.listen(3001, () => {
         console.log("Server is running on port 3001");
     });
