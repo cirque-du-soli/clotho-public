@@ -22,6 +22,9 @@ app.use("/api/admin/genders", genderRouter);
 const sizeRouter = require("./routes/size-routes");
 app.use("/api/admin/sizes", sizeRouter);
 
+const adminUserRouter = require("./routes/admin-user-routes");
+app.use("/api/admin/users", adminUserRouter);
+
 // {alter: true} // {force: true} // <-- use as arg in .sync() below if needed
 
 db.sequelize.sync().then(() => {
