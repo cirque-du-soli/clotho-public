@@ -3,12 +3,8 @@
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import PhotoUpload from './components/PhotoUpload';
 
-
 // Admin
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
-import { dataProvider } from './dataProvider'; // returns a Promise!
-
-
 
 import React from 'react';
 
