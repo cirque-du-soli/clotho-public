@@ -1,7 +1,28 @@
+// IMPORTS
+
+// Admin
+import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
+import { dataProvider } from './dataProvider'; // returns a Promise!
+
+
+
+
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+
+
+  <Admin dataProvider={dataProvider}>
+    
+  </Admin>
+
+
+
+
+
+
   return (
     <div className="App">
       <header className="App-header">

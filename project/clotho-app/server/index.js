@@ -25,6 +25,12 @@ app.use("/api/admin/sizes", sizeRouter);
 const adminUserRouter = require("./routes/admin-user-routes");
 app.use("/api/admin/users", adminUserRouter);
 
+
+// *LAST* Server Basic Route
+app.get('/', (req, res) => {
+    res.send('Greetings, user! Server is running on port 3001.');
+});
+
 // {alter: true} // {force: true} // <-- use as arg in .sync() below if needed
 
 db.sequelize.sync().then(() => {
