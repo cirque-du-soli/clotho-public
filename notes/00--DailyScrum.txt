@@ -107,7 +107,7 @@ Soli:
 		- Initialize
 		- Research simple table/flow diagram for FE-BE cheat sheet
 		- Login Page (bypasses auth)
-		- Admin Dashboar skeleton page
+		- Admin Dashboard skeleton page
 
 Meredith: 
 	Done:
@@ -133,42 +133,52 @@ Day03: 2023-10-10 T
 
 Dustin:
 	Done:
-		- 
+		- Model for images
+		- Azure db credentials
+		- Began Setup S3 and Stripe
 		
 	Not-Done:
-		- 
+		- Heroku
 	
 	Needs Assistance:
 		- 
 
 	Todo Before Next Scrum:
-		- 
+		- Finish server integration (Azure, S3, Heroku)
 
 Soli:
 	Done:
 		- Made this scrum file & organized directory/notes to-date
 		- Created & Initialized Client
+		- Started Miro Flowchart - FE-BE- cheat sheet
 	Not-Done:
-		- 
+		-Admin Dashboard
+		-Login Page 
 	
 	Needs Assistance:
-		- 
+		- --
 
 	Todo Before Next Scrum:
-		- 
+		- Admin
+		- Login
 
 Meredith: 
 	Done:
-		- 
+		- Controllers and routes for Admin portal: Categories, Users
+		- readme.txt and started links to resources
 		
 	Not-Done:
-		- 
+		- CRUD for Orders and Listings
 	
 	Needs Assistance:
-		- 
+		- Images
+		- Instructions to make changes to routes/controllers if needed
+		- Search and sorting 
 
 	Todo Before Next Scrum:
-		- 
+		- Add listing attributes to db
+		- Finish Admin CRUD: Orders, Listings, Login/Logout
+		- Auth
 
 
 
