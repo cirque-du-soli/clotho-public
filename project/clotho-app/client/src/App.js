@@ -1,4 +1,5 @@
 // IMPORTS
+<<<<<<< Updated upstream
 // import React from 'react';
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import PhotoUpload from './components/PhotoUpload';
@@ -10,38 +11,25 @@ import { dataProvider } from './dataProvider'; // returns a Promise!
 
 
 
+=======
+import React from 'react';
+>>>>>>> Stashed changes
 
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
 
-
-
-  <Admin dataProvider={dataProvider}>
-    
-  </Admin>
-
-
-
-
-
-
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
+
+        
+
+
+        
       </header>
     </div>
   );

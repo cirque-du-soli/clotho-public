@@ -2,36 +2,29 @@
 // React
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import App from './App';
+
+import AdminLayout from './layouts/AdminLayout';
+
+import 'bootstrap/dist/css/bootstrap.css';
 
 // STYLES //
 import './index.css';
+import './App.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/admin/*" element={<AdminLayout />} />
+        <Route path="/test001" element={<App />} />
+        <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* UNUSED DEFAULTS */
