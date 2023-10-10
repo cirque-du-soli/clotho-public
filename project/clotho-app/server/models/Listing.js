@@ -44,28 +44,23 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     Listing.associate = (models) => {
+
         Listing.belongsTo(models.User, {
             foreignKey: 'sellerId',
             as: 'seller'
         });
-    };
 
-    Listing.associate = (models) => {
-        Listing.belongsTo(models.Category);
-    };
+        Listing.belongsTo(models.Category,
+            {foreignKey: 'categoryId'});
 
-    Listing.associate = (models) => {
-        Listing.belongsTo(models.Gender);
-    };
+        Listing.belongsTo(models.Gender,
+            {foreignKey: 'genderId'});
 
-    Listing.associate = (models) => {
-        Listing.belongsTo(models.Size);
-    };
+        Listing.belongsTo(models.Size,
+            {foreignKey: 'sizeId'});
 
-    Listing.associate = (models) => {
-        Listing.hasOne(models.OrderItem, {
-            foreignKey: 'listingId'
-        });
+        Listing.hasOne(models.OrderItem,
+            {foreignKey: 'listingId'});
     };
 
     return Listing;

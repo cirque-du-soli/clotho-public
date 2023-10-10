@@ -24,15 +24,15 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Order.associate = (models) => {
-        Order.hasMany(models.OrderItem);
-    };
+        Order.hasMany(models.OrderItem,
+            {foreignKey: 'orderId'});
 
-    Order.associate = (models) => {
         Order.belongsTo(models.User, {
             foreignKey: 'buyerId',
             as: 'buyer'
         });
     };
+
 
     return Order;
 };

@@ -17,22 +17,12 @@ module.exports = (sequelize, DataTypes) => {
 
 
     OrderItem.associate = (models) => {
-        OrderItem.belongsTo(models.Order, {
-            foreignKey: {
-                name: 'orderId',
-                as: 'order'
-            }
-        });
+        OrderItem.belongsTo(models.Order,
+            {foreignKey: 'orderId'});
+        OrderItem.belongsTo(models.Listing,
+            {foreignKey: 'listingId'});
     };
 
-    OrderItem.associate = (models) => {
-        OrderItem.belongsTo(models.Listing, {
-            foreignKey: {
-                name: 'listingId',
-                as: 'listing'
-            }
-        });
-    };
 
     return OrderItem;
 };

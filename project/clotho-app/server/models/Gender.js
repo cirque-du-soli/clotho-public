@@ -15,11 +15,10 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 0
         }
     });
-    
+
     Gender.associate = (models) => {
-        Gender.hasMany(models.Listing, {
-            foreignKey: 'genderId'
-        });
+        Gender.hasMany(models.Listing,
+            {foreignKey: 'genderId'});
     };
 
     return Gender;

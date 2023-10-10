@@ -17,10 +17,13 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
     
+    // Category.associate = (models) => {
+    //     Category.hasMany(models.Listing);
+    // };
+
     Category.associate = (models) => {
-        Category.hasMany(models.Listing, {
-            foreignKey: 'categoryId'
-        });
+        Category.hasMany(models.Listing,
+            {foreignKey: 'categoryId'});
     };
 
     return Category;
