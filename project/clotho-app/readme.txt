@@ -39,6 +39,18 @@ PUT edit existing user:             api/admin/users/:id([0-9]+)
 DELETE user:                        api/admin/users/:id([0-9]+)
 PATCH undelete user:                api/admin/users/undelete/:id([0-9]+)
 
+        -------------------------------listings-------------------------------
+
+GET list incl deleted:                  api/admin/listings
+GET by id incl deleted:                 api/admin/listings/:id([0-9]+)
+GET list by seller username:            api/admin/listings/seller/:username
+POST new listing:                       api/admin/listings
+PUT edit existing listing               
+(title, desc, img, price, attributes):  api/admin/users/:id([0-9]+)
+DELETE listing:                         api/admin/listings/:id([0-9]+)
+PATCH undelete user:                    api/admin/listings/undelete/:id([0-9]+)
+PATCH mark as sold:                     api/admin/listings/sold/:id([0-9]+)
+PATCH mark as for sale (cancel sale):   api/admin/listings/unsold/:id([0-9]+)
 
 ========================USER========================
 
