@@ -1,5 +1,4 @@
 // IMPORTS
-<<<<<<< Updated upstream
 // import React from 'react';
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import PhotoUpload from './components/PhotoUpload';
@@ -11,9 +10,7 @@ import { dataProvider } from './dataProvider'; // returns a Promise!
 
 
 
-=======
 import React from 'react';
->>>>>>> Stashed changes
 
 import logo from './logo.svg';
 import './App.css';

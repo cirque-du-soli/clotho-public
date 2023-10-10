@@ -11,11 +11,8 @@
     "perfect-scrollbar": "^1.5.5",
     "ra-data-json-server": "^4.14.0",
     "react": "^18.2.0",
-<<<<<<< Updated upstream
     "react-admin": "^4.14.5",
     "react-beautiful-dnd": "^13.1.1",
-=======
->>>>>>> Stashed changes
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "reactstrap": "^9.2.0",
