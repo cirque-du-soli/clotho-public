@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
 
     Gender.associate = (models) => {
         Gender.hasMany(models.Listing,
-            {foreignKey: 'genderId'});
+            {    
+                foreignKey: 'genderId'
+            });
     };
 
     return Gender;

@@ -25,6 +25,8 @@ app.use("/api/admin/sizes", sizeRouter);
 const adminUserRouter = require("./routes/admin-user-routes");
 app.use("/api/admin/users", adminUserRouter);
 
+const adminListingRouter = require("./routes/admin-listing-routes");
+app.use("/api/admin/listings", adminListingRouter);
 
 // *LAST* Server Basic Route
 app.get('/', (req, res) => {

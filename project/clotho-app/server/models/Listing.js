@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(1000),
             allowNull: false
         },
+        price: {
+            type: DataTypes.DECIMAL,
+            allowNull: false
+        },
         categoryId: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -45,22 +49,31 @@ module.exports = (sequelize, DataTypes) => {
 
     Listing.associate = (models) => {
 
-        Listing.belongsTo(models.User, {
-            foreignKey: 'sellerId',
-            as: 'seller'
-        });
+        Listing.belongsTo(models.User,
+            {
+                foreignKey: 'sellerId',
+                as: 'Seller'
+            });
 
         Listing.belongsTo(models.Category,
-            {foreignKey: 'categoryId'});
+            {
+                foreignKey: 'categoryId'
+            });
 
         Listing.belongsTo(models.Gender,
-            {foreignKey: 'genderId'});
+            {
+                foreignKey: 'genderId'
+            });
 
         Listing.belongsTo(models.Size,
-            {foreignKey: 'sizeId'});
+            {
+                foreignKey: 'sizeId'
+            });
 
         Listing.hasOne(models.OrderItem,
-            {foreignKey: 'listingId'});
+            {
+                foreignKey: 'listingId'
+            });
     };
 
     return Listing;

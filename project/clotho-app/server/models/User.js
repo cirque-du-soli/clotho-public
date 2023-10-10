@@ -36,12 +36,12 @@ module.exports = (sequelize, DataTypes) => {
     User.associate = (models) => {
         User.hasMany(models.Listing, {
             foreignKey: 'sellerId',
-            as: 'seller'
+            as: 'Seller'
         });
 
         User.hasMany(models.Order, {
             foreignKey: 'buyerId',
-            as: 'buyer'
+            as: 'Buyer'
         });
     };
 
