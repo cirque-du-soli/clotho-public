@@ -13,3 +13,6 @@ https://www.youtube.com/watch?v=eQAIojcArRY
 
 React Hooks
 https://www.youtube.com/playlist?list=PLZlA0Gpn_vH8EtggFGERCwMY5u5hOjf-h
+
+JWT Logout
+https://medium.com/devgorilla/how-to-log-out-when-using-jwt-a8c7823e8a6
