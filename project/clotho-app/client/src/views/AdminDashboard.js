@@ -32,11 +32,7 @@ import {
 
 
 function AdminDashboard(props) {
-    const [bigChartData, setbigChartData] = React.useState("data1");
-    const setBgChartData = (name) => {
-        setbigChartData(name);
-    };
-
+    
     return (
         <>
             <UsersList />

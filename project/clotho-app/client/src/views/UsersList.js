@@ -18,11 +18,19 @@ function UsersList() {
     const [usersList, setUsersList] = useState([]);
 
     // HOOKS
+    /* 
+    //Test Hook with sample JSON
     useEffect(() => {
         Axios.get("https://jsonplaceholder.typicode.com/users").then((response) => {
             setUsersList(response.data);
         });
     }, []);
+    */
+   useEffect(() => {
+       Axios.get("http://localhost:3001/api/admin/users").then((response) => {
+           setUsersList(response.data);
+       });
+   }, []);
 
     const viewUser = (id) => {
         alert('viewUser() not yet implemented');
@@ -30,28 +38,39 @@ function UsersList() {
 
     const deleteUser = (id) => {
         alert('deleteUser() not yet implemented');
-    }
-
+    }  
+    
+    const createUser = (id) => {
+        alert('createUser() not yet implemented');
+    }   
     return (
         <>
             <div className="content">
                 <Row>
                     <Col>
                         <Card>
-                            <CardHeader>
+                            <CardHeader className='text-start-0'>
                                 <CardTitle tag="h4">Users:</CardTitle>
+                                <button
+                                    className="btn btn-primary"
+                                    onClick={() => { createUser() }}
+                                >
+                                    Create New User
+                                    </button>
                             </CardHeader>
                             <CardBody>
                                 <Table className="tablesorter" responsive>
                                     <thead className="text-primary">
                                         <tr>
                                             <th className="text-center">ID</th>
-                                            <th className="text-center">Name</th>
                                             <th className="text-center">Username</th>
                                             <th className="text-center">Email</th>
-                                            <th className="text-center">OtherStuff</th>
-                                            <th className="text-center">Details</th>
-                                            <th className="text-center">Delete</th>
+                                            <th className="text-center">Password</th>
+                                            <th className="text-center">Role</th>
+                                            <th className="text-center">Status</th>
+                                            <th className="text-center">Img</th>
+                                            <th className="text-center">Created</th>
+                                            <th className="text-center">Updated</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,10 +79,14 @@ function UsersList() {
                                                 return (
                                                     <tr>
                                                         <td>{val.id}</td>
-                                                        <td>{val.name}</td>
                                                         <td>{val.username}</td>
                                                         <td>{val.email}</td>
-                                                        <td>etc.</td>
+                                                        <td>{val.password ? "********" : "invalid"}</td>
+                                                        <td>{val.isAdmin ? "Admin" : "User"}</td>
+                                                        <td>{val.isDeleted ? "Deleted" : "Active"}</td>
+                                                        <td>{val.avatar}</td>
+                                                        <td>{val.createdAt}</td>
+                                                        <td>{val.updatedAt}</td>
                                                         <td className="text-center">
                                                             <button 
                                                                 className="btn btn-secondary"
