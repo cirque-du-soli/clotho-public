@@ -59,7 +59,6 @@ GET by id incl cancelled:               api/admin/orders/:id([0-9]+)
 GET list by seller username:            api/admin/orders/buyer/:username
 POST new order:                         api/admin/orders
 DELETE cancel order:                    api/admin/orders/:id([0-9]+)
-PATCH uncancel order:                   api/admin/orders/:id([0-9]+)
 
 POST requests for orders must include buyerId and listing ids of cart items. Example:
 
@@ -86,6 +85,14 @@ GET user by id                          api/users/:id([0-9]+)
 POST register new user                  api/users/
 PUT update user profile                 api/users/:id([0-9]+)
 DELETE close account                    api/users/:id([0-9]+)
+
+        -------------------------------listings-------------------------------
+
+GET all available                       api/listings/
+GET all not deleted by seller           api/listings/seller/:username
+POST new listing                        api/listings/
+PUT update listing                      api/listings/:id([0-9]+)
+DELETE listing                          api/listings/:id([0-9]+)
 
 ****************** ADDITIONAL NOTES ***********************
 

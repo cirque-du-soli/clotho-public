@@ -41,6 +41,9 @@ app.use("/api/users", userRouter);
 const listingRouter = require("./routes/listing-routes");
 app.use("/api/listings", listingRouter);
 
+const orderRouter = require("./routes/order-routes");
+app.use("/api/orders", orderRouter);
+
 // *LAST* Server Basic Route
 app.get('/', (req, res) => {
     res.send('Greetings, user! Server is running on port 3001.');

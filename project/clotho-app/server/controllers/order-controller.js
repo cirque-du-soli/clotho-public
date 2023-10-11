@@ -1,7 +1,6 @@
 /*
-Order controller for Admin
-Admin can CRUD all users' orders
-TODO: no auth yet
+Order controller for non-admin
+TODO: auth, transactions, stripe
 */
 
 const { Order } = require("../models");
@@ -9,44 +8,6 @@ const { User } = require("../models");
 const { OrderItem } = require("../models");
 const { Listing } = require("../models");
 
-
-/* 
-Get full list of items including cancelled
-*/
-exports.findAll = async (req, res) => {
-
-    try {
-
-        var orderList = await Order.findAll(
-            {
-
-                include: [{
-                    model: User,
-                    as: 'Buyer',
-                    attributes: ['username', 'id']
-                },
-                {
-                    model: OrderItem,
-                    include: [{
-                        model: Listing,
-                        attributes: ['id', 'title', 'description', 'thumbnail', 'price'],
-                    }]
-                }]
-            }
-        );
-
-        if (!orderList[0]) {
-            return res.status(404).json({ message: "No orders found" });
-        }
-
-        res.json(orderList);
-
-    } catch (err) {
-
-        console.log(err.message);
-        res.status(500).json({ message: "Something went wrong" });
-    }
-};
 
 /* 
 Get order by id
@@ -102,9 +63,9 @@ exports.findAllByBuyer = async (req, res) => {
                 include: [{
                     model: User,
                     as: 'Buyer',
-                    attributes: [],
+                    attributes: ['username', 'id'],
                     where: {
-                        username: req.params.username
+                        username: req.params.username //TODO auth
                     }
                 },
                 {
@@ -165,7 +126,7 @@ exports.create = async (req, res) => {
                 }
             );
             if (!listing) {
-                err++;
+               err++;
 
             } else {
                 total += listing.price;
@@ -205,7 +166,7 @@ exports.create = async (req, res) => {
             })
         }
 
-        res.status(201).json({ message: "Successfully added order", order: order });
+        res.status(201).json({ message: "Successfully placed order", order: order });
 
 
     } catch (err) {
@@ -215,6 +176,7 @@ exports.create = async (req, res) => {
     }
 
 };
+
 
 /* 
 Delete order by id
@@ -275,6 +237,3 @@ exports.cancelById = async (req, res) => {
         res.status(500).json({ message: "Something went wrong" });
     }
 };
-
-
-

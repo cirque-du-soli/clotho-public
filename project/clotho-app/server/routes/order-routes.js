@@ -1,8 +1,6 @@
 const router = require('express').Router();
-const orders = require("../controllers/admin-order-controller.js");
+const orders = require("../controllers/order-controller.js");
 
-// get all
-router.get('/', orders.findAll);
 
 // get all by buyer
 router.get('/buyer/:username', orders.findAllByBuyer); //FIXME username regex
