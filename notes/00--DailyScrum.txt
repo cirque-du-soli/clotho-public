@@ -181,7 +181,53 @@ Meredith:
 		- Auth
 
 
+2023-10-11
+===================
 
+Dustin:
+	Done:
+		- Rough draft of front end and back end photo upload
+		- Rough draft of payment processor back end
+		
+	Not-Done:
+		- Heroku
+		- front end payment processor
+	
+	Needs Assistance:
+		- standardization of syntax with Meredith for photo upload
+
+	Todo Before Next Scrum:
+		- Heroku and payment processor
+
+Soli:
+	Done:
+		- First admin view for get 
+		- setup front end directories
+		
+	Not-Done:
+		- login
+	
+	Needs Assistance:
+		- Check in about auth/login
+
+	Todo Before Next Scrum:
+		- Admin portal: user CRUD
+
+Meredith: 
+	Done:
+		- All initial CRUD for admins and users except login/logout (auth, images, payments, transactions not implemented)
+		
+	Not-Done:
+		- Authentication/authorization
+		- login/logout controllers + routes
+	
+	Needs Assistance:
+		- might want help/consultation about searching and sorting
+		- might need help with Stripe for order placement/refunds
+
+	Todo Before Next Scrum:
+		- transactions
+		- auth
 
 
 
