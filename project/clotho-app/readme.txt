@@ -52,6 +52,22 @@ PATCH undelete user:                    api/admin/listings/undelete/:id([0-9]+)
 PATCH mark as sold:                     api/admin/listings/sold/:id([0-9]+)
 PATCH mark as for sale (cancel sale):   api/admin/listings/unsold/:id([0-9]+)
 
+        -------------------------------orders-------------------------------
+
+GET list incl cancelled:                api/admin/orders
+GET by id incl cancelled:               api/admin/orders/:id([0-9]+)
+GET list by seller username:            api/admin/orders/buyer/:username
+POST new order:                         api/admin/orders
+DELETE cancel order:                    api/admin/orders/:id([0-9]+)
+PATCH uncancel order:                   api/admin/orders/:id([0-9]+)
+
+POST requests for orders must include buyerId and listing ids of cart items. Example:
+
+    {
+        "buyerId": "2",
+        "items": [2, 1]
+    }
+
 ========================USER========================
 
         -------------------------------item attributes-------------------------------
@@ -64,8 +80,12 @@ GET single record excl deleted:     api/attr/categories/:id([0-9]+)
                                     api/attr/genders/:id([0-9]+)
                                     api/attr/sizes/:id([0-9]+)
 
+        -------------------------------user profile-------------------------------
 
-
+GET user by id                          api/users/:id([0-9]+)
+POST register new user                  api/users/
+PUT update user profile                 api/users/:id([0-9]+)
+DELETE close account                    api/users/:id([0-9]+)
 
 ****************** ADDITIONAL NOTES ***********************
 

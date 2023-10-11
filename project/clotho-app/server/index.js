@@ -8,11 +8,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-//GET only for category, size, gender
-const attrRouter = require("./routes/public-attribute-routes");
-app.use("/api/attr", attrRouter);
-
-//full CRUD attr for admin only 
+/* ADMIN ONLY */
 const categoryRouter = require("./routes/category-routes");
 app.use("/api/admin/categories", categoryRouter);
 
@@ -27,6 +23,23 @@ app.use("/api/admin/users", adminUserRouter);
 
 const adminListingRouter = require("./routes/admin-listing-routes");
 app.use("/api/admin/listings", adminListingRouter);
+
+const adminOrderRouter = require("./routes/admin-order-routes");
+app.use("/api/admin/orders", adminOrderRouter);
+
+/* NON ADMIN */ 
+
+//GET only for category, size, gender
+const attrRouter = require("./routes/public-attribute-routes");
+app.use("/api/attr", attrRouter);
+
+//Register, update profile, close account
+const userRouter = require("./routes/user-routes");
+app.use("/api/users", userRouter);
+
+//View, post, update listings
+const listingRouter = require("./routes/listing-routes");
+app.use("/api/listings", listingRouter);
 
 // *LAST* Server Basic Route
 app.get('/', (req, res) => {

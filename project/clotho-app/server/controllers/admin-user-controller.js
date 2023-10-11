@@ -198,41 +198,41 @@ Update user password (no route yet, may be useful later for reset password with 
 exports.updatePasswordById = async (req, res) => {
 
     if (!req.body.password) {
-        return res.status(400).json({ message: "New password required" }); 
+        return res.status(400).json({ message: "New password required" });
     }
 
-        try {
-            // check that id exists
-            var user = await User.findByPk(req.params.id);
+    try {
+        // check that id exists
+        var user = await User.findByPk(req.params.id);
 
-            if (!user) {
-                return res.status(400).json({ message: "Invalid user id" });
-            }
+        if (!user) {
+            return res.status(400).json({ message: "Invalid user id" });
+        }
 
-            //save new password
-            bcrypt.hash(req.body.password, 10).then(async (hash) => {
+        //save new password
+        bcrypt.hash(req.body.password, 10).then(async (hash) => {
 
-                var user = await User.update({
-                    password: hash
-                },
+            var user = await User.update({
+                password: hash
+            },
                 {
                     where: {
                         id: req.params.id
                     }
                 });
 
-                res.status(201).json({ message: "Successfully added user", user: user });
-            });
+            res.status(201).json({ message: "Successfully added user", user: user });
+        });
 
-            user = await User.findByPk(req.params.id);
+        user = await User.findByPk(req.params.id);
 
-            res.status(200).json({ message: "Successful update", user: user });
+        res.status(200).json({ message: "Successful update", user: user });
 
-        } catch (err) {
+    } catch (err) {
 
-            console.log(err.message);
-            res.status(500).json({ message: "Something went wrong" });
-        }
+        console.log(err.message);
+        res.status(500).json({ message: "Something went wrong" });
+    }
 };
 
 /* 
@@ -343,9 +343,9 @@ function isValidPost(req, res) {
         case (!validator.isEmail(req.body.email)):
             res.status(400).json({ message: "Invalid email" });
             return false;
-            case (!req.body.password):
-                res.status(400).json({ message: "Password cannot be null" });
-                return false;
+        case (!req.body.password):
+            res.status(400).json({ message: "Password cannot be null" });
+            return false;
         case (req.body.avatar && req.body.avatar.length > 200): //TODO
             return res.status(400).json({ message: "Path to avatar image cannot exceed 200 characters" });
         default:

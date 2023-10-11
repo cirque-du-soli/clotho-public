@@ -1,7 +1,6 @@
 /*
-Listing controller for Admin
-Admin can CRUD all users' listings
-TODO: no auth yet
+Listing controller for non-admin users
+TODO: auth, search filters
 */
 
 const { Listing } = require("../models");
@@ -11,7 +10,7 @@ const { Size } = require("../models");
 const { Gender } = require("../models");
 
 /* 
-Get full list of items including deleted
+Get full list of items excluding sold and deleted
 */
 exports.findAll = async (req, res) => {
 
@@ -36,7 +35,11 @@ exports.findAll = async (req, res) => {
             {
                 model: Gender,
                 attributes: ['name', 'id']
-            }]
+            }],
+            where: {
+                isDeleted: false,
+                isSold: false
+            }
         });
 
         if (!itemList[0]) {
@@ -52,7 +55,7 @@ exports.findAll = async (req, res) => {
 };
 
 /* 
-Get listing by id
+Get listing by id (include sold, exclude deleted)
 */
 exports.findById = async (req, res) => {
 
@@ -78,7 +81,10 @@ exports.findById = async (req, res) => {
                 {
                     model: Gender,
                     attributes: ['name', 'id']
-                }]
+                }],
+                where: {
+                    isDeleted: false
+                }
             });
 
         if (!listing) {
@@ -96,7 +102,7 @@ exports.findById = async (req, res) => {
 
 
 /* 
-Get listing by seller username
+Get listings by seller username (include sold, exclude deleted, order by sold)
 */
 exports.findAllBySeller = async (req, res) => {
 
@@ -126,7 +132,11 @@ exports.findAllBySeller = async (req, res) => {
                 {
                     model: Gender,
                     attributes: ['name', 'id']
-                }]
+                }],
+                where: {
+                    isDeleted: false
+                },
+                order: ['isSold']
             }
         );
 
@@ -211,7 +221,13 @@ exports.updateById = async (req, res) => {
             }
 
             //TODO: in non-admin version, verify listing is not sold or deleted + authorize by seller id
-            var listing = await Listing.findByPk(req.params.id);
+            var listing = await Listing.findOne({
+                where: {
+                    id: req.params.id,
+                    isSold: false,
+                    isDeleted: false
+                }
+            });
             if (!listing) {
                 return res.status(400).json({ message: "Invalid listing id" });
             }
@@ -236,12 +252,6 @@ exports.updateById = async (req, res) => {
                 if (!gender) {
                     return res.status(400).json({ message: "Invalid gender id" });
                 }
-            }
-
-
-            var seller = await User.findByPk(req.body.sellerId);
-            if (!seller || (seller && seller.isDeleted)) {
-                return res.status(400).json({ message: "Invalid seller id" });
             }
 
             listingEdit = await Listing.update(
@@ -317,142 +327,6 @@ exports.deleteById = async (req, res) => {
     }
 };
 
-/* 
-Undelete listing by id
-*/
-exports.unDeleteById = async (req, res) => {
-
-    // request must include id
-    if (!req.params.id) {
-        return res.status(400).json({ message: "Listing id cannot be null" });
-    }
-    try {
-
-        // check that user with id exists
-        var listing = await Listing.findOne(
-            {
-                where: {
-                    id: req.params.id,
-                    isDeleted: true
-                }
-            });
-
-        if (!listing) {
-            return res.status(400).json({ message: "Listing does not exist or is not deleted" });
-        }
-
-        listing = await Listing.update(
-            {
-                isDeleted: false
-            },
-            {
-                where: {
-                    id: req.params.id
-                }
-            });
-
-        listing = await Listing.findByPk(req.params.id);
-
-        res.status(200).json({ message: "Successful undelete", listing: listing });
-
-    } catch (err) {
-
-        console.log(err.message);
-        res.status(500).json({ message: "Something went wrong" });
-    }
-};
-
-/* 
-Mark listing as sold by id
-(may not be needed later; transactions not yet implemented)
-*/
-exports.markSold = async (req, res) => {
-
-    // request must include id
-    if (!req.params.id) {
-        return res.status(400).json({ message: "Listing id cannot be null" });
-    }
-    try {
-
-        // check that user with id exists
-        var listing = await Listing.findOne(
-            {
-                where: {
-                    id: req.params.id,
-                    isSold: false
-                }
-            });
-
-        if (!listing) {
-            return res.status(400).json({ message: "Listing does not exist or is already marked sold" });
-        }
-
-        listing = await Listing.update(
-            {
-                isSold: true
-            },
-            {
-                where: {
-                    id: req.params.id
-                }
-            });
-
-        listing = await Listing.findByPk(req.params.id);
-
-        res.status(200).json({ message: "Successfully marked as sold", listing: listing });
-
-    } catch (err) {
-
-        console.log(err.message);
-        res.status(500).json({ message: "Something went wrong" });
-    }
-};
-
-/* 
-Mark listing as for sale
-(may not be needed later; transactions not yet implemented)
-*/
-exports.markForSale = async (req, res) => {
-
-    // request must include id
-    if (!req.params.id) {
-        return res.status(400).json({ message: "Listing id cannot be null" });
-    }
-    try {
-
-        // check that user with id exists
-        var listing = await Listing.findOne(
-            {
-                where: {
-                    id: req.params.id,
-                    isSold: true
-                }
-            });
-
-        if (!listing) {
-            return res.status(400).json({ message: "Listing does not exist or is already marked as for sale" });
-        }
-
-        listing = await Listing.update(
-            {
-                isSold: false
-            },
-            {
-                where: {
-                    id: req.params.id
-                }
-            });
-
-        listing = await Listing.findByPk(req.params.id);
-
-        res.status(200).json({ message: "Successfully marked as for sale", listing: listing });
-
-    } catch (err) {
-
-        console.log(err.message);
-        res.status(500).json({ message: "Something went wrong" });
-    }
-};
 
 function isValidPost(req, res) {
 
@@ -479,7 +353,7 @@ function isValidPost(req, res) {
             res.status(400).json({ message: "Price must exceed 0" });
             return false;
         case (!req.body.sellerId):
-            res.status(400).json({ message: "Seller id cannot be null" });
+            res.status(400).json({ message: "Seller id cannot be null" }); //TODO auth
             return false;
         case (req.body.sellerId != Number(req.body.sellerId).toFixed()):
             res.status(400).json({ message: "Seller id must be an integer" });
@@ -518,16 +392,13 @@ function isValidPut(req, res) {
             res.status(400).json({ message: "Title cannot exceed 50 characters" });
             return false;
         case (req.body.description && req.body.description.length > 1000):
-            res.status(400).json({ message: "Description cannot exceed 1000 characters" });
+            res.status(400).json({ message: "Description cannot exceed 1000 characters" }); //TODO sanitize
             return false;
         case (req.body.price && req.body.price != Number(req.body.price).toFixed(2)):
             res.status(400).json({ message: "Price must be in dollars and cents" });
             return false;
         case (req.body.price && req.body.price < 0.01):
             res.status(400).json({ message: "Price must exceed 0" });
-            return false;
-        case (req.body.sellerId && req.body.sellerId != Number(req.body.sellerId).toFixed()):
-            res.status(400).json({ message: "Seller id must be an integer" });
             return false;
         case (req.body.sizeId && req.body.sizeId != Number(req.body.sizeId).toFixed()):
             res.status(400).json({ message: "Size id must be an integer" });
