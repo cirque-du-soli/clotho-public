@@ -3,11 +3,11 @@ Listing controller for non-admin users
 TODO: auth, search filters
 */
 
-const { Listing } = require("../utils/models");
-const { User } = require("../utils/models");
-const { Category } = require("../utils/models");
-const { Size } = require("../utils/models");
-const { Gender } = require("../utils/models");
+const { Listing } = require("../models");
+const { User } = require("../models");
+const { Category } = require("../models");
+const { Size } = require("../models");
+const { Gender } = require("../models");
 
 /* 
 Get full list of items excluding sold and deleted

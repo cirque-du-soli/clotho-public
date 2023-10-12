@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const db = require('./utils/models');
+const db = require('/Users/Dustin/repos/clotho/project/clotho-app/server/models');
 const cors = require('cors');
 
 

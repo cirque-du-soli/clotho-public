@@ -7,7 +7,7 @@ later: could use to get stats for listings/orders (most popular size by number o
 
 */
 
-const { Size } = require("../utils/models");
+const { Size } = require("../models");
 
 
 /* 

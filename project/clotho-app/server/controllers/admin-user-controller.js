@@ -5,7 +5,7 @@ TODO: auth, images, validate username and password strength
 
 */
 
-const { User } = require("../utils/models");
+const { User } = require("../models");
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 

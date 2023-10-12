@@ -4,17 +4,10 @@ Admin can CRUD all users' orders
 TODO: no auth yet
 */
 
-<<<<<<< Updated upstream:project/clotho-app/server/controllers/admin-order-controller.js
 const { Order, sequelize } = require("../models");
 const { User } = require("../models");
 const { OrderItem } = require("../models");
 const { Listing } = require("../models");
-=======
-const { Order } = require("../utils/models");
-const { User } = require("../utils/models");
-const { OrderItem } = require("../utils/models");
-const { Listing } = require("../utils/models");
->>>>>>> Stashed changes:project/clotho-app/client/server/controllers/admin-order-controller.js
 
 
 /* 

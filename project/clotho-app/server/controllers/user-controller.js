@@ -5,7 +5,7 @@ TODO: auth, images, username regex
 
 */
 
-const { User } = require("../utils/models");
+const { User } = require("../models");
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 

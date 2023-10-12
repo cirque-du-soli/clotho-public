@@ -7,7 +7,7 @@ later: could use to get stats for listings/orders (most popular gender by number
 
 */
 
-const { Gender } = require("../utils/models");
+const { Gender } = require("../models");
 
 
 /* 

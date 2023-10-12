@@ -7,7 +7,7 @@ later: could use to get stats for listings/orders (most popular category by numb
 
 */
 
-const { Category } = require("../utils/models");
+const { Category } = require("../models");
 
 
 /* 
