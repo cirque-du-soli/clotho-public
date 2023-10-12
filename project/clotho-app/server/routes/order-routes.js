@@ -1,18 +1,18 @@
 const router = require('express').Router();
 const orders = require("../controllers/order-controller.js");
-
-
-// get all by buyer
-router.get('/buyer/:username', orders.findAllByBuyer); //FIXME username regex
+const auth = require("../controllers/auth.js");
 
 // get by id
-router.get('/:id([0-9]+)', orders.findById);
+router.get('/:id([0-9]+)', auth.getToken, auth.getUser, orders.findById);
+
+// get all by buyer
+router.get('/', auth.getToken, auth.getUser, orders.findAllByBuyer);
 
 // create new order
-router.post('/', orders.create);
+router.post('/', auth.getToken, auth.getUser, orders.create);
 
 // cancel by id
-router.delete('/:id([0-9]+)', orders.cancelById);
+router.delete('/:id([0-9]+)', auth.getToken, auth.getUser, orders.cancelById);
 
 
-module.exports = router; 
+module.exports = router;  

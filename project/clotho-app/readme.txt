@@ -1,6 +1,6 @@
 Beginning list of API calls
 
-========================ADMIN========================
+========================ADMIN ONLY========================
 
         -------------------------------item attributes-------------------------------
 
@@ -57,6 +57,8 @@ Decimals are currently converted in the backend from dollars and cents.
 Prices in requests should be sent with two decimal places e.g. "0.99", "50.00".
 GET will retrieve these values from db as "099", "5000" and respond with "0.99", "50.00".
 
+ALSO: do not send seller id in request body--it will be retrieved from auth tokens.
+
         -------------------------------orders-------------------------------
 
 GET list incl cancelled:                api/admin/orders
@@ -72,7 +74,12 @@ POST requests for orders must include buyerId and listing ids of cart items. Exa
         "items": [2, 1]
     }
 
-========================USER========================
+========================ALL USERS========================
+
+        -------------------------------login/logout-------------------------------
+
+POST login:                         api/auth/login
+DELETE logout:                      api/auth/logout
 
         -------------------------------item attributes-------------------------------
 
@@ -102,7 +109,7 @@ DELETE listing                          api/listings/:id([0-9]+)
         -------------------------------orders-------------------------------
 
 GET by id:                              api/orders/:id([0-9]+)
-GET list by buyer username:             api/orders/buyer/:username
+GET private list for buyer:             api/orders
 POST new order:                         api/orders
 DELETE cancel order:                    api/orders/:id([0-9]+)
 

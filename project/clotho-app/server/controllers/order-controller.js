@@ -1,6 +1,6 @@
 /*
 Order controller for non-admin
-TODO: auth, transactions, stripe
+TODO: stripe
 */
 
 const { Order } = require("../models");
@@ -16,20 +16,28 @@ exports.findById = async (req, res) => {
 
     try {
 
-        var order = await Order.findByPk(
-            req.params.id,
+        var order = await Order.findOne(
+            {
+                where: {
+                    id: req.params.id
+                }
+            },
             {
                 include: [{
                     model: User,
                     as: 'Buyer',
-                    attributes: ['username', 'id']
+                    attributes: [],
+                    where: {
+                        id: req.userId,
+                        isDeleted: false
+                    }
                 },
                 {
                     model: OrderItem,
+                    attributes: [],
                     include: [{
                         model: Listing,
                         attributes: ['id', 'title', 'description', 'thumbnail', 'price'],
-
                     }]
                 }]
             }
@@ -50,7 +58,7 @@ exports.findById = async (req, res) => {
 
 
 /* 
-Get order by buyer username
+Get buyer's private order list
 */
 exports.findAllByBuyer = async (req, res) => {
 
@@ -63,17 +71,18 @@ exports.findAllByBuyer = async (req, res) => {
                 include: [{
                     model: User,
                     as: 'Buyer',
-                    attributes: ['username', 'id'],
+                    attributes: [],
                     where: {
-                        username: req.params.username //TODO auth
+                        id: req.userId,
+                        isDeleted: false
                     }
                 },
                 {
                     model: OrderItem,
+                    attributes: [],
                     include: [{
                         model: Listing,
                         attributes: ['id', 'title', 'description', 'thumbnail', 'price'],
-
                     }]
 
                 }]
@@ -81,7 +90,7 @@ exports.findAllByBuyer = async (req, res) => {
         );
 
         if (!orderList[0]) {
-            return res.status(404).json({ message: "No orders found by this buyer" });
+            return res.status(404).json({ message: "No orders found" });
         }
 
         res.json(orderList);
@@ -95,7 +104,6 @@ exports.findAllByBuyer = async (req, res) => {
 
 /* 
 Create new order
-TESTING ONLY--payments and transactions not yet implemented
 */
 exports.create = async (req, res) => {
 
@@ -104,7 +112,7 @@ exports.create = async (req, res) => {
         var buyer = await User.findOne(
             {
                 where: {
-                    id: req.body.buyerId,
+                    id: req.userId,
                     isDeleted: false
                 }
             }
@@ -140,7 +148,7 @@ exports.create = async (req, res) => {
         // save order with buyer and total
 
         var order = await Order.create({
-            buyerId: req.body.buyerId,
+            buyerId: req.userId,
             total: total,
             paymentDetails: "placeholder"
         })
@@ -189,12 +197,13 @@ exports.cancelById = async (req, res) => {
     }
     try {
 
-        // check that user with id exists
+        // check that order with id exists
         var order = await Order.findOne(
             {
                 where: {
                     id: req.params.id,
-                    isCancelled: false
+                    isCancelled: false,
+                    buyerId: req.userId
                 },
                 include: [{
                         model: OrderItem
