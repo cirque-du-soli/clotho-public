@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
-import UsersList from "./UsersList";
+import UsersList from "../components/Tables/UsersList";
 
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -32,7 +32,7 @@ import {
 
 
 function AdminDashboard(props) {
-    
+
     return (
         <>
             <UsersList />

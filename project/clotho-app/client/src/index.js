@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // STYLES //
 import './index.css';
-import './App.css';
+import './assets/App.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

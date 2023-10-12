@@ -8,8 +8,8 @@ import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-ad
 
 import React from 'react';
 
-import logo from './logo.svg';
-import './App.css';
+import logo from './assets/logo.svg';
+import './assets/App.css';
 
 function App() {
 
@@ -19,10 +19,10 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
 
 
-        
 
 
-        
+
+
       </header>
     </div>
   );

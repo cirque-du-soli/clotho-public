@@ -2,12 +2,12 @@
 import React from 'react';
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 
-import logo from '../logo.svg';
-import '../App.css';
+import logo from '../assets/logo.svg';
+import '../assets/App.css';
 
 // creates scrollbars on windows devices
-import PerfectScrollbar from "perfect-scrollbar"; 
-import routes from "../routes.js";
+import PerfectScrollbar from "perfect-scrollbar";
+import routes from "../util/routes.js";
 
 const getRoutes = (routes) => {
     return routes.map((prop, key) => {

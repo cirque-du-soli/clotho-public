@@ -1,4 +1,4 @@
-import AdminDashboard from "./views/AdminDashboard.js";
+import AdminDashboard from "../layouts/AdminDashboard.js";
 
 /*
 import Icons from "views/Icons.js";
