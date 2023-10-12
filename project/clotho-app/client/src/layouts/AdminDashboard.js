@@ -29,12 +29,14 @@ import {
     Col,
     UncontrolledTooltip,
 } from "reactstrap";
+import NewUserForm from "../components/Forms/NewUserForm";
 
 
 function AdminDashboard(props) {
 
     return (
         <>
+            <NewUserForm />
             <UsersList />
         </>
     );

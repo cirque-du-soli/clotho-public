@@ -33,16 +33,14 @@ function UsersList() {
    }, []);
 
     const viewUser = (id) => {
-        alert('viewUser() not yet implemented');
+        alert('viewUser(id) not yet implemented');
     };
 
     const deleteUser = (id) => {
-        alert('deleteUser() not yet implemented');
+        alert('deleteUser() is under dev');
+        
     }  
     
-    const createUser = (id) => {
-        alert('createUser() not yet implemented');
-    }   
     return (
         <>
             <div className="content">
@@ -51,12 +49,6 @@ function UsersList() {
                         <Card>
                             <CardHeader className='text-start-0'>
                                 <CardTitle tag="h4">Users:</CardTitle>
-                                <button
-                                    className="btn btn-primary"
-                                    onClick={() => { createUser() }}
-                                >
-                                    Create New User
-                                    </button>
                             </CardHeader>
                             <CardBody>
                                 <Table className="tablesorter" responsive>
