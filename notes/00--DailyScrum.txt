@@ -230,9 +230,68 @@ Meredith:
 		- auth
 
 
+2023-10-12
+===================
+
+Dustin:
+	Done:
+		- More work on payments
+		- Photo upload in front and back
+		- Started implementing cart
+		
+	Not-Done:
+		- Heroku
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- Finish photo uploads and payments
+		- test pages for photo uploads, payments, cart
+
+Soli:
+	Done:
+		- Documentation (cheat sheet 1)
+		- Admin Users create, get list, delete (testing)
+		
+	Not-Done:
+		- Still login
+	
+	Needs Assistance:
+		- Confused by server response re: Admin CRUD
+
+	Todo Before Next Scrum:
+		- placeholder image / default
+		- user profile
+			- Admin Update user
+			- View own user profile
+
+Meredith: 
+	Done:
+		- implemented transactions for orders in back end
+		- implemented JWT 
+		- login/logout
+		- protected routes	
+		
+	Not-Done:
+		- testing for login and protected routes
+	
+	Needs Assistance:
+		- what changes need to be made in API for stripe payments and images
+
+	Todo Before Next Scrum:
+		- implement listing image paths in db
+		- React login/logout and user auth storage
 
 
+Side notes:
 
+View listing details (similar^)
+New user (reg)(
+New listing (similar^)
+Order
+Order list
+Cart
 
 ===============================================================================
 ===============================================================================
