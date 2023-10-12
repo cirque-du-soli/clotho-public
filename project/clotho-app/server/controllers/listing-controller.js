@@ -45,6 +45,12 @@ exports.findAll = async (req, res) => {
         if (!itemList[0]) {
             return res.status(404).json({ message: "No listings found" });
         }
+
+        // format decimal
+        for (let i in itemList) {
+            itemList[i].price /= 100;
+            itemList[i].price = itemList[i].price.toFixed(2);
+        }
         res.json(itemList);
 
     } catch (err) {
@@ -91,6 +97,9 @@ exports.findById = async (req, res) => {
             return res.status(404).json({ message: "Listing not found" });
         }
 
+        //format decimal
+        item.price /= 100;
+        item.price = item.price.toFixed(2);
         res.json(listing);
 
     } catch (err) {
@@ -144,6 +153,11 @@ exports.findAllBySeller = async (req, res) => {
             return res.status(404).json({ message: "No listings found by this seller" });
         }
 
+        // format decimal
+        for (let i in itemList) {
+            itemList[i].price /= 100;
+            itemList[i].price = itemList[i].price.toFixed(2);
+        }
         res.json(itemList);
 
     } catch (err) {
@@ -189,7 +203,7 @@ exports.create = async (req, res) => {
                 title: req.body.title,
                 description: req.body.description,
                 thumbnail: 'placeholder', //TODO imgs
-                price: req.body.price,
+                price: req.body.price * 100,
                 sizeId: req.body.sizeId,
                 categoryId: req.body.categoryId,
                 genderId: req.body.genderId
@@ -258,7 +272,7 @@ exports.updateById = async (req, res) => {
                 {
                     title: req.body.title ? req.body.title : listing.title,
                     description: req.body.description ? req.body.description : listing.description,
-                    price: req.body.price ? req.body.price : listing.price,
+                    price: req.body.price ? req.body.price * 100 : listing.price,
                     thumbnail: req.body.thumbnail ? req.body.thumbnail : listing.thumbnail,
                     sizeId: req.body.sizeId ? req.body.sizeId : listing.sizeId,
                     categoryId: req.body.categoryId ? req.body.categoryId : listing.categoryId,

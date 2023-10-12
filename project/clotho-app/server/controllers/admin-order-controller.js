@@ -4,7 +4,7 @@ Admin can CRUD all users' orders
 TODO: no auth yet
 */
 
-const { Order } = require("../models");
+const { Order, sequelize } = require("../models");
 const { User } = require("../models");
 const { OrderItem } = require("../models");
 const { Listing } = require("../models");
@@ -138,6 +138,8 @@ TESTING ONLY--payments and transactions not yet implemented
 */
 exports.create = async (req, res) => {
 
+    const t = await sequelize.transaction();
+
     try {
 
         var buyer = await User.findOne(
@@ -153,6 +155,7 @@ exports.create = async (req, res) => {
         }
         let err = 0;
         let total = 0;
+
         for (let id in req.body.items) {
 
             var listing = await Listing.findOne(
@@ -176,13 +179,14 @@ exports.create = async (req, res) => {
             return res.status(400).json({ message: "One or more items in the cart are not available" });
         }
 
+
         // save order with buyer and total
 
         var order = await Order.create({
             buyerId: req.body.buyerId,
             total: total,
             paymentDetails: "placeholder"
-        })
+        }, {transaction: t});
 
         // save order items and mark listings as sold
 
@@ -196,21 +200,21 @@ exports.create = async (req, res) => {
                     where: {
                         id: req.body.items[id]
                     }
-                }
-            );
+                }, {transaction: t});
 
             var orderItem = await OrderItem.create({
                 orderId: order.id,
                 listingId: req.body.items[id]
-            })
+            }, {transaction: t});
         }
 
+        await t.commit();
         res.status(201).json({ message: "Successfully added order", order: order });
-
 
     } catch (err) {
 
         console.log(err.message);
+        await t.rollback();
         res.status(500).json({ message: "Something went wrong" });
     }
 
@@ -225,6 +229,9 @@ exports.cancelById = async (req, res) => {
     if (!req.params.id) {
         return res.status(400).json({ message: "Order id cannot be null" });
     }
+
+    const t = await sequelize.transaction();
+
     try {
 
         // check that user with id exists
@@ -235,7 +242,7 @@ exports.cancelById = async (req, res) => {
                     isCancelled: false
                 },
                 include: [{
-                        model: OrderItem
+                    model: OrderItem
                 }]
             });
 
@@ -253,8 +260,7 @@ exports.cancelById = async (req, res) => {
                     where: {
                         id: order.OrderItems[item].listingId
                     }
-                }
-            )
+                }, {transaction: t});
         }
         order = await Order.update(
             {
@@ -264,14 +270,16 @@ exports.cancelById = async (req, res) => {
                 where: {
                     id: req.params.id
                 }
-            });
+            }, {transaction: t});
 
+            await t.commit();
 
         res.status(200).json({ message: "Successful cancel" });
 
     } catch (err) {
 
         console.log(err.message);
+        await t.rollback();
         res.status(500).json({ message: "Something went wrong" });
     }
 };
