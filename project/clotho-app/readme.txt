@@ -1,6 +1,6 @@
 Beginning list of API calls
 
-========================ADMIN========================
+========================ADMIN ONLY========================
 
         -------------------------------item attributes-------------------------------
 
@@ -52,11 +52,18 @@ PATCH undelete user:                    api/admin/listings/undelete/:id([0-9]+)
 PATCH mark as sold:                     api/admin/listings/sold/:id([0-9]+)
 PATCH mark as for sale (cancel sale):   api/admin/listings/unsold/:id([0-9]+)
 
+Note about POST and PUT for listings: 
+Decimals are currently converted in the backend from dollars and cents.
+Prices in requests should be sent with two decimal places e.g. "0.99", "50.00".
+GET will retrieve these values from db as "099", "5000" and respond with "0.99", "50.00".
+
+ALSO: do not send seller id in request body--it will be retrieved from auth tokens.
+
         -------------------------------orders-------------------------------
 
 GET list incl cancelled:                api/admin/orders
 GET by id incl cancelled:               api/admin/orders/:id([0-9]+)
-GET list by seller username:            api/admin/orders/buyer/:username
+GET list by buyer username:             api/admin/orders/buyer/:username
 POST new order:                         api/admin/orders
 DELETE cancel order:                    api/admin/orders/:id([0-9]+)
 
@@ -67,7 +74,12 @@ POST requests for orders must include buyerId and listing ids of cart items. Exa
         "items": [2, 1]
     }
 
-========================USER========================
+========================ALL USERS========================
+
+        -------------------------------login/logout-------------------------------
+
+POST login:                         api/auth/login
+DELETE logout:                      api/auth/logout
 
         -------------------------------item attributes-------------------------------
 
@@ -93,6 +105,14 @@ GET all not deleted by seller           api/listings/seller/:username
 POST new listing                        api/listings/
 PUT update listing                      api/listings/:id([0-9]+)
 DELETE listing                          api/listings/:id([0-9]+)
+
+        -------------------------------orders-------------------------------
+
+GET by id:                              api/orders/:id([0-9]+)
+GET private list for buyer:             api/orders
+POST new order:                         api/orders
+DELETE cancel order:                    api/orders/:id([0-9]+)
+
 
 ****************** ADDITIONAL NOTES ***********************
 

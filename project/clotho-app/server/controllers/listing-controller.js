@@ -45,6 +45,12 @@ exports.findAll = async (req, res) => {
         if (!itemList[0]) {
             return res.status(404).json({ message: "No listings found" });
         }
+
+        // format decimal
+        for (let i in itemList) {
+            itemList[i].price /= 100;
+            itemList[i].price = itemList[i].price.toFixed(2);
+        }
         res.json(itemList);
 
     } catch (err) {
@@ -91,6 +97,9 @@ exports.findById = async (req, res) => {
             return res.status(404).json({ message: "Listing not found" });
         }
 
+        //format decimal
+        item.price /= 100;
+        item.price = item.price.toFixed(2);
         res.json(listing);
 
     } catch (err) {
@@ -144,6 +153,11 @@ exports.findAllBySeller = async (req, res) => {
             return res.status(404).json({ message: "No listings found by this seller" });
         }
 
+        // format decimal
+        for (let i in itemList) {
+            itemList[i].price /= 100;
+            itemList[i].price = itemList[i].price.toFixed(2);
+        }
         res.json(itemList);
 
     } catch (err) {
@@ -152,6 +166,7 @@ exports.findAllBySeller = async (req, res) => {
         res.status(500).json({ message: "Something went wrong" });
     }
 };
+
 
 /* 
 Create new listing
@@ -178,18 +193,18 @@ exports.create = async (req, res) => {
                 return res.status(400).json({ message: "Invalid gender id" });
             }
 
-            var seller = await User.findByPk(req.body.sellerId);
+            var seller = await User.findByPk(req.userId);
             if (!seller || (seller && seller.isDeleted)) {
                 return res.status(400).json({ message: "Invalid seller id" });
             }
 
             //attempt create
             var listing = await Listing.create({
-                sellerId: req.body.sellerId, //TODO auth
+                sellerId: req.userId,
                 title: req.body.title,
                 description: req.body.description,
                 thumbnail: 'placeholder', //TODO imgs
-                price: req.body.price,
+                price: req.body.price * 100,
                 sizeId: req.body.sizeId,
                 categoryId: req.body.categoryId,
                 genderId: req.body.genderId
@@ -224,6 +239,7 @@ exports.updateById = async (req, res) => {
             var listing = await Listing.findOne({
                 where: {
                     id: req.params.id,
+                    sellerId: req.userId,
                     isSold: false,
                     isDeleted: false
                 }
@@ -258,7 +274,7 @@ exports.updateById = async (req, res) => {
                 {
                     title: req.body.title ? req.body.title : listing.title,
                     description: req.body.description ? req.body.description : listing.description,
-                    price: req.body.price ? req.body.price : listing.price,
+                    price: req.body.price ? req.body.price * 100 : listing.price,
                     thumbnail: req.body.thumbnail ? req.body.thumbnail : listing.thumbnail,
                     sizeId: req.body.sizeId ? req.body.sizeId : listing.sizeId,
                     categoryId: req.body.categoryId ? req.body.categoryId : listing.categoryId,
@@ -298,6 +314,7 @@ exports.deleteById = async (req, res) => {
             {
                 where: {
                     id: req.params.id,
+                    sellerId: req.userId,
                     isDeleted: false
                 }
             });
@@ -351,12 +368,6 @@ function isValidPost(req, res) {
             return false;
         case (req.body.price < 0.01):
             res.status(400).json({ message: "Price must exceed 0" });
-            return false;
-        case (!req.body.sellerId):
-            res.status(400).json({ message: "Seller id cannot be null" }); //TODO auth
-            return false;
-        case (req.body.sellerId != Number(req.body.sellerId).toFixed()):
-            res.status(400).json({ message: "Seller id must be an integer" });
             return false;
         case (!req.body.sizeId):
             res.status(400).json({ message: "Size id cannot be null" });

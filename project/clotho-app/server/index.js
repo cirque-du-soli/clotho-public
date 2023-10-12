@@ -27,7 +27,11 @@ app.use("/api/admin/listings", adminListingRouter);
 const adminOrderRouter = require("./routes/admin-order-routes");
 app.use("/api/admin/orders", adminOrderRouter);
 
-/* NON ADMIN */ 
+/* ALL USERS */ 
+
+//Login, logout
+const authRouter = require("./routes/auth-routes");
+app.use("/api/auth", authRouter);
 
 //GET only for category, size, gender
 const attrRouter = require("./routes/public-attribute-routes");

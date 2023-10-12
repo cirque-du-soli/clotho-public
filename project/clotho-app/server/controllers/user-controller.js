@@ -10,14 +10,14 @@ const validator = require('validator');
 const bcrypt = require('bcrypt');
 
 /* 
-Get user by id
+Get user by id (private profile view for logged in user)
 */
 exports.findById = async (req, res) => {
 
     try {
 
         var user = await User.findByPk(
-            req.params.id,
+            req.userId,
             {
                 attributes: ['id', 'username', 'email', 'avatar']
             }
@@ -97,8 +97,8 @@ exports.updateById = async (req, res) => {
     if (isValidPut(req, res)) {
 
         try {
-            // check that id exists
-            var user = await User.findByPk(req.params.id);
+            // check that id exists and user is logged in
+            var user = await User.findByPk(req.userId);
 
             if (!user) {
                 return res.status(400).json({ message: "Invalid user id" });
@@ -155,12 +155,12 @@ exports.updateById = async (req, res) => {
                 },
                 {
                     where: {
-                        id: req.params.id
+                        id: req.userId
                     }
                 });
 
                  user = await User.findByPk(
-                    req.params.id,
+                    req.userId,
                     {
                         attributes: ['id', 'username', 'email', 'avatar']
                     }
@@ -186,8 +186,8 @@ exports.updatePasswordById = async (req, res) => {
     }
 
     try {
-        // check that id exists
-        var user = await User.findByPk(req.params.id);
+        // check that id exists and user is logged in
+        var user = await User.findByPk(req.userId);
 
         if (!user) {
             return res.status(400).json({ message: "Invalid user id" });
@@ -201,14 +201,14 @@ exports.updatePasswordById = async (req, res) => {
             },
                 {
                     where: {
-                        id: req.params.id
+                        id: req.userId
                     }
                 });
 
         });
 
         user = await User.findByPk(
-            req.params.id,
+            req.userId,
             {
                 attributes: ['id', 'username', 'email', 'avatar']
             }
@@ -228,17 +228,13 @@ Delete user by id
 */
 exports.deleteById = async (req, res) => {
 
-    // request must include id
-    if (!req.params.id) {
-        return res.status(400).json({ message: "User id cannot be null" });
-    }
     try {
 
         // check that user with id exists
         var user = await User.findOne(
             {
                 where: {
-                    id: req.params.id,
+                    id: req.userId,
                     isDeleted: false
                 }
             });
@@ -253,11 +249,9 @@ exports.deleteById = async (req, res) => {
             },
             {
                 where: {
-                    id: req.params.id
+                    id: req.userId
                 }
             });
-
-        user = await User.findByPk(req.params.id);
 
         res.status(200).json({ message: "Successfully closed account" });
 
@@ -269,12 +263,13 @@ exports.deleteById = async (req, res) => {
 };
 
 /* 
-Undelete user by id
+Reactivate account
+May not be implemented, user would need to login first
 */
 exports.unDeleteById = async (req, res) => {
 
     // request must include id
-    if (!req.params.id) {
+    if (!req.userId) {
         return res.status(400).json({ message: "User id cannot be null" });
     }
     try {
@@ -283,13 +278,13 @@ exports.unDeleteById = async (req, res) => {
         var user = await User.findOne(
             {
                 where: {
-                    id: req.params.id,
+                    id: req.userId,
                     isDeleted: true
                 }
             });
 
         if (!user) {
-            return res.status(400).json({ message: "User does not exist or is not deleted" });
+            return res.status(400).json({ message: "Invalid user id" });
         }
 
         user = await User.update(
@@ -298,12 +293,12 @@ exports.unDeleteById = async (req, res) => {
             },
             {
                 where: {
-                    id: req.params.id
+                    id: req.userId
                 }
             });
 
             var user = await User.findByPk(
-                req.params.id,
+                req.userId,
                 {
                     attributes: ['id', 'username', 'email', 'avatar']
                 }
@@ -352,9 +347,6 @@ function isValidPost(req, res) {
 
 function isValidPut(req, res) {
     switch (true) {
-        case (!req.params.id):
-            res.status(400).json({ message: "User id cannot be null" });
-            return false;
         case (req.body.username && req.body.username.length > 50): //TODO regex
             res.status(400).json({ message: "Username cannot exceed 50 characters" });
             return false;
