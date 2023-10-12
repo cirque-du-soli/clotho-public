@@ -1,0 +1,24 @@
+{
+    "development": {
+      "username": "clothoAdmin",
+      "password": "Password123",
+      "database": "clotho",
+      "host": "clotho.mysql.database.azure.com",
+      "dialect": "mysql"
+    },
+    "test": {
+      "username": "clothoAdmin",
+      "password": "Password123",
+      "database": "clotho",
+      "host": "clotho.mysql.database.azure.com",
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "clothoAdmin",
+      "password": "Password123",
+      "database": "clotho",
+      "host": "clotho.mysql.database.azure.com",
+      "dialect": "mysql"
+    }
+  }
+  

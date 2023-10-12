@@ -1,7 +1,5 @@
 // IMPORTS
-// import React from 'react';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import PhotoUpload from './components/PhotoUpload';
+
 
 // Admin
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
@@ -28,14 +26,6 @@ function App() {
   );
 }
 
-// return (
-//   <Router>
-//   <Routes>
-//       <Route path="/photoupload" element={<PhotoUpload />} />
-//   </Routes>
-//   </Router>
 
-// );
-// }
 
 export default App;
