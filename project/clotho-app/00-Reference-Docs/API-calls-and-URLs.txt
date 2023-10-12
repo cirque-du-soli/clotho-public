@@ -113,21 +113,3 @@ GET private list for buyer:             api/orders
 POST new order:                         api/orders
 DELETE cancel order:                    api/orders/:id([0-9]+)
 
-
-****************** ADDITIONAL NOTES ***********************
-
-DB connection:
-Credentials go in server/config/config.json
-
-JWT secrets:
-see note in OneDrive
-
-Note about model aliases:
-So far, Users are associated to Listings and Orders with the aliases 'seller' and 'buyer', respectively.
-(below: not yet implemented)
-When necessary, JSON response objects will include a nested user object under the appropriate alias in order to access relevant details.
-Example: 'order.buyer.username' and 'listing.seller.username'
-
-Note about retrieving other details from server:
-Errors sent from API include both 'status' and 'message' properties to be used in front as needed.
-So far, POST, PATCH, and DELETE responses include a 'message' property and, where relevant, a nested model object reflecting changes made.
