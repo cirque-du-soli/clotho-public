@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App';
 import PhotoUpload from './components/PhotoUpload';
-
+import CreateListing from './components/CreateListing';
 import AdminLayout from './layouts/AdminLayout';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -23,6 +23,7 @@ root.render(
         <Route path="/admin/*" element={<AdminLayout />} />
         <Route path="/test001" element={<App />} />
         <Route path="/photoupload" element={<PhotoUpload />} />
+        <Route path="/createlisting" element={<CreateListing />} />
         <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
       </Routes>
     </BrowserRouter>
