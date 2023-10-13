@@ -49,9 +49,9 @@ const CreateListing = () => {
     setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleImageChange = (e) => {
-    setFormData(prevState => ({ ...prevState, image: e.target.files[0] }));
-  };
+//   const handleImageChange = (e) => {
+//     setFormData(prevState => ({ ...prevState, image: e.target.files[0] }));
+//   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,7 +88,7 @@ const CreateListing = () => {
           <option value="3">Large</option>
           {/* ... */}
         </select>
-        <input type="file" name="image" onChange={handleImageChange} required />
+        {/* <input type="file" name="image" onChange={handleImageChange} required /> */}
         <button type="submit">Create Listing</button>
       </form>
     </div>
