@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import {
+    Card,
+    CardImg,
+    CardBody,
+    Form,
+    FormGroup,
+    Input,
+    Label,
+    Button,
+    Container
+} from "reactstrap";
 
 export default function NewPost() {
   const [photos, setPhotos] = useState([]);
@@ -10,9 +21,7 @@ export default function NewPost() {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
-    // Upload photo to server
     const { data } = await axios.post('/api/posts', formData, { headers: {'Content-Type': 'multipart/form-data'}});
-    // Update local state
     setPhotos([...photos, { url: data.url }]);
   };
 
@@ -23,16 +32,22 @@ export default function NewPost() {
 
   const submit = async event => {
     event.preventDefault();
-    // Submit any other other form data here
+    // Submit any other data e
   };
 
   return (
-    <div>
-      <form onSubmit={submit}>
-        <input type="file" onChange={onFileChange} accept="image/*" />
-        <input value={caption} onChange={e => setCaption(e.target.value)} type="text" placeholder='Caption' />
-        <button type="submit">Submit</button>
-      </form>
+    <Container>
+      <Form onSubmit={submit}>
+        <FormGroup>
+          <Label for="imageUpload">Upload Image</Label>
+          <Input type="file" id="imageUpload" onChange={onFileChange} accept="image/*" />
+        </FormGroup>
+        <FormGroup>
+          <Label for="caption">Caption</Label>
+          <Input type="text" id="caption" value={caption} onChange={e => setCaption(e.target.value)} placeholder='Caption' />
+        </FormGroup>
+        <Button color="primary" type="submit">Submit</Button>
+      </Form>
 
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="photoList">
@@ -46,7 +61,12 @@ export default function NewPost() {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <img src={photo.url} alt="Uploaded Preview" />
+                      <Card className="mt-3">
+                        <CardImg top width="100%" src={photo.url} alt="Uploaded Preview" />
+                        <CardBody>
+                          <small>Drag to reorder</small>
+                        </CardBody>
+                      </Card>
                     </div>
                   )}
                 </Draggable>
@@ -56,6 +76,6 @@ export default function NewPost() {
           )}
         </Droppable>
       </DragDropContext>
-    </div>
+    </Container>
   );
 }
