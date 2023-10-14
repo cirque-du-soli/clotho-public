@@ -7,8 +7,11 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import App from './App';
 import PhotoUpload from './components/PhotoUpload';
 import Listings from './components/Listings';
+import ListingsV2 from './components/ListingsV2';
 import CreateListing from './components/CreateListing';
 import AdminLayout from './layouts/AdminLayout';
+import Header from './components/Header';
+
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -23,9 +26,11 @@ root.render(
       <Routes>
         <Route path="/admin/*" element={<AdminLayout />} />
         <Route path="/test001" element={<App />} />
+        <Route path="/header" element={<Header />} />
         <Route path="/photoupload" element={<PhotoUpload />} />
         <Route path="/createlisting" element={<CreateListing />} />
         <Route path="/listings" element={<Listings />} />
+        <Route path="/listingsv2" element={<ListingsV2 />} />
         <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
       </Routes>
     </BrowserRouter>
