@@ -1,16 +1,21 @@
 // UserProfileV2.js
 import React, { useState, useEffect } from 'react';
-import useAxiosJWT from '../hooks/useAxiosJWT';
+import axios from '../api/axios';
 import { Button, Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function UserProfilePrivate() {
-    const axiosJWT = useAxiosJWT();
+
+function UserProfilePublic() {
+
+    const navigate = useNavigate();
+    const { username } = useParams();
+
     const [user, setUser] = useState({});
     const [listings, setListings] = useState([]);
 
     useEffect(() => {
         // Fetch user profile
-        axiosJWT.get(`/users/profile`)
+        axios.get(`/users/seller/${ username }`)
             .then(response => {
                 setUser(response?.data?.user);
                 setListings(response?.data?.listings)
@@ -28,7 +33,6 @@ function UserProfilePrivate() {
                 <Col md={4}>
                     <img src={user.avatar} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle" />
                     <h2>{user.username}</h2>
-                    <p>{user.email}</p>
                 </Col>
                 <Col md={8}>
                     <h3>My Listings</h3>
@@ -47,4 +51,4 @@ function UserProfilePrivate() {
     );
 }
 
-export default UserProfilePrivate;
+export default UserProfilePublic;

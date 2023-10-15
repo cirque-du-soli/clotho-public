@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     User.associate = (models) => {
         User.hasMany(models.Listing, {
             foreignKey: 'sellerId',
-            as: 'Seller'
+            as: 'listings'
         });
 
         User.hasMany(models.Order, {

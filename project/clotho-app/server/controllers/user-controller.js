@@ -7,6 +7,11 @@ TODO: auth, images, username regex
 
 const { User } = require("../models");
 const { Listing } = require("../models");
+const { ListingImage } = require("../models");
+const { Category } = require("../models");
+const { Size } = require("../models");
+const { Gender } = require("../models");
+
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 
@@ -21,16 +26,17 @@ exports.findById = async (req, res) => {
             req.userId,
             {
                 attributes: ['username', 'email', 'avatar'],
-                include:[
-                        {
-                            model: Listing,
-                            as: 'Seller',
-                            where: {
-                                isDeleted: false
-                            },
-                            attributes: ['id', 'title', 'description', 'thumbnail', 'price', 'isSold']
-                        }
-                    ]
+                include: [
+                    {
+                        model: Listing,
+                        as: 'listings',
+                        required: false,
+                        where: {
+                            isDeleted: false
+                        },
+                        attributes: ['id', 'title', 'description', 'thumbnail', 'price', 'isSold', 'createdAt']
+                    }
+                ]
             }
         );
 
@@ -44,7 +50,72 @@ exports.findById = async (req, res) => {
                 email: user.email,
                 avatar: user.avatar
             },
-            listings: user.Seller
+            listings: user.listings
+        }
+        res.json(result);
+
+    } catch (err) {
+
+        console.log(err.message);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+};
+
+/* 
+Get user by username (public profile view with listings)
+*/
+exports.findByUsernamePublic = async (req, res) => {
+
+    try {
+
+        var user = await User.findOne(
+            {
+                where: {
+                    username: req.params.username
+                },
+                attributes: ['id', 'username', 'avatar'],
+                include: [
+                    {
+                        model: Listing,
+                        as: 'listings',
+                        // where: {
+                        //     isDeleted: false
+                        // },
+                        required: false,
+                        where: {
+
+                            isDeleted: false
+                        },
+                        order: ['isSold'],
+                        attributes: ['id', 'title', 'description', 'thumbnail', 'price', 'isSold', 'createdAt'],
+                        include: [
+                            {
+                                model: Category,
+                                attributes: ['name', 'id']
+                            },
+                            {
+                                model: Size,
+                                attributes: ['name', 'id']
+                            },
+                            {
+                                model: Gender,
+                                attributes: ['name', 'id']
+                            }]
+                    }]
+            }
+        );
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const result = {
+            user: {
+                username: user.username,
+                email: user.email,
+                avatar: user.avatar
+            },
+            listings: user.listings
         }
         res.json(result);
 
@@ -178,12 +249,12 @@ exports.updateById = async (req, res) => {
                     }
                 });
 
-                 user = await User.findByPk(
-                    req.userId,
-                    {
-                        attributes: ['id', 'username', 'email', 'avatar']
-                    }
-                );
+            user = await User.findByPk(
+                req.userId,
+                {
+                    attributes: ['id', 'username', 'email', 'avatar']
+                }
+            );
 
             res.status(200).json({ message: "Successful update", user: user });
 
@@ -316,12 +387,12 @@ exports.unDeleteById = async (req, res) => {
                 }
             });
 
-            var user = await User.findByPk(
-                req.userId,
-                {
-                    attributes: ['id', 'username', 'email', 'avatar']
-                }
-            );
+        var user = await User.findByPk(
+            req.userId,
+            {
+                attributes: ['id', 'username', 'email', 'avatar']
+            }
+        );
 
         res.status(200).json({ message: "Successful un-delete", user: user });
 

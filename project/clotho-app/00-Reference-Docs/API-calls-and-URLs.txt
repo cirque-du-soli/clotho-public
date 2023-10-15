@@ -93,7 +93,8 @@ GET single record excl deleted:     api/attr/categories/:id([0-9]+)
 
         -------------------------------user profile-------------------------------
 
-GET user by id                          api/users/profile
+GET user private view (with listings)   api/users/profile
+GET seller public view (with listings)  api/users/:username
 POST register new user                  api/users/
 PUT update user profile                 api/users/profile
 DELETE close account                    api/users/:id([0-9]+)
