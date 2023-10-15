@@ -13,7 +13,7 @@ require('dotenv').config();
  Refresh tokens not yet implemented
  */
 var deadTokens = [];
-//var deadRefreshTokens = [];
+var deadRefreshTokens = [];
 
 
 /*
@@ -22,28 +22,28 @@ Check credentials and send tokens
 */
 exports.login = async (req, res) => {
 
-    if (!req.body.email || !req.body.password) {
+    if (!req.body.username || !req.body.password) {
         return res.status(400).json({ message: "required" });
     }
 
     try {
 
-        User.findOne({ where: { email: req.body.email } }).then(user => {
+        User.findOne({ where: { username: req.body.username } }).then(user => {
 
             if (!user) {
-                return res.status(400).json("Incorrect email and password combination");
+                return res.status(400).json({message: "Incorrect username and password combination"});
             }
 
             bcrypt.compare(req.body.password, user.password).then(async (match) => {
 
                 if (!match) {
-                    return res.status(400).json("Incorrect email and password combination");
+                    return res.status(400).json({message: "Incorrect username and password combination"});
                 }
 
                 const token = signToken(user);
-                const refreshToken = jwt.sign({user}, process.env.REFRESH_SECRET);
+                const refreshToken = signRefresh(user);
             
-                return res.json({token: token, refreshToken: refreshToken});
+                return res.json({token: token, refreshToken: refreshToken, userId: user.id, isAdmin: user.isAdmin});
             });
         });
 
@@ -64,11 +64,12 @@ exports.logout = (req, res) => {
 
         if (err) {
             console.log(err);
-            return res.status(401).json("You are not logged in");
+            return res.status(403).json("CANNOT VERIFY TOKEN");
 
         } else {
 
             deadTokens.push(req.token);
+            deadRefreshTokens.push(req.refreshToken);
             console.log("deadtokens " + deadTokens[0]);
 
         res.status(200).json("Successfully logged out");
@@ -83,7 +84,7 @@ exports.getUser = (req, res, next) => {
 
     if (deadTokens.includes(req.token)) {
 
-        return res.status(401).json("you are not logged in");
+        return res.status(403).json("DEAD TOKEN");
     }
 
     jwt.verify(req.token, process.env.SECRET, (err, data) => {
@@ -119,52 +120,62 @@ Retrieve current token
 */
 exports.getToken = (req, res, next) => {
 
-    const header = req.headers['authorization'];
+    const header = req.headers.authorization;
 
     if (header) {
 
         const reqToken = header.split(' ')[1];
         req.token = reqToken;
-
+        
         next();
+
     } else {
-        return res.status(401).json("you are not logged in");
+        return res.status(401).json("CANNOT GET TOKEN you are not logged in");
     }
 }
 
 
 /*
+Use refresh token
+*/
 exports.refreshToken = (req, res) => {
 
-    const refreshToken = req.body.token;
+    const refreshToken = req.token;
 
     if (!refreshToken) {
 
-        return res.status(401);
+        return res.status(401).json("NO TOKEN given for refresh");
     };
 
     if (deadRefreshTokens.includes(refreshToken)) {
 
-        return res.status(403);
+        return res.status(403).json("dead refresh token");
     }
 
     jwt.verify(refreshToken, process.env.REFRESH_SECRET, (err, data) => {
 
         if (err) {
-            return res.status(403);
+            return res.status(403).json("cannot verify refresh token");
         }
 
         const newToken = signToken(data);
 
-        res.send(newToken);
+        res.json({token: newToken});
 
     });
 }
-*/
+
 
 /*
 Sign user token
 */
 function signToken(user) {
     return jwt.sign({ user }, process.env.SECRET, { expiresIn: '1h' });
+}
+
+/*
+Sign refresh token
+*/
+function signRefresh(user) {
+    return jwt.sign({ user }, process.env.REFRESH_SECRET, { expiresIn: '24h' });
 }

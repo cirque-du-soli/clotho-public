@@ -9,7 +9,7 @@ function Listings() {
 
   useEffect(() => {
     // Fetch listings
-    axios.get('/api/listings/')
+    axios.get('http://localhost:3001/api/listings/')
       .then(response => {
         setListings(response.data);
       })
@@ -18,7 +18,7 @@ function Listings() {
       });
 
     // Fetch categories
-    axios.get('/api/attr/categories')
+    axios.get('http://localhost:3001/api/attr/categories')
       .then(response => {
         setCategories(response.data);
       })
@@ -27,7 +27,7 @@ function Listings() {
       });
 
     // Fetch sizes
-    axios.get('/api/attr/sizes')
+    axios.get('http://localhost:3001/api/attr/sizes') 
       .then(response => {
         setSizes(response.data);
       })

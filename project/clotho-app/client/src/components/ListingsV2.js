@@ -31,7 +31,7 @@ const ListingsV2 = () => {
   useEffect(() => {
     async function fetchListings() {
       try {
-        const response = await fetch(`/api/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}`);
+        const response = await fetch(`http://localhost:3001/api/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}`);
         const data = await response.json();
         setListings(data);
         console.log(data);

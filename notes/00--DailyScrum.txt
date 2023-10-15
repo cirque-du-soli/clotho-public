@@ -293,6 +293,61 @@ Order
 Order list
 Cart
 
+
+2023-10-14
+===================
+
+Dustin:
+	Done:
+		- Homepage/View listings
+		- Create listing page
+		- Header component
+		
+	Not-Done:
+		- Photo uploads
+		- Stripe
+	
+	Needs Assistance:
+		- Troubleshoot client routes + api calls
+
+	Todo Before Next Scrum:
+		- Photo uploads
+		- Stripe
+
+Soli:
+	Done:
+		- Grappled to the death with React and lost
+		- Delete users
+		
+	Not-Done:
+		- Admin portal: update user/view user profile
+	
+	Needs Assistance:
+		- TBA
+
+	Todo Before Next Scrum:
+		- Design user profile
+		- Troubleshoot client routes
+
+Meredith: 
+	Done:
+		- Login form + logout button
+		- 404 page
+		- Started JWT in front, got stuck on refresh tokens
+		
+	Not-Done:
+		- Listing Images model + edits to controllers
+		- Debugging login/logout/tokens
+	
+	Needs Assistance:
+		- Troubleshooting
+
+	Todo Before Next Scrum:
+		- Finish auth in front
+		- listing images in back
+		- troubleshooting/debugging
+
+
 ===============================================================================
 ===============================================================================
 ===============================================================================
