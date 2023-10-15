@@ -1,0 +1,85 @@
+// IMPORT: React
+import React from 'react';
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+
+// IMPORT: Styles
+import logo from '../assets/logo.svg';
+import '../assets/App.css';
+
+// creates scrollbars on windows devices
+import PerfectScrollbar from "perfect-scrollbar";
+
+// IMPORT: Routes
+import routes from "../util/routes.js";
+
+// IMPORT: Components
+
+///////////////////////////// ADD TEST COMPONENTS HERE ////////////////////////
+import PhotoUpload from '../components/PhotoUpload';
+import Listings from '../components/Listings';
+import CreateListing from '../components/CreateListing';
+import Header from '../components/Header';
+import { Auth } from '../context/Auth';
+import PageNotFound from '../components/PageNotFound';
+import Login from '../components/Forms/Login';
+import Logout from '../components/Forms/Logout';
+import UserProfileV2 from '../components/UserProfileV2';
+
+// import Listings from '../../TEMP/Listings';
+// import ListingsV3 from '../../TEMP/ListingsV3';
+// import UserProfile from './components/UserProfile';
+
+
+const getRoutes = (routes) => {
+    return routes.map((prop, key) => {
+        if (prop.layout === "TestLayout") {
+            return (
+                <Route path={prop.path} element={prop.component} key={key} exact />
+            );
+        } else {
+            return null;
+        }
+    });
+};
+
+function TestLayout(props) {
+
+    const mainPanelRef = React.useRef(null);
+
+    return (
+        <div className="App">
+
+            <div className="main-panel" ref={mainPanelRef}>
+                <Routes>
+
+                    {/* This adds all possible routes & views */}
+                    {getRoutes(routes)}
+
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/header" element={<Header />} />
+                    <Route path="/photoupload" element={<PhotoUpload />} />
+                    <Route path="/createlisting" element={<CreateListing />} />
+                    <Route path="/listings" element={<Listings />} />
+                    
+                    <Route path="/logout" element={<Logout />} />
+                    <Route path="/user/:id" element={<UserProfileV2 />} />
+                    <Route path="/notfound" element={<PageNotFound />} />
+
+                    {/* <Route path="/listingsv2" element={<ListingsV2 />} /> */}
+                    {/* <Route path="/listingsv3" element={<ListingsV3 />} /> */}
+                    {/* <Route path="/userprofile" element={<UserProfile />} /> */}
+
+                    {/* Catch-all non-declared routes*/}
+                    <Route
+                        path="/*"
+                        element={<Navigate to="/test" replace />}
+                    />
+
+                </Routes>
+            </div>
+
+        </div>
+    );
+}
+
+export default TestLayout;

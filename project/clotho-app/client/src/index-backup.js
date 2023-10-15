@@ -39,7 +39,7 @@ root.render(
     <BrowserRouter>
       <Routes>
 
-      {/*  
+      {/*  NOTE: THESE WERE ALL MOVED TO TestLayout.js AND/OR routes.js (client)
   
         <Route path="/admin/*" element={<Admin />} />
         <Route path="/login" element={<Login />} />
