@@ -12,23 +12,6 @@ import PerfectScrollbar from "perfect-scrollbar";
 // IMPORT: Routes
 import routes from "../util/routes.js";
 
-// IMPORT: Components
-
-///////////////////////////// ADD TEST COMPONENTS HERE ////////////////////////
-import PhotoUpload from '../components/Forms/PhotoUpload';
-import CreateListing from '../components/Forms/CreateListing';
-import Header from '../components/Navbars/Header';
-import { Auth } from '../context/Auth';
-import PageNotFound from '../components/Pages/PageNotFound';
-import Login from '../components/Forms/Login';
-import Logout from '../components/Buttons/Logout';
-import UserProfileV2 from '../components/Pages/UserProfileV2';
-
-// import Listings from '../../TEMP/Listings';
-// import ListingsV3 from '../../TEMP/ListingsV3';
-// import UserProfile from './components/UserProfile';
-
-
 const getRoutes = (routes) => {
     return routes.map((prop, key) => {
         if (prop.layout === "TestLayout") {
@@ -51,10 +34,10 @@ function TestLayout(props) {
             <div className="main-panel" ref={mainPanelRef}>
 
                 <Routes>
-                    {/* All possible routes, with the associated Test Component */}
+                    {/* Each possible route with its associated Test Component */}
                     {getRoutes(routes)}
 
-                    {/* Catch-all non-declared routes*/}
+                    {/* Catch-all redirect for non-declared routes*/}
                     <Route
                         path="/*"
                         element={<Navigate to="/test" replace />}
