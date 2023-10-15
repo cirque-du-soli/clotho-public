@@ -30,12 +30,14 @@ import {
     UncontrolledTooltip,
 } from "reactstrap";
 import NewUserForm from "../components/Forms/NewUserForm";
+import Header from "../components/Header";
 
 
 function AdminDashboard(props) {
 
     return (
         <>
+            <Header     />
             <NewUserForm />
             <UsersList />
         </>

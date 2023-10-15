@@ -10,9 +10,9 @@ const Header = () => {
         <NavItem>
           <Link to="/admin" className="nav-link">Admin</Link>
         </NavItem>
-        <NavItem>
+        {/* <NavItem>
           <Link to="/test001" className="nav-link">Test001</Link>
-        </NavItem>
+        </NavItem> */}
         <NavItem>
           <Link to="/photoupload" className="nav-link">Photo Upload</Link>
         </NavItem>
@@ -23,8 +23,14 @@ const Header = () => {
           <Link to="/listings" className="nav-link">Listings</Link>
         </NavItem>
         <NavItem>
-          <Link to="/listingsv2" className="nav-link">Listings V2</Link>
+          <Link to="/login" className="nav-link">Login</Link>
         </NavItem>
+        <NavItem>
+          <Link to="/logout" className="nav-link">Logout</Link>
+        </NavItem>
+        {/* <NavItem>
+          <Link to="/listingsv2" className="nav-link">Listings V2</Link>
+        </NavItem> */}
       </Nav>
     </Navbar>
   );
