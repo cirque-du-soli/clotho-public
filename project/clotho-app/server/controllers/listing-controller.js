@@ -8,6 +8,7 @@ const { User } = require("../models");
 const { Category } = require("../models");
 const { Size } = require("../models");
 const { Gender } = require("../models");
+const { ListingImage } = require("../models/ListingImage");
 
 /* 
 Get full list of items excluding sold and deleted
@@ -23,6 +24,10 @@ exports.findAll = async (req, res) => {
                 as: 'Seller',
                 attributes: ['username', 'id'],
 
+            },
+            {
+                model: ListingImage,
+                attributes: ['id', 'priority', 'path', 'isDeleted']
             },
             {
                 model: Category,
@@ -77,6 +82,10 @@ exports.findById = async (req, res) => {
                     attributes: ['username', 'id'],
                 },
                 {
+                    model: ListingImage,
+                    attributes: ['id', 'priority', 'path', 'isDeleted']
+                },
+                {
                     model: Category,
                     attributes: ['name', 'id']
                 },
@@ -129,6 +138,10 @@ exports.findAllBySeller = async (req, res) => {
                     where: {
                         username: req.params.username
                     }
+                },
+                {
+                    model: ListingImage,
+                    attributes: ['id', 'priority', 'path', 'isDeleted']
                 },
                 {
                     model: Category,

@@ -5,6 +5,7 @@ TODO: no auth yet
 */
 
 const { Listing } = require("../models");
+const { ListingImage } = require("../models");
 const { User } = require("../models");
 const { Category } = require("../models");
 const { Size } = require("../models");
@@ -24,6 +25,11 @@ exports.findAll = async (req, res) => {
                 as: 'Seller',
                 attributes: ['username', 'id'],
 
+            },
+            //TODO handle deleted images
+            {
+                model: ListingImage,
+                attributes: ['id', 'priority', 'path', 'isDeleted']
             },
             {
                 model: Category,
@@ -72,6 +78,10 @@ exports.findById = async (req, res) => {
                     model: User,
                     as: 'Seller',
                     attributes: ['username', 'id'],
+                },
+                {
+                    model: ListingImage,
+                    attributes: ['id', 'priority', 'path', 'isDeleted']
                 },
                 {
                     model: Category,
@@ -125,6 +135,10 @@ exports.findAllBySeller = async (req, res) => {
                     where: {
                         username: req.params.username
                     }
+                },
+                {
+                    model: ListingImage,
+                    attributes: ['id', 'priority', 'path', 'isDeleted']
                 },
                 {
                     model: Category,
