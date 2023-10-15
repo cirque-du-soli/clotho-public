@@ -8,6 +8,7 @@ import App from './App';
 import PhotoUpload from './components/PhotoUpload';
 import Listings from './components/Listings';
 import ListingsV2 from './components/ListingsV2';
+import ListingsV3 from './components/ListingsV3';
 import CreateListing from './components/CreateListing';
 import AdminLayout from './layouts/AdminLayout';
 import Header from './components/Header';
@@ -31,6 +32,8 @@ root.render(
         <Route path="/createlisting" element={<CreateListing />} />
         <Route path="/listings" element={<Listings />} />
         <Route path="/listingsv2" element={<ListingsV2 />} />
+        <Route path="/listingsv3" element={<ListingsV3 />} />
+
         <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
       </Routes>
     </BrowserRouter>

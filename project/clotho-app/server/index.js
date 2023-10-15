@@ -3,6 +3,11 @@ const app = express();
 const db = require('./models');
 const cors = require('cors');
 
+// import multer from 'multer';
+// import sharp;
+
+
+
 
 app.use(express.json());
 app.use(cors());
@@ -64,3 +69,6 @@ db.sequelize.sync().then(() => {
     console.error("Unable to connect to database : ", err);
     process.exit(1);
   });
+
+
+

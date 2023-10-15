@@ -27,7 +27,7 @@ export default function NewPost() {
 
   const onDragEnd = (result) => {
     // Reorder photo list with drag and drop
-    // Then update the order in your database
+    // Then update the order in the mySQL db
   };
 
   const submit = async event => {

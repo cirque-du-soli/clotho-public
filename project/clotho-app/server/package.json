@@ -25,6 +25,7 @@
     "react-router-dom": "^6.16.0",
     "sequelize": "^6.33.0",
     "sequelize-cli": "^6.6.1",
+    "sharp": "^0.32.6",
     "validator": "^13.11.0"
   }
 }
