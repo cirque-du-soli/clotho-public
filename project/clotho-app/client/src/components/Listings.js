@@ -1,166 +1,107 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import {
+  Container, Row, Col, InputGroup, InputGroupText, Input,
+  Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardImg, CardBody, CardTitle, Button, onKeyPress,
+} from 'reactstrap';
+import '../assets/ListingsV2.css';
 
-function Listings() {
-  const [listings, setListings] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [sizes, setSizes] = useState([]);
-
-  useEffect(() => {
-    // Fetch listings
-    axios.get('/api/listings/')
-      .then(response => {
-        setListings(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching listings:', error);
-      });
-
-    // Fetch categories
-    axios.get('/api/attr/categories')
-      .then(response => {
-        setCategories(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching categories:', error);
-      });
-
-    // Fetch sizes
-    axios.get('/api/attr/sizes')
-      .then(response => {
-        setSizes(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching sizes:', error);
-      });
-
-  }, []);
-
-
-  const [searchTerm, setSearchTerm] = useState('');
+const ListingsV2 = () => {
+  const [search, setSearch] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  
-  // Filter listings based on search term and selected filters
-  const filteredListings = listings.filter(listing => {
-    return listing.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-           (!selectedSize || listing.size === selectedSize) &&
-           (!selectedCategory || listing.category === selectedCategory);
-  });
-  
-  // ... Inside the render:
-  return (
-    <div>
-      <input 
-          type="text" 
-          value={searchTerm} 
-          onChange={e => setSearchTerm(e.target.value)} 
-          placeholder="Search listings..."
-      />
-      
-      <select value={selectedSize} onChange={e => setSelectedSize(e.target.value)}>
-        <option value="0">One Size</option>
-        <option value="1">Unknown</option>
-        <option value="2">XXS</option>
-        <option value="3">XS</option>
-        <option value="4">S</option>
-        <option value="5">M</option>
-        <option value="6">L</option>
-        <option value="7">XL</option>
-        <option value="8">XXL</option>
-        <option value="9">2X</option>
-        <option value="10">3X</option>
-        <option value="11">4X</option>
-        <option value="12">5X</option>
-        <option value="13">6X</option>
-        <option value="14">00</option>
-        <option value="15">0</option>
-        <option value="16">2</option>
-        <option value="17">4</option>
-        <option value="18">6</option>
-        <option value="19">8</option>
-        <option value="20">10</option>
-        <option value="21">12</option>
-        <option value="22">14</option>
-        <option value="23">16</option>
-        <option value="24">18</option>
-        <option value="25">20</option>
-        <option value="26">22</option>
-        <option value="27">24</option>
-        <option value="28">26</option>
-        <option value="29">28</option>
-        <option value="30">23</option>
-        <option value="31">25</option>
-        <option value="32">27</option>
-        <option value="33">29</option>
-        <option value="34">30</option>
-        <option value="35">31</option>
-        <option value="36">32</option>
-        <option value="37">33</option>
-        <option value="38">34</option>
-        <option value="39">35</option>
-        <option value="40">36</option>
-        <option value="41">37</option>
-        <option value="42">38</option>
-        <option value="43">39</option>
-        <option value="44">40</option>
-        <option value="45">41</option>
-        <option value="46">42</option>
-        <option value="47">43</option>
-        <option value="48">44</option>
-        <option value="49">45</option>
-        <option value="50">46</option>
-        <option value="51">47</option>
-        <option value="52">48</option>
-        <option value="53">49</option>
-        <option value="54">4.5</option>
-        <option value="55">5.5</option>
-        <option value="56">6.5</option>
-        <option value="57">5</option>
-        <option value="58">7</option>
-        <option value="59">7.5</option>
-        <option value="60">8.5</option>
-        <option value="61">9</option>
-        <option value="62">9.5</option>
-        <option value="63">10.5</option>
-        <option value="64">11</option>
-        <option value="65">11.5</option>
-        <option value="66">12.5</option>
-        <option value="67">13</option>
-        <option value="68">13.5</option>
-        <option value="69">14.5</option>
-        <option value="70">15</option>
-        <option value="71">15.5</option>
+  const [dropdownOpenSize, setDropdownOpenSize] = useState(false);
+  const [dropdownOpenCategory, setDropdownOpenCategory] = useState(false);
+  const [listings, setListings] = useState([]);
 
-          {sizes.map(size => <option key={size.id} value={size.name}>{size.name}</option>)}
-      </select>
-  
-      <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)}>
-        <option value="">Tops</option>
-        <option value="">Bottoms</option>
-        <option value="">Bags</option>
-        <option value="">Shoes</option>
-        <option value="">Outerwear</option>
-        <option value="">Accessories</option>
-        <option value="">Dresses</option>
-        <option value="">Jeans</option>
-        <option value="">Other</option>
-          {categories.map(category => <option key={category.id} value={category.name}>{category.name}</option>)}
-      </select>
-    
-      <div className="listings-container">
-          {filteredListings.map(listing => (
-              <div key={listing.id} className="listing-card">
-                  <img src={listing.img} alt={listing.title} onClick={() => {/* Redirect to listing */}} />
-                  <div>{listing.title}</div>
-                  <div>${(listing.price / 100).toFixed(2)}</div>
-                  <div>{listing.size}</div>
-                  <div>Seller: {listing.seller}</div>
-              </div>
-          ))}
-      </div>
-    </div>
+  const sizes = [
+    "One Size", "Unknown", "XXS", "XS", "S", "M", "L", "XL", "XXL", "2X",
+    "3X", "4X", "5X", "6X", 
+    "0", "2", "4", "6", "8", "10", "12", "14", "16", "18",
+    "20", "22", "24", "26", "28", "23", "25", "27", "29", "30",
+    "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
+    "41", "42", "43", "44", "45", "46", "47", "48", "49", 
+    "4.5", "5.5", "6.5", "5", "7", "7.5", "8.5", "9", "9.5", "10.5", "11",
+    "11.5", "12.5", "13", "13.5", "14.5", "15", "15.5"
+  ];
+
+  const categories = [
+    "Tops", "Bottoms", "Bags", "Shoes", "Outerwear", "Accessories", "Dresses", "Jeans", "Other"
+  ];
+
+  useEffect(() => {
+    async function fetchListings() {
+      try {
+        const response = await fetch(`http://localhost:3001/api/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}`);
+        const data = await response.json();
+        setListings(data);
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching the listings:', error);
+      }
+    }
+
+    fetchListings();
+  }, [search, selectedSize, selectedCategory]);
+
+
+  return (
+    <Container>
+      <Row className="mb-4">
+        <Col md="8">
+          <InputGroup>
+          <Input 
+   placeholder="Search" 
+   value={search} 
+   onChange={e => setSearch(e.target.value)} 
+  //  onKeyDown={e => {
+  //     if (e.key === 'Enter') {
+  //        fetchListings();
+  //     } 
+  //  }
+  //  }
+/>
+            <InputGroupText addonType="append">🔍</InputGroupText>
+          </InputGroup>
+        </Col>
+        <Col md="2">
+          <Dropdown isOpen={dropdownOpenSize} toggle={() => setDropdownOpenSize(prevState => !prevState)}>
+            <DropdownToggle caret>
+              {selectedSize || "Size"}
+            </DropdownToggle>
+            <DropdownMenu>
+              {sizes.map(size => <DropdownItem key={size} onClick={() => setSelectedSize(size)}>{size}</DropdownItem>)}
+            </DropdownMenu>
+          </Dropdown>
+        </Col>
+        <Col md="2">
+          <Dropdown isOpen={dropdownOpenCategory} toggle={() => setDropdownOpenCategory(prevState => !prevState)}>
+            <DropdownToggle caret>
+              {selectedCategory || "Category"}
+            </DropdownToggle>
+            <DropdownMenu>
+              {categories.map(category => <DropdownItem key={category} onClick={() => setSelectedCategory(category)}>{category}</DropdownItem>)}
+            </DropdownMenu>
+          </Dropdown>
+        </Col>
+      </Row>
+
+      <Row>
+        {listings.map(listing => (
+          <Col md="4" key={listing.id}>
+            <Card>
+              <CardImg top width="100%" src={listing.thumbnail || "placeholder-image.jpg"} alt="lisiting image" />
+              <CardBody>
+                <CardTitle tag="h5">{listing.title}</CardTitle>
+                <p>Price: ${listing.price}</p>
+                <p>Size: {listing.sizeId}</p>
+                <p>Seller: {listing.sellerId}</p>
+              </CardBody>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 }
 
-export default Listings;
+export default ListingsV2;
