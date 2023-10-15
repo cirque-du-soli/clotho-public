@@ -1,6 +1,6 @@
 // UserProfileV2.js
 import React, { useState, useEffect } from 'react';
-import useAxiosJWT from '../hooks/useAxiosJWT';
+import useAxiosJWT from '../../hooks/useAxiosJWT';
 import { Button, Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
 function UserProfilePrivate() {

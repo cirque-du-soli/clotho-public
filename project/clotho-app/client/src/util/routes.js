@@ -17,6 +17,9 @@ import Login from '../components/Forms/Login';
 import Logout from '../components/Buttons/Logout';
 import UserProfileV2 from '../components/Pages/UserProfileV2';
 import UserProfile from '../components/Pages/UserProfile';
+import UserProfilePrivate from '../components/Pages/UserProfilePrivate';
+import UserProfilePublic from '../components/Pages/UserProfilePublic';
+
 // import ListingsV2 from '../components/ListingsV2';
 // import ListingsV3 from '../components/ListingsV3';
 // import Listings from '../../TEMP/Listings';
@@ -54,6 +57,20 @@ var routes = [
         path: "/login",
         name: "Test: Login",
         component: <Login />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/profile",
+        name: "Test: Private profile",
+        component: <UserProfilePrivate />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/seller/:username",
+        name: "Test: Public profile (add username param)",
+        component: <UserProfilePublic />,
     },
 
     {

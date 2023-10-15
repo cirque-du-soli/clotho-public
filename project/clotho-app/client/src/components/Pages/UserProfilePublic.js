@@ -1,6 +1,6 @@
 // UserProfileV2.js
 import React, { useState, useEffect } from 'react';
-import axios from '../api/axios';
+import axios from '../../api/axios';
 import { Button, Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ function UserProfilePublic() {
 
     useEffect(() => {
         // Fetch user profile
-        axios.get(`/users/seller/${ username }`)
+        axios.get('/users/seller/' + username)
             .then(response => {
                 setUser(response?.data?.user);
                 setListings(response?.data?.listings)
