@@ -67,7 +67,7 @@ function Listings() {
           <FormGroup>
             <Label for="sizeSelect">Size</Label>
             <Input type="select" id="sizeSelect" value={selectedSize} onChange={e => setSelectedSize(e.target.value)}>
-              {/* Sizes options... */}
+            {selectedSize || "Size"}
               {sizes.map(size => <option key={size.id} value={size.name}>{size.name}</option>)}
             </Input>
           </FormGroup>
