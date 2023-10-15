@@ -50,8 +50,8 @@ function TestLayout(props) {
         <div className="App">
 
             <div className="main-panel" ref={mainPanelRef}>
+                
                 <Routes>
-
                     {/* This adds all possible routes & views */}
                     {getRoutes(routes)}
 
