@@ -1,9 +1,13 @@
 // UserProfileV2.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import useAxiosJWT from '../../hooks/useAxiosJWT';
 import { Button, Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
 function UserProfilePrivate() {
+
+
+    
     const axiosJWT = useAxiosJWT();
     const [user, setUser] = useState({});
     const [listings, setListings] = useState([]);

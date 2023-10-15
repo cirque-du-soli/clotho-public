@@ -33,12 +33,12 @@ const Login = () => {
             const refreshToken = response?.data?.refreshToken;
             const isAdmin = response?.data?.isAdmin;
             const userId = response?.data?.userId;
-
+            const uname = response?.data?.username;
             sessionStorage.setItem('token', token);
             sessionStorage.setItem('refreshToken', refreshToken);
             sessionStorage.setItem('isAdmin', isAdmin);
             sessionStorage.setItem('userId', userId);
-
+            sessionStorage.setItem('username', uname);
             console.log(sessionStorage.getItem('token'));
 
             setUsername('');

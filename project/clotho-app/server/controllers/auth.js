@@ -43,7 +43,7 @@ exports.login = async (req, res) => {
                 const token = signToken(user);
                 const refreshToken = signRefresh(user);
             
-                return res.json({token: token, refreshToken: refreshToken, userId: user.id, isAdmin: user.isAdmin});
+                return res.json({token: token, refreshToken: refreshToken, userId: user.id, isAdmin: user.isAdmin, username: user.username});
             });
         });
 

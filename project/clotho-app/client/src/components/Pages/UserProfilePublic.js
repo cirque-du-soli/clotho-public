@@ -10,6 +10,10 @@ function UserProfilePublic() {
     const navigate = useNavigate();
     const { username } = useParams();
 
+    // navigate to private view if loaded by seller
+    if (sessionStorage.getItem('username') && sessionStorage.getItem('username') == username) {
+        navigate('/test/profile');
+    }
     const [user, setUser] = useState({});
     const [listings, setListings] = useState([]);
 
@@ -25,7 +29,7 @@ function UserProfilePublic() {
             });
 
 
-    }, []);
+    },[]);
 
     return (
         <Container>
