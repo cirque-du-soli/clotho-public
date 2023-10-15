@@ -1,71 +1,44 @@
-// IMPORTS //
-// React
+// IMPORT: React
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import App from './App';
-import PhotoUpload from './components/PhotoUpload';
-// import Listings from '../../TEMP/Listings';
-import Listings from './components/Listings';
-// import ListingsV3 from '../../TEMP/ListingsV3';
-import CreateListing from './components/CreateListing';
-import AdminLayout from './layouts/AdminLayout';
-import Header from './components/Header';
-import PageNotFound from './components/PageNotFound';
-import Login from './components/Forms/Login';
-import Logout from './components/Forms/Logout';
-// import UserProfile from './components/UserProfile';
-import UserProfileV2 from './components/UserProfileV2';
 
-
-
-import 'bootstrap/dist/css/bootstrap.css';
-
-// STYLES //
+// IMPORT: Styles
 import './index.css';
 import './assets/App.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
+// IMPORT: Layouts
+import AdminLayout from './layouts/AdminLayout';
+import StandardLayout from './layouts/StandardLayout';
+import TestLayout from './layouts/TestLayout';
+
+// IMPORT: Contexts
+//import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper";
+//import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper";
+
+// SETUP: root
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path="/app/*" element={<StandardLayout />} />
         <Route path="/admin/*" element={<AdminLayout />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/test001" element={<App />} />
-        <Route path="/header" element={<Header />} />
-        <Route path="/photoupload" element={<PhotoUpload />} />
-        <Route path="/createlisting" element={<CreateListing />} />
-        <Route path="/listings" element={<Listings />} />
-        {/* <Route path="/listingsv2" element={<ListingsV2 />} /> */}
-        {/* <Route path="/listingsv3" element={<ListingsV3 />} /> */}
-        <Route path="/logout" element={<Logout />} />
-        {/* <Route path="/userprofile" element={<UserProfile />} /> */}
-        <Route path="/user/:id"  element={<UserProfileV2 />} />
-        <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
-        <Route path="/notfound" element={<PageNotFound />} />
+        <Route path="/test/*" element={<TestLayout />} />
+
+        {/* 
+        <Route path="/app/*" element={<Navigate to="/app/home" replace />} />
+        <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
+         */}
+        
+        <Route path="/*" element={<Navigate to="/admin/dashboard" replace />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );
 
 
-/* UNUSED DEFAULTS */
-//import reportWebVitals from './reportWebVitals';
-//reportWebVitals();
-// Pass a function to log results (e.g: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 
 
-
-
-// return (
-//   <Router>
-//   <Routes>
-//       <Route path="/photoupload" element={<PhotoUpload />} />
-//   </Routes>
-//   </Router>
-
-// );
-// }

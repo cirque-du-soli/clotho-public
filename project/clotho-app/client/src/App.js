@@ -1,6 +1,5 @@
 // IMPORTS
 
-
 // Admin
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
 
@@ -15,11 +14,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-
-
-
-
-
 
       </header>
     </div>

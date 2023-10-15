@@ -13,13 +13,25 @@ import PerfectScrollbar from "perfect-scrollbar";
 import routes from "../util/routes.js";
 
 // IMPORT: Components
-import Header from "../components/Navbars/Header";
-import TestSquarePlaceholder from '../components/Misc/TestSquarePlaceholder';
-import FooterPlaceholder from "../components/Navbars/FooterPlaceholder";
+
+///////////////////////////// ADD TEST COMPONENTS HERE ////////////////////////
+import PhotoUpload from '../components/Forms/PhotoUpload';
+import CreateListing from '../components/Forms/CreateListing';
+import Header from '../components/Navbars/Header';
+import { Auth } from '../context/Auth';
+import PageNotFound from '../components/Pages/PageNotFound';
+import Login from '../components/Forms/Login';
+import Logout from '../components/Buttons/Logout';
+import UserProfileV2 from '../components/Pages/UserProfileV2';
+
+// import Listings from '../../TEMP/Listings';
+// import ListingsV3 from '../../TEMP/ListingsV3';
+// import UserProfile from './components/UserProfile';
+
 
 const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-        if (prop.layout === "AdminLayout") {
+        if (prop.layout === "TestLayout") {
             return (
                 <Route path={prop.path} element={prop.component} key={key} exact />
             );
@@ -29,35 +41,30 @@ const getRoutes = (routes) => {
     });
 };
 
-function AdminLayout(props) {
+function TestLayout(props) {
 
     const mainPanelRef = React.useRef(null);
-
-
-
 
     return (
         <div className="App">
 
-            <Header />
-
             <div className="main-panel" ref={mainPanelRef}>
+
                 <Routes>
-                    {/* This adds all possible routes & views */}
+                    {/* All possible routes, with the associated Test Component */}
                     {getRoutes(routes)}
 
                     {/* Catch-all non-declared routes*/}
                     <Route
-                        path="/"
-                        element={<Navigate to="/admin/dashboard" replace />}
+                        path="/*"
+                        element={<Navigate to="/test" replace />}
                     />
+
                 </Routes>
             </div>
-
-            <FooterPlaceholder />
 
         </div>
     );
 }
 
-export default AdminLayout;
+export default TestLayout;

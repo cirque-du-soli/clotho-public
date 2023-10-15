@@ -1,50 +1,127 @@
-import AdminDashboard from "../layouts/AdminDashboard.js";
+// IMPORT: Dashboards/Views
+import AdminDashboard from "../views/AdminDashboard";
+import StandardDashboard from "../views/StandardDashboard";
+import TestDashboard from "../views/TestDashboard";
 
-/*
-import Icons from "views/Icons.js";
-import Map from "views/Map.js";
-import Notifications from "views/Notifications.js";
-import Rtl from "views/Rtl.js";
-import TableList from "views/TableList.js";
-import Typography from "views/Typography.js";
-import UserProfile from "views/UserProfile.js";
-*/
+// IMPORT: Admin Components
+
+// IMPORT: Standard Components
+
+// IMPORT: Test Components
+import PhotoUpload from '../components/Forms/PhotoUpload';
+import CreateListing from '../components/Forms/CreateListing';
+import Header from '../components/Navbars/Header';
+import { Auth } from '../context/Auth';
+import PageNotFound from '../components/Pages/PageNotFound';
+import Login from '../components/Forms/Login';
+import Logout from '../components/Buttons/Logout';
+import UserProfileV2 from '../components/Pages/UserProfileV2';
+import UserProfile from '../components/Pages/UserProfile';
+// import ListingsV2 from '../components/ListingsV2';
+// import ListingsV3 from '../components/ListingsV3';
+// import Listings from '../../TEMP/Listings';
 
 var routes = [
+
+    // Add to this array: anything that is its own page (login, signup, etc.)
+
+    ///////////////////////////// ADMIN ROUTES ////////////////////////
     {
+        layout: "AdminLayout",
         path: "/dashboard",
-        name: "Dashboard",
-        rtlName: "لوحة القيادة",
-        icon: "tim-icons icon-chart-pie-36",
+        name: "Admin Dashboard",
         component: <AdminDashboard />,
-        layout: "/admin",
-    }
+    },
+
+    ///////////////////////////// USER ROUTES ////////////////////////
+    {
+        layout: "StandardLayout",
+        path: "/",
+        name: "Standard Dashboard",
+        component: <StandardDashboard />,
+    },
+
+    ///////////////////////////// TEST ROUTES ////////////////////////
+    {
+        layout: "TestLayout",
+        path: "/",
+        name: "Test: Dashboard",
+        component: <TestDashboard />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/login",
+        name: "Test: Login",
+        component: <Login />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/photoupload",
+        name: "Test: Photo Upload",
+        component: <PhotoUpload />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/createlisting",
+        name: "Test: Create Listing",
+        component: <CreateListing />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/header",
+        name: "Test: Header",
+        component: <Header />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/logout",
+        name: "Test: Logout",
+        component: <Logout />,
+    },
+
     /*
-    ,
+        {
+            layout: "TestLayout",
+            path: "/ListingsV2",
+            name: "Test: ListingsV2",
+            component: <ListingsV2 />,
+        },
+    
+        {
+            layout: "TestLayout",
+            path: "/ListingsV3",
+            name: "Test: ListingsV3",
+            component: <ListingsV3 />,
+        },
+        
+        {
+            layout: "TestLayout",
+            path: "/UserProfile",
+            name: "Test: UserProfile",
+            component: <UserProfile />,
+        },
+    */
     {
-        path: "/icons",
-        name: "Icons",
-        rtlName: "الرموز",
-        icon: "tim-icons icon-atom",
-        component: <Icons />,
-        layout: "/admin",
+        layout: "TestLayout",
+        path: "/UserProfileV2",
+        name: "Test: UserProfileV2",
+        component: <UserProfileV2 />,
     },
+
     {
-        path: "/map",
-        name: "Map",
-        rtlName: "خرائط",
-        icon: "tim-icons icon-pin",
-        component: <Map />,
-        layout: "/admin",
+        layout: "TestLayout",
+        path: "/PageNotFound",
+        name: "Test: PageNotFound",
+        component: <PageNotFound />,
     },
-    {
-        path: "/notifications",
-        name: "Notifications",
-        rtlName: "إخطارات",
-        icon: "tim-icons icon-bell-55",
-        component: <Notifications />,
-        layout: "/admin",
-    },
+
+    /*
+    // UNUSED DEFAULTS
     {
         path: "/user-profile",
         name: "User Profile",
@@ -53,30 +130,7 @@ var routes = [
         component: <UserProfile />,
         layout: "/admin",
     },
-    {
-        path: "/tables",
-        name: "Table List",
-        rtlName: "قائمة الجدول",
-        icon: "tim-icons icon-puzzle-10",
-        component: <TableList />,
-        layout: "/admin",
-    },
-    {
-        path: "/typography",
-        name: "Typography",
-        rtlName: "طباعة",
-        icon: "tim-icons icon-align-center",
-        component: <Typography />,
-        layout: "/admin",
-    },
-    {
-        path: "/rtl-support",
-        name: "RTL Support",
-        rtlName: "ار تي ال",
-        icon: "tim-icons icon-world",
-        component: <Rtl />,
-        layout: "/rtl",
-    },
     */
+
 ];
 export default routes;
