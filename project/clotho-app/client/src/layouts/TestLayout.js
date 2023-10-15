@@ -15,15 +15,14 @@ import routes from "../util/routes.js";
 // IMPORT: Components
 
 ///////////////////////////// ADD TEST COMPONENTS HERE ////////////////////////
-import PhotoUpload from '../components/PhotoUpload';
-import Listings from '../components/Listings';
-import CreateListing from '../components/CreateListing';
-import Header from '../components/Header';
+import PhotoUpload from '../components/Forms/PhotoUpload';
+import CreateListing from '../components/Forms/CreateListing';
+import Header from '../components/Navbars/Header';
 import { Auth } from '../context/Auth';
-import PageNotFound from '../components/PageNotFound';
+import PageNotFound from '../components/Pages/PageNotFound';
 import Login from '../components/Forms/Login';
-import Logout from '../components/Forms/Logout';
-import UserProfileV2 from '../components/UserProfileV2';
+import Logout from '../components/Buttons/Logout';
+import UserProfileV2 from '../components/Pages/UserProfileV2';
 
 // import Listings from '../../TEMP/Listings';
 // import ListingsV3 from '../../TEMP/ListingsV3';
@@ -50,7 +49,7 @@ function TestLayout(props) {
         <div className="App">
 
             <div className="main-panel" ref={mainPanelRef}>
-                
+
                 <Routes>
                     {/* All possible routes, with the associated Test Component */}
                     {getRoutes(routes)}

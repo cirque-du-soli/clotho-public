@@ -9,21 +9,21 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App';
-import PhotoUpload from './components/PhotoUpload';
+import PhotoUpload from './components/Forms/PhotoUpload';
 // import Listings from '../../TEMP/Listings';
 import Listings from './components/Listings';
 // import ListingsV3 from '../../TEMP/ListingsV3';
-import CreateListing from './components/CreateListing';
+import CreateListing from './components/Forms/CreateListing';
 import Admin from './layouts/Admin';
 import Standard from './layouts/Standard';
 
-import Header from './components/Header';
+import Header from './components/Navbars/Header';
 import { Auth } from './context/Auth';
-import PageNotFound from './components/PageNotFound';
+import PageNotFound from './components/Pages/PageNotFound';
 import Login from './components/Forms/Login';
-import Logout from './components/Forms/Logout';
+import Logout from './components/Buttons/Logout';
 // import UserProfile from './components/UserProfile';
-import UserProfileV2 from './components/UserProfileV2';
+import UserProfileV2 from './components/Pages/UserProfileV2';
 
 
 
@@ -39,7 +39,7 @@ root.render(
     <BrowserRouter>
       <Routes>
 
-      {/*  NOTE: THESE WERE ALL MOVED TO TestLayout.js AND/OR routes.js (client)
+        {/*  NOTE: THESE WERE ALL MOVED TO TestLayout.js AND/OR routes.js (client)
   
         <Route path="/admin/*" element={<Admin />} />
         <Route path="/login" element={<Login />} />

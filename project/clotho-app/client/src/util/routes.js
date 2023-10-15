@@ -3,23 +3,23 @@ import AdminDashboard from "../views/AdminDashboard";
 import StandardDashboard from "../views/StandardDashboard";
 import TestDashboard from "../views/TestDashboard";
 
-// IMPORT: Components for testing
-import PhotoUpload from '../components/PhotoUpload';
-import Listings from '../components/Listings';
-import CreateListing from '../components/CreateListing';
-import Header from '../components/Header';
+// IMPORT: Admin Components
+
+// IMPORT: Standard Components
+
+// IMPORT: Test Components
+import PhotoUpload from '../components/Forms/PhotoUpload';
+import CreateListing from '../components/Forms/CreateListing';
+import Header from '../components/Navbars/Header';
 import { Auth } from '../context/Auth';
-import PageNotFound from '../components/PageNotFound';
+import PageNotFound from '../components/Pages/PageNotFound';
 import Login from '../components/Forms/Login';
-import Logout from '../components/Forms/Logout';
-import UserProfileV2 from '../components/UserProfileV2';
+import Logout from '../components/Buttons/Logout';
+import UserProfileV2 from '../components/Pages/UserProfileV2';
+import UserProfile from '../components/Pages/UserProfile';
+// import ListingsV2 from '../components/ListingsV2';
+// import ListingsV3 from '../components/ListingsV3';
 // import Listings from '../../TEMP/Listings';
-// import ListingsV3 from '../../TEMP/ListingsV3';
-// import UserProfile from './components/UserProfile';
-
-
-
-
 
 var routes = [
 
@@ -65,13 +65,6 @@ var routes = [
 
     {
         layout: "TestLayout",
-        path: "/listings",
-        name: "Test: Listings",
-        component: <Listings />,
-    },
-
-    {
-        layout: "TestLayout",
         path: "/createlisting",
         name: "Test: Create Listing",
         component: <CreateListing />,
@@ -91,13 +84,28 @@ var routes = [
         component: <Logout />,
     },
 
-    {
-        layout: "TestLayout",
-        path: "/logout",
-        name: "Test: Logout",
-        component: <Logout />,
-    },
-
+    /*
+        {
+            layout: "TestLayout",
+            path: "/ListingsV2",
+            name: "Test: ListingsV2",
+            component: <ListingsV2 />,
+        },
+    
+        {
+            layout: "TestLayout",
+            path: "/ListingsV3",
+            name: "Test: ListingsV3",
+            component: <ListingsV3 />,
+        },
+        
+        {
+            layout: "TestLayout",
+            path: "/UserProfile",
+            name: "Test: UserProfile",
+            component: <UserProfile />,
+        },
+    */
     {
         layout: "TestLayout",
         path: "/UserProfileV2",
@@ -112,10 +120,7 @@ var routes = [
         component: <PageNotFound />,
     },
 
-
-
-
-    /* 
+    /*
     // UNUSED DEFAULTS
     {
         path: "/user-profile",
@@ -126,6 +131,6 @@ var routes = [
         layout: "/admin",
     },
     */
-    
+
 ];
 export default routes;

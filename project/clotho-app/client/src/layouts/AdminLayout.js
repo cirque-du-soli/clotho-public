@@ -13,13 +13,13 @@ import PerfectScrollbar from "perfect-scrollbar";
 import routes from "../util/routes.js";
 
 // IMPORT: Components
-import Header from "../components/Header";
-import TestSquarePlaceholder from '../components/Temp/TestSquarePlaceholder';
-import FooterPlaceholder from "../components/Temp/FooterPlaceholder";
+import Header from "../components/Navbars/Header";
+import TestSquarePlaceholder from '../components/Misc/TestSquarePlaceholder';
+import FooterPlaceholder from "../components/Navbars/FooterPlaceholder";
 
 const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-        if (prop.layout === "AdminLayout" ) {
+        if (prop.layout === "AdminLayout") {
             return (
                 <Route path={prop.path} element={prop.component} key={key} exact />
             );
@@ -38,9 +38,9 @@ function AdminLayout(props) {
 
     return (
         <div className="App">
-                
+
             <Header />
-            
+
             <div className="main-panel" ref={mainPanelRef}>
                 <Routes>
                     {/* This adds all possible routes & views */}

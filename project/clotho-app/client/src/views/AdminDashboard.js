@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 
-import TestSquarePlaceholder from "../components/Temp/TestSquarePlaceholder";
+import TestSquarePlaceholder from "../components/Misc/TestSquarePlaceholder";
 
-import TestButton from "../components/TestButton";
+import TestButton from "../components/Buttons/TestButton";
 
 function AdminDashboard(props) {
 
