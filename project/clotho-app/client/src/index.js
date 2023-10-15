@@ -42,19 +42,13 @@ root.render(
       <Routes>
         <Route path="/app/*" element={<StandardLayout />} />
         <Route path="/admin/*" element={<AdminLayout />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/test001" element={<App />} />
-        <Route path="/header" element={<Header />} />
-        <Route path="/photoupload" element={<PhotoUpload />} />
-        <Route path="/createlisting" element={<CreateListing />} />
-        <Route path="/listings" element={<Listings />} />
-        {/* <Route path="/listingsv2" element={<ListingsV2 />} /> */}
-        {/* <Route path="/listingsv3" element={<ListingsV3 />} /> */}
-        <Route path="/logout" element={<Logout />} />
-        {/* <Route path="/userprofile" element={<UserProfile />} /> */}
-        <Route path="/user/:id"  element={<UserProfileV2 />} />
-        <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
-        <Route path="/notfound" element={<PageNotFound />} />
+
+        {/* 
+        <Route path="/app/*" element={<Navigate to="/app/home" replace />} />
+        <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
+         */}
+        
+        <Route path="/*" element={<Navigate to="/admin/dashboard" replace />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
