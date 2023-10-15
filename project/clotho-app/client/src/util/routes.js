@@ -1,4 +1,8 @@
-import AdminDashboard from "../layouts/AdminDashboard.js";
+// IMPORT: Dashboards
+import AdminDashboard from "../views/AdminDashboard";
+import StandardDashboard from "../views/StandardDashboard";
+
+// IMPORT: Views
 
 /*
 import Icons from "views/Icons.js";
@@ -13,30 +17,35 @@ import UserProfile from "views/UserProfile.js";
 var routes = [
     {
         path: "/dashboard",
-        name: "Dashboard",
-        rtlName: "لوحة القيادة",
-        icon: "tim-icons icon-chart-pie-36",
+        name: "Admin Dashboard",
         component: <AdminDashboard />,
-        layout: "/admin",
-    }
+        layout: "AdminLayout"
+    },
+    {
+        path: "/",
+        name: "Standard Dashboard",
+        component: <StandardDashboard />,
+        layout: "StandardLayout",
+    },
+
+
+    /* 
+    ADD HERE: anything that is its own page (login, signup, etc.)
+    {
+        path: "/login",
+        name: "Log In",
+        component: <LoginView />,
+        layout: "StandardLayout",
+    },
+
+
+    */
+
     /*
-    ,
-    {
-        path: "/icons",
-        name: "Icons",
-        rtlName: "الرموز",
-        icon: "tim-icons icon-atom",
-        component: <Icons />,
-        layout: "/admin",
-    },
-    {
-        path: "/map",
-        name: "Map",
-        rtlName: "خرائط",
-        icon: "tim-icons icon-pin",
-        component: <Map />,
-        layout: "/admin",
-    },
+
+    
+
+    
     {
         path: "/notifications",
         name: "Notifications",
