@@ -14,8 +14,8 @@ import AdminLayout from './layouts/AdminLayout';
 import Header from './components/Header';
 import { Auth } from './context/Auth';
 import PageNotFound from './components/PageNotFound';
-import Login from './components/Login';
-import Logout from './components/Logout';
+import Login from './components/Forms/Login';
+import Logout from './components/Forms/Logout';
 // import UserProfile from './components/UserProfile';
 import UserProfileV2 from './components/UserProfileV2';
 

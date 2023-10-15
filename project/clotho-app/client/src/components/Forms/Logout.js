@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import useAxiosJWT from '../hooks/useAxiosJWT';
+import useAxiosJWT from '../../hooks/useAxiosJWT';
 
 const Logout = () => {
 
