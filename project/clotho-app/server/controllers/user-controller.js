@@ -6,6 +6,7 @@ TODO: auth, images, username regex
 */
 
 const { User } = require("../models");
+const { Listing } = require("../models");
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 
@@ -19,7 +20,17 @@ exports.findById = async (req, res) => {
         var user = await User.findByPk(
             req.userId,
             {
-                attributes: ['id', 'username', 'email', 'avatar']
+                attributes: ['username', 'email', 'avatar'],
+                include:[
+                        {
+                            model: Listing,
+                            as: 'Seller',
+                            where: {
+                                isDeleted: false
+                            },
+                            attributes: ['id', 'title', 'description', 'thumbnail', 'price', 'isSold']
+                        }
+                    ]
             }
         );
 
@@ -27,7 +38,15 @@ exports.findById = async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        res.json(user);
+        const result = {
+            user: {
+                username: user.username,
+                email: user.email,
+                avatar: user.avatar
+            },
+            listings: user.Seller
+        }
+        res.json(result);
 
     } catch (err) {
 

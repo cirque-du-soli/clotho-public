@@ -93,9 +93,9 @@ GET single record excl deleted:     api/attr/categories/:id([0-9]+)
 
         -------------------------------user profile-------------------------------
 
-GET user by id                          api/users/:id([0-9]+)
+GET user by id                          api/users/profile
 POST register new user                  api/users/
-PUT update user profile                 api/users/:id([0-9]+)
+PUT update user profile                 api/users/profile
 DELETE close account                    api/users/:id([0-9]+)
 
         -------------------------------listings-------------------------------
