@@ -1,9 +1,6 @@
 import React from "react";
-import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 
-import TestSquarePlaceholder from "../components/Temp/TestSquarePlaceholder";
-
-// IMPORT: Routes
+// IMPORT: Routes (util)
 import routes from "../util/routes.js";
 
 function TestDashboard(props) {
@@ -23,9 +20,18 @@ function TestDashboard(props) {
     return (
         <>
             <h1>Test Dashboard</h1>
+
             <ul style={{ textAlign: "left" , marginLeft: "200px"}} >
                 {listRoutes(routes)}
             </ul>
+
+            <br/>
+            <a href="/admin">Back to Admin Dashboard</a>
+            <br/>
+            <br/>
+            <a href="/app">Back to User Homepage</a>
+            <br/>
+
         </>
     );
 }

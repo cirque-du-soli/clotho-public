@@ -52,22 +52,8 @@ function TestLayout(props) {
             <div className="main-panel" ref={mainPanelRef}>
                 
                 <Routes>
-                    {/* This adds all possible routes & views */}
+                    {/* All possible routes, with the associated Test Component */}
                     {getRoutes(routes)}
-
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/header" element={<Header />} />
-                    <Route path="/photoupload" element={<PhotoUpload />} />
-                    <Route path="/createlisting" element={<CreateListing />} />
-                    <Route path="/listings" element={<Listings />} />
-                    
-                    <Route path="/logout" element={<Logout />} />
-                    <Route path="/user/:id" element={<UserProfileV2 />} />
-                    <Route path="/notfound" element={<PageNotFound />} />
-
-                    {/* <Route path="/listingsv2" element={<ListingsV2 />} /> */}
-                    {/* <Route path="/listingsv3" element={<ListingsV3 />} /> */}
-                    {/* <Route path="/userprofile" element={<UserProfile />} /> */}
 
                     {/* Catch-all non-declared routes*/}
                     <Route
