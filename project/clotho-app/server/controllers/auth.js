@@ -112,6 +112,7 @@ exports.adminOnly = (req, res, next) => {
     if (!req.isAdmin) {
         return res.status(404).json({ message: "Page not found"})
     }
+    next();
 
 };
 

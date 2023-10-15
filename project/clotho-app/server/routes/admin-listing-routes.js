@@ -12,7 +12,10 @@ router.get('/seller/:username', listings.findAllBySeller); //FIXME username rege
 router.get('/:id([0-9]+)', listings.findById);
 
 // create new listing
-router.post('/', listings.create);
+//router.post('/', listings.create);
+
+// create new listing (protected)
+router.post('/', auth.getToken, auth.getUser, auth.adminOnly, listings.create);
 
 // update listing by id
 router.put('/:id([0-9]+)', listings.updateById);
@@ -44,8 +47,7 @@ router.get('/seller/:username', auth.getToken, auth.getUser, auth.adminOnly, lis
 // get by id
 router.get('/:id([0-9]+)', auth.getToken, auth.getUser, auth.adminOnly, listings.findById);
 
-// create new listing
-router.post('/', auth.getToken, auth.getUser, auth.adminOnly, listings.create);
+
 
 // update listing by id
 router.put('/:id([0-9]+)', auth.getToken, auth.getUser, auth.adminOnly, listings.updateById);
