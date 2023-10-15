@@ -16,6 +16,9 @@ import { Auth } from './context/Auth';
 import PageNotFound from './components/PageNotFound';
 import Login from './components/Login';
 import Logout from './components/Logout';
+// import UserProfile from './components/UserProfile';
+import UserProfileV2 from './components/UserProfileV2';
+
 
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -39,6 +42,8 @@ root.render(
         {/* <Route path="/listingsv2" element={<ListingsV2 />} /> */}
         {/* <Route path="/listingsv3" element={<ListingsV3 />} /> */}
         <Route path="/logout" element={<Logout />} />
+        {/* <Route path="/userprofile" element={<UserProfile />} /> */}
+        <Route path="/user/:id"  element={<UserProfileV2 />} />
         <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="/notfound" element={<PageNotFound />} />
       </Routes>
