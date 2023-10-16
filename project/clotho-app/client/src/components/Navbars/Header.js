@@ -15,6 +15,7 @@ import {
   NavbarText,
 } from 'reactstrap';
 import logoFull from '../../assets/images/clotho-logo-name-hiRes.png';
+import LoginModalNavItem from '../Modals/LoginModalNavItem';
 
 function Header() {
 
@@ -75,11 +76,17 @@ function Header() {
             <NavItem className="mx-auto mx-md-0">
               <NavLink href="/test/listings" className="nav-link">Listings</NavLink>
             </NavItem>
-            */}
+            
+            // OLD LOGIN (NON MODAL)
             <NavItem className="mx-auto mx-md-0">
               <NavLink href="/test/login" className="nav-link">Login</NavLink>
             </NavItem>
-            <NavItem className="mx-auto mx-md-0" disabled>
+            */}
+
+            
+            <LoginModalNavItem />
+            
+            <NavItem className="mx-auto mx-md-0">
               <NavLink href="/test/logout" className="nav-link">Logout</NavLink>
             </NavItem>
 
