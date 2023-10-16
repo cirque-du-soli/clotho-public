@@ -19,6 +19,11 @@ const Logout = () => {
         try {
             const response = await axiosJWT.delete('/auth/logout');
             console.log(response?.data);
+            sessionStorage.setItem('token', '');
+            sessionStorage.setItem('refreshToken', '');
+            sessionStorage.setItem('isAdmin', '');
+            sessionStorage.setItem('userId', '');
+            sessionStorage.setItem('username', '');
             setSuccess(true);
         } catch (err) {
             if (!err?.response) {

@@ -92,7 +92,7 @@ exports.getUser = (req, res, next) => {
         if (err) {
 
             console.log(err);
-            return res.status(401).json("you are not logged in");
+            return res.status(403).json("you are not logged in");
 
         } else {
 
@@ -159,7 +159,7 @@ exports.refreshToken = (req, res) => {
             return res.status(403).json("cannot verify refresh token");
         }
 
-        const newToken = signToken(data);
+        const newToken = signToken(data.user);
 
         res.json({token: newToken});
 

@@ -27,11 +27,11 @@ const useAxiosJWT = () => {
                     const response = await axios.get('/auth/refresh', 
                     {
                         headers:
-                            { Auth: `Bearer ${refreshToken}`}
+                            { authorization: `Bearer ${refreshToken}`}
                     });
 
                   
-                    prevRequest.headers['Authorization'] = `Bearer ${response.data.token}`;
+                    prevRequest.headers['authorization'] = `Bearer ${response.data.token}`;
                     sessionStorage.setItem('token', response.data.token);
                     return axiosJWT(prevRequest);
                 }
