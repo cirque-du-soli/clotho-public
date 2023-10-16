@@ -347,6 +347,61 @@ Meredith:
 		- listing images in back
 		- troubleshooting/debugging
 
+2023-10-16
+===================
+
+Dustin:
+	Done:
+		- User Profile
+		- Search Listings
+		- Redid the s3 photo upload
+		
+	Not-Done:
+		- Stripe
+	
+	Needs Assistance:
+		- Search & Photo Upload Troubleshooting
+
+	Todo Before Next Scrum:
+		- Single Listing Page with Add to Cart
+
+Soli:
+	Done:
+		- Client Routes: SOLVED ;_;
+		- persistent header & footer (+designed)
+		- Links to test components
+		
+	Not-Done:
+		- --
+	
+	Needs Assistance:
+		- (maybe) Token/auth access?
+
+	Todo Before Next Scrum:
+		- Plug some actual components into the non-Admin user layout
+		- Conditional render with auth / user role
+
+Meredith: 
+	Done:
+		- fixed auth in back
+		- login/logout in front
+		- listing images in back
+		- modified api controllers/routes
+		- added some error handling/bug fixes in front
+		- modifications to front for auth
+		
+	Not-Done:
+		- login/logout redirects
+		- format display error msgs in front
+	
+	Needs Assistance:
+		- tba
+
+	Todo Before Next Scrum:
+		- test + debug image uploads
+		- troubleshoot listing page
+		- add validation + error handling in front
+		- help with front end links/redirects/conditional rendering
 
 ===============================================================================
 ===============================================================================
