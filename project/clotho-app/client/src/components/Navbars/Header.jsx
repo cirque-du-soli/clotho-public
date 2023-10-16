@@ -14,19 +14,19 @@ const Header = () => {
           <Link to="/test001" className="nav-link">Test001</Link>
         </NavItem> */}
         <NavItem>
-          <Link to="/photoupload" className="nav-link">Photo Upload</Link>
+          <Link to="/test/photoupload" className="nav-link">Photo Upload</Link>
         </NavItem>
         <NavItem>
-          <Link to="/createlisting" className="nav-link">Create Listing</Link>
+          <Link to="/test/createlisting" className="nav-link">Create Listing</Link>
         </NavItem>
         <NavItem>
-          <Link to="/listings" className="nav-link">Listings</Link>
+          <Link to="/test/listings" className="nav-link">Listings</Link>
         </NavItem>
         <NavItem>
-          <Link to="/login" className="nav-link">Login</Link>
+          <Link to="/test/login" className="nav-link">Login</Link>
         </NavItem>
         <NavItem>
-          <Link to="/logout" className="nav-link">Logout</Link>
+          <Link to="/test/logout" className="nav-link">Logout</Link>
         </NavItem>
         {/* <NavItem>
           <Link to="/listingsv2" className="nav-link">Listings V2</Link>

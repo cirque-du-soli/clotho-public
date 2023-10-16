@@ -15,7 +15,7 @@ import routes from "../util/routes.js";
 // IMPORT: Components
 import Header from "../components/Navbars/Header";
 import TestSquarePlaceholder from '../components/Misc/TestSquarePlaceholder';
-import FooterPlaceholder from "../components/Navbars/FooterPlaceholder";
+import FooterPlaceholder from "../components/Navbars/Footer";
 
 const getRoutes = (routes) => {
     return routes.map((prop, key) => {
@@ -39,7 +39,7 @@ function AdminLayout(props) {
 
             <div className="main-panel" ref={mainPanelRef}>
 
-                
+
                 <Routes>
                     {/* This adds all possible routes & views */}
                     {getRoutes(routes)}
