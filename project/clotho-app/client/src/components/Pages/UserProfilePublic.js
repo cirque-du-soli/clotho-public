@@ -1,7 +1,7 @@
 // UserProfileV2.js
 import { useState, useEffect } from 'react';
 import axios from '../../api/axios';
-import { Button, Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
+import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 
 
@@ -11,7 +11,7 @@ function UserProfilePublic() {
     const { username } = useParams();
 
     // navigate to private view if loaded by seller
-    if (sessionStorage.getItem('username') && sessionStorage.getItem('username') == username) {
+    if (sessionStorage.getItem('username') && sessionStorage.getItem('username') === username) {
         navigate('/test/profile');
     }
     const [user, setUser] = useState({});
