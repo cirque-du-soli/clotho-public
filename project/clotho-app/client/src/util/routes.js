@@ -28,7 +28,7 @@ import Listings from '../components/Tables/Listings';
 
 // import ListingsV2 from '../components/ListingsV2';
 // import ListingsV3 from '../components/ListingsV3';
-// import Listings from '../../TEMP/Listings';
+//import Listings from '../../TEMP/Listings';
 
 var routes = [
 

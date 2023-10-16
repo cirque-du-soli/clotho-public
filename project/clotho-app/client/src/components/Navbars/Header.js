@@ -1,38 +1,91 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavItem } from 'reactstrap';
+import { React, useState } from 'react';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavbarText,
+} from 'reactstrap';
+import logoFull from '../../assets/images/clotho-logo-name-hiRes.png';
 
-const Header = () => {
+function Header() {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
+
   return (
-    <Navbar color="dark" dark expand="md">
-      <Link to="/" className="navbar-brand">Clotho</Link>
-      <Nav className="ml-auto" navbar>
-        <NavItem>
-          <Link to="/admin" className="nav-link">Admin</Link>
-        </NavItem>
-        {/* <NavItem>
-          <Link to="/test001" className="nav-link">Test001</Link>
-        </NavItem> */}
-        <NavItem>
-          <Link to="/photoupload" className="nav-link">Photo Upload</Link>
-        </NavItem>
-        <NavItem>
-          <Link to="/createlisting" className="nav-link">Create Listing</Link>
-        </NavItem>
-        <NavItem>
-          <Link to="/listings" className="nav-link">Listings</Link>
-        </NavItem>
-        <NavItem>
-          <Link to="/login" className="nav-link">Login</Link>
-        </NavItem>
-        <NavItem>
-          <Link to="/logout" className="nav-link">Logout</Link>
-        </NavItem>
-        {/* <NavItem>
-          <Link to="/listingsv2" className="nav-link">Listings V2</Link>
-        </NavItem> */}
-      </Nav>
-    </Navbar>
+    <>
+      <Navbar
+        color="light"
+        light
+        expand="md"
+      >
+        <NavbarBrand href="/">
+          <img
+            alt="logo"
+            src={logoFull}
+            style={{
+              height: 50
+            }}
+          />
+        </NavbarBrand>
+
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="justify-content-end" style={{ width: "100%" }} navbar >
+            {/* 
+            <NavItem className="mx-auto mx-md-0">
+            <NavLink href="/test001" className="nav-link">Test001</NavLink>
+            </NavItem> 
+            */}
+
+            {/* 
+            <NavItem className="mx-auto mx-md-0">
+            <NavLink href="/listingsv2" className="nav-link">Listings V2</NavLink>
+            </NavItem> 
+            */}
+            
+            {/* 
+            <NavItem className="mx-auto mx-md-0">
+              <NavLink href="/admin" className="nav-link ml-auto">Admin</NavLink>
+            </NavItem>
+            */}
+            
+            <NavItem className="mx-auto mx-md-0">
+              <NavLink href="/test" className="nav-link ml-auto">Dev</NavLink>
+            </NavItem>
+
+            {/* 
+            <NavItem className="mx-auto mx-md-0">
+              <NavLink href="/test/photoupload" className="nav-link">Photo Upload</NavLink>
+            </NavItem>
+            <NavItem className="mx-auto mx-md-0">
+              <NavLink href="/test/createlisting" className="nav-link">Create Listing</NavLink>
+            </NavItem>
+            <NavItem className="mx-auto mx-md-0">
+              <NavLink href="/test/listings" className="nav-link">Listings</NavLink>
+            </NavItem>
+            */}
+            <NavItem className="mx-auto mx-md-0">
+              <NavLink href="/test/login" className="nav-link">Login</NavLink>
+            </NavItem>
+            <NavItem className="mx-auto mx-md-0" disabled>
+              <NavLink href="/test/logout" className="nav-link">Logout</NavLink>
+            </NavItem>
+
+          </Nav>
+        </Collapse>
+      </Navbar>
+    </>
   );
 }
 

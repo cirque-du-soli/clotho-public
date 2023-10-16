@@ -22,8 +22,9 @@ function AdminDashboard(props) {
 
     return (
         <>
+
             <Container className="adminDashboardHolder p-0 text-center">
-                <Header />
+                
 
                 <Row>
                     <Col className="py-3">

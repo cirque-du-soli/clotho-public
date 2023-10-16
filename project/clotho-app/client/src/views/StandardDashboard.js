@@ -1,15 +1,23 @@
-//import React from "react";
+//IMPORT: React
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 
-import TestSquarePlaceholder from "../components/Misc/TestSquarePlaceholder";
+// IMPORT: Components
+import TestSquarePlaceholder from "../components/PLACEHOLDERS/TestSquarePlaceholder";
+import Listings from "../components/Tables/Listings";
 
-function Standard(props) {
+function StandardDashboard(props) {
 
     return (
         <>
-            <TestSquarePlaceholder />
+            <div className="text-center">
+
+
+                <h1>Standard Dashboard</h1>
+                {/* <Listings /> */}
+                <TestSquarePlaceholder details={{ text: "This is where the listings will be shown" }} />
+            </div>
         </>
     );
 }
 
-export default Standard;
+export default StandardDashboard;

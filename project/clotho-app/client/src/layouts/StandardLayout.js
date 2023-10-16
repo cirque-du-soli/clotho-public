@@ -1,13 +1,15 @@
-// IMPORTS
+// IMPORT: React
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { useRef } from 'react';
 
-import logo from '../assets/logo.svg';
+// IMPORT: Styles
 import '../assets/App.css';
 
-// creates scrollbars on windows devices
-import PerfectScrollbar from "perfect-scrollbar";
+// IMPORT: Components
+import Header from "../components/Navbars/Header";
+import Footer from "../components/Navbars/Footer";
 
+// IMPORT: Routes
 import routes from "../util/routes.js";
 
 const getRoutes = (routes) => {
@@ -28,20 +30,20 @@ function StandardLayout() {
 
     return (
         <div className="App">
-                <div className="main-panel" ref={mainPanelRef}>
-
+            <Header />
+            <Footer />
+            <div className="main-panel" ref={mainPanelRef}>
                 <Routes>
-                    
-                        {/* This adds all possible routes & views */}
-                        {getRoutes(routes)} 
 
-                        {/* Catch-all non-declared routes*/}
-                        <Route path="/" element={<Navigate to="/app/home" replace />} />
-                    
-                    </Routes>
+                    {/* This adds all possible routes & views */}
+                    {getRoutes(routes)}
 
-                </div>
+                    {/* Catch-all non-declared routes*/}
+                    <Route path="/" element={<Navigate to="/app/home" replace />} />
 
+                </Routes>
+            </div>
+            
         </div>
     );
 }
