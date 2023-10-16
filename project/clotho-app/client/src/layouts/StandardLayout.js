@@ -28,13 +28,10 @@ function StandardLayout() {
 
     return (
         <div className="App">
-            <header className="App-header">
-
-                <img src={logo} className="App-logo" alt="logo" />
                 <div className="main-panel" ref={mainPanelRef}>
 
-                    <Routes>
-
+                <Routes>
+                    
                         {/* This adds all possible routes & views */}
                         {getRoutes(routes)} 
 
@@ -45,7 +42,6 @@ function StandardLayout() {
 
                 </div>
 
-            </header>
         </div>
     );
 }
