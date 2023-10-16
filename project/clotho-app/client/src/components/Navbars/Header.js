@@ -42,12 +42,29 @@ function Header() {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="justify-content-end" style={{ width: "100%" }} navbar >
+            {/* 
+            <NavItem className="mx-auto mx-md-0">
+            <NavLink href="/test001" className="nav-link">Test001</NavLink>
+            </NavItem> 
+            */}
+
+            {/* 
+            <NavItem className="mx-auto mx-md-0">
+            <NavLink href="/listingsv2" className="nav-link">Listings V2</NavLink>
+            </NavItem> 
+            */}
+            
+            {/* 
             <NavItem className="mx-auto mx-md-0">
               <NavLink href="/admin" className="nav-link ml-auto">Admin</NavLink>
             </NavItem>
-            {/* <NavItem className="mx-auto mx-md-0">
-            <NavLink href="/test001" className="nav-link">Test001</NavLink>
-          </NavItem> */}
+            */}
+            
+            <NavItem className="mx-auto mx-md-0">
+              <NavLink href="/test" className="nav-link ml-auto">Dev</NavLink>
+            </NavItem>
+
+            {/* 
             <NavItem className="mx-auto mx-md-0">
               <NavLink href="/test/photoupload" className="nav-link">Photo Upload</NavLink>
             </NavItem>
@@ -57,15 +74,14 @@ function Header() {
             <NavItem className="mx-auto mx-md-0">
               <NavLink href="/test/listings" className="nav-link">Listings</NavLink>
             </NavItem>
+            */}
             <NavItem className="mx-auto mx-md-0">
               <NavLink href="/test/login" className="nav-link">Login</NavLink>
             </NavItem>
-            <NavItem className="mx-auto mx-md-0">
+            <NavItem className="mx-auto mx-md-0" disabled>
               <NavLink href="/test/logout" className="nav-link">Logout</NavLink>
             </NavItem>
-            {/* <NavItem className="mx-auto mx-md-0">
-            <NavLink href="/listingsv2" className="nav-link">Listings V2</NavLink>
-            </NavItem> */}
+
           </Nav>
         </Collapse>
       </Navbar>

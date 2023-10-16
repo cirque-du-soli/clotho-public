@@ -14,7 +14,7 @@ import routes from "../util/routes.js";
 
 // IMPORT: Components
 import Header from "../components/Navbars/Header";
-import TestSquarePlaceholder from '../components/Misc/TestSquarePlaceholder';
+import TestSquarePlaceholder from '../components/PLACEHOLDERS/TestSquarePlaceholder';
 import FooterPlaceholder from "../components/Navbars/Footer";
 
 const getRoutes = (routes) => {

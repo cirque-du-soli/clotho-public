@@ -6,12 +6,7 @@ import {
     Col,
 } from "reactstrap";
 
-function TestSquarePlaceholder() {
-
-    // STATES
-
-    // HOOKS
-
+function TestSquarePlaceholder({ details }) {
 
     return (
         <>
@@ -19,7 +14,14 @@ function TestSquarePlaceholder() {
                 <Row>
                     <Col>
                         <div>
-                            <p>Test</p>
+                            <h4>Under Construction</h4>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <div>
+                            <p>{ details.text }</p>
                         </div>
                     </Col>
                 </Row>
