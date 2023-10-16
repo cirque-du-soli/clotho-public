@@ -9,6 +9,7 @@ const { Category } = require("../models");
 const { Size } = require("../models");
 const { Gender } = require("../models");
 const { ListingImage } = require("../models");
+const { Op } = require("sequelize");
 
 /* 
 Get full list of items excluding sold and deleted
@@ -16,6 +17,30 @@ Get full list of items excluding sold and deleted
 exports.findAll = async (req, res) => {
 
     try {
+        const search = req.query.search ?
+            {
+                [Op.or]: [
+                    {
+                        title:
+                        {
+                            [Op.like]: `%${req.query.search}%`
+                        }
+                    },
+                    {
+                        description:
+                        {
+                            [Op.like]: `%${req.query.search}%`
+                        }
+                    }
+                ]
+            } : {};
+        const category = req.query.category ? { id: req.query.category } : {};
+        const gender = req.query.gender ? { id: req.query.gender } : {};
+        const size = req.query.size ? { id: req.query.size } : {};
+        console.log(req.query.size);
+        console.log(size);
+        console.log(size.id);
+        console.log(`'%${req.query.search}%'`);
 
         var itemList = await Listing.findAll({
             attributes: ['id', 'title', 'description', 'thumbnail', 'price', 'isSold', 'isDeleted', 'createdAt', 'updatedAt'],
@@ -31,25 +56,32 @@ exports.findAll = async (req, res) => {
             },
             {
                 model: Category,
-                attributes: ['name', 'id']
+                attributes: ['name', 'id'],
+                where: category
             },
             {
                 model: Size,
-                attributes: ['name', 'id']
+                attributes: ['name', 'id'],
+                where: size
+
             },
             {
                 model: Gender,
-                attributes: ['name', 'id']
+                attributes: ['name', 'id'],
+                where: gender
+
             }],
-            where: {
+            where: [{
                 isDeleted: false,
-                isSold: false
-            }
+                isSold: false,
+            },
+                search
+            ]
         });
 
-        if (!itemList[0]) {
-            return res.status(404).json({ message: "No listings found" });
-        }
+        // if (!itemList[0]) {
+        //     return res.status(404).json({ message: "No listings found" });
+        // }
 
         // format decimal
         for (let i in itemList) {

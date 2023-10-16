@@ -20,7 +20,7 @@ function Listings() {
 
   useEffect(() => {
 
-      axios.get(`/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}`)
+      axios.get(`/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}&gender=${selectedGender}`)
       .then(response => {
         setListings(response.data);
       })
