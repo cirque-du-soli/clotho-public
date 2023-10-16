@@ -33,13 +33,9 @@ function AdminLayout(props) {
 
     const mainPanelRef = useRef(null);
 
-
-
-
     return (
         <div className="App">
 
-            <Header />
 
             <div className="main-panel" ref={mainPanelRef}>
                 <Routes>
@@ -53,8 +49,6 @@ function AdminLayout(props) {
                     />
                 </Routes>
             </div>
-
-            <FooterPlaceholder />
 
         </div>
     );
