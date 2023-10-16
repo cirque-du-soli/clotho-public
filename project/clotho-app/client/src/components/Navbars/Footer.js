@@ -8,6 +8,8 @@ import {
     Navbar,
 } from "reactstrap";
 
+import logoFull from '../../assets/images/clotho-logo-name-hiRes.png';
+
 function FooterPlaceholder() {
 
     // STATES
@@ -31,7 +33,7 @@ function FooterPlaceholder() {
                                 link-underline-opacity-75-hover">
                                 Home
                             </a>
-                            <text> | </text>
+                            <span> | </span>
                             <a href='/app/home'
                                 className="
                                 link-dark 
@@ -42,7 +44,7 @@ function FooterPlaceholder() {
                                 link-underline-opacity-75-hover">
                                  Terms of Service
                             </a>
-                            <text> | </text>
+                            <span> | </span>
                             <a href='/app/home'
                                 className="
                                 link-dark 
@@ -55,6 +57,9 @@ function FooterPlaceholder() {
                             </a>
                         </div>
                         
+                    </Col>
+                    <Col className='d-flex justify-content-center'>
+                        <img src={logoFull} alt='logo' height={'40px'} className='align-self-center' />
                     </Col>
                     <Col className='d-flex justify-content-end mx-3'>
                         <div  className='align-self-center'>
