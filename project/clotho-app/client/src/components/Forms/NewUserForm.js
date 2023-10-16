@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
+import { useState, useEffect } from 'react';
+import axios from '../../api/axios'; 
 
 // Reactstrap
 import {
@@ -58,7 +58,7 @@ function NewUserForm() {
         // e.g. check for duplicate usernames, etc.
 
         // post to db
-        Axios.post("http://localhost:3001/api/admin/users", {
+        axios.post("/admin/users", { //FIXME HANDLE SUBMIT, ERROR HANDLING, ASYNC
             username: username,
             password: password,
             email: email,

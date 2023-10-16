@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
+import { useState, useEffect } from 'react';
+import useAxiosJWT from '../../hooks/useAxiosJWT';
 
 // reactstrap components
 import {
@@ -14,6 +14,8 @@ import {
 
 function UsersList() {
 
+    const axiosJWT = useAxiosJWT();
+
     // STATES
     const [usersList, setUsersList] = useState([]);
 
@@ -27,7 +29,7 @@ function UsersList() {
     }, []);
     */
    useEffect(() => {
-       Axios.get("http://localhost:3001/api/admin/users").then((response) => {
+       axiosJWT.get("/admin/users").then((response) => { //FIXME ERROR HANDLING
            setUsersList(response.data);
        });
    }, []);

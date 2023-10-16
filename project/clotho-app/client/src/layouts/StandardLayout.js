@@ -1,6 +1,6 @@
 // IMPORTS
-import React from 'react';
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import { useRef } from 'react';
 
 import logo from '../assets/logo.svg';
 import '../assets/App.css';
@@ -24,7 +24,7 @@ const getRoutes = (routes) => {
 
 function StandardLayout() {
 
-    const mainPanelRef = React.useRef(null);
+    const mainPanelRef = useRef(null);
 
     return (
         <div className="App">

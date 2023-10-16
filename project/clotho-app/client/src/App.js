@@ -3,7 +3,6 @@
 // Admin
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
 
-import React from 'react';
 
 import logo from './assets/logo.svg';
 import './assets/App.css';

@@ -1,6 +1,6 @@
 // IMPORT: React
-import React from 'react';
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import { useRef } from 'react';
 
 // IMPORT: Styles
 import logo from '../assets/logo.svg';
@@ -31,7 +31,7 @@ const getRoutes = (routes) => {
 
 function AdminLayout(props) {
 
-    const mainPanelRef = React.useRef(null);
+    const mainPanelRef = useRef(null);
 
 
 

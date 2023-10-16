@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios'; 
+import { useState } from 'react';
+import useAxiosJWT from '../../hooks/useAxiosJWT';
 import {
     Card,
     CardHeader,
@@ -13,6 +13,9 @@ import {
 } from "reactstrap";
 
 const CreateListing = () => {
+
+  const axiosJWT = useAxiosJWT();
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -38,7 +41,7 @@ const CreateListing = () => {
     for (const key in formData) {
       form.append(key, formData[key]);
     }
-    const response = await axios.post('localhost:3001/api/admin/listings', form);
+    const response = await axiosJWT.post('/admin/listings', form); //FIXME HANDLE ERRORS
     console.log(response.data);
   };
 

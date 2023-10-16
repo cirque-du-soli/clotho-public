@@ -11,6 +11,7 @@ import TestDashboard from "../views/TestDashboard";
 import PhotoUpload from '../components/Forms/PhotoUpload';
 import CreateListing from '../components/Forms/CreateListing';
 import CreateListingAdminTest from '../components/Forms/CreateListingAdminTest';
+import CreateListingUserTest from '../components/Forms/CreateListingUserTest';
 
 import Header from '../components/Navbars/Header';
 import { Auth } from '../context/Auth';
@@ -94,6 +95,13 @@ var routes = [
         path: "/createlistingadmin",
         name: "Test: Create Listing Admin (test)",
         component: <CreateListingAdminTest />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/createlistinguser",
+        name: "Test: Create Listing Admin (test)",
+        component: <CreateListingUserTest />,
     },
 
     {

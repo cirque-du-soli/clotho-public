@@ -1,7 +1,7 @@
 // UserProfile.js
 
 
-// import React, { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 // import axios from 'axios';
 // import { useAxiosJWT } from "../hooks/useAxiosJWT";
 // import { Button, Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';

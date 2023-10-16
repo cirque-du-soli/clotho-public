@@ -1,6 +1,6 @@
 // UserProfileV2.js
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
+import axios from '../../api/axios';
 import jwtDecode from 'jwt-decode';
 import { Button, Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 

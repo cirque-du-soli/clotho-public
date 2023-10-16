@@ -1,5 +1,5 @@
 // UserProfileV2.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from '../../api/axios';
 import { Button, Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 import { useNavigate, useParams } from 'react-router-dom';

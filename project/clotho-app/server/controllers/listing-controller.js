@@ -400,10 +400,10 @@ function isValidPost(req, res) {
         case (req.body.categoryId != Number(req.body.categoryId).toFixed()):
             res.status(400).json({ message: "Category id must be an integer" });
             return false;
-        case (!req.body.thumbnail): //TODO imgs
-            return res.status(400).json({ message: "Path to thumbnail image cannot be null" });
-        case (req.body.thumbnail.length > 200): //TODO imgs
-            return res.status(400).json({ message: "Path to thumbnail image cannot exceed 200 characters" });
+        // case (!req.body.thumbnail): //TODO imgs
+        //     return res.status(400).json({ message: "Path to thumbnail image cannot be null" });
+        // case (req.body.thumbnail.length > 200): //TODO imgs
+        //     return res.status(400).json({ message: "Path to thumbnail image cannot exceed 200 characters" });
         default:
             return true;
     }

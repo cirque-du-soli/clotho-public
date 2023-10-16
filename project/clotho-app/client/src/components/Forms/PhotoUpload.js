@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import useAxiosJWT from '../../hooks/useAxiosJWT'; 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
     Card,
@@ -14,6 +14,7 @@ import {
 } from "reactstrap";
 
 export default function NewPost() {
+  const axiosJWT = useAxiosJWT();
   const [photos, setPhotos] = useState([]);
   const [caption, setCaption] = useState("");
 
@@ -21,7 +22,8 @@ export default function NewPost() {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
-    const { data } = await axios.post('/api/posts', formData, { headers: {'Content-Type': 'multipart/form-data'}});
+    //FIX ME
+    const { data } = await axiosJWT.post('/api/posts', formData, { headers: {'Content-Type': 'multipart/form-data'}});
     setPhotos([...photos, { url: data.url }]);
   };
 
@@ -30,7 +32,7 @@ export default function NewPost() {
     // Then update the order in the mySQL db
   };
 
-  const submit = async event => {
+  const submit = async event => { //FIXME
     event.preventDefault();
     // Submit any other data e
   };

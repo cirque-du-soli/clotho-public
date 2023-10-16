@@ -1,12 +1,9 @@
 // UserProfileV2.js
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 import useAxiosJWT from '../../hooks/useAxiosJWT';
 import { Button, Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
 function UserProfilePrivate() {
-
-
     
     const axiosJWT = useAxiosJWT();
     const [user, setUser] = useState({});
@@ -19,7 +16,7 @@ function UserProfilePrivate() {
                 setUser(response?.data?.user);
                 setListings(response?.data?.listings)
             })
-            .catch(error => {
+            .catch(error => { //FIXME DISPLAY ERRORS
                 console.error('Error fetching user:', error);
             });
 
