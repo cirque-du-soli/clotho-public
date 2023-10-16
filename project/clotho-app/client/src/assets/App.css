@@ -36,15 +36,25 @@ td {
 
 
 
+/* ********************* Header ******************************************** */
 
 
 
+/* ********************* Subheader ******************************************** */
+#subheader {
+  border:#280035 solid;
+  border-width: 1px 0px 1px 0px;
+}
 
-
-
-
-
-
+.saleLink {
+  color: red;
+  font-weight: 400;
+  text-shadow: rgba(139, 0, 0, 0.404)1px 1px 3px;
+}
+.saleLink:hover{
+  color: rgb(209, 0, 0);
+  text-shadow: rgba(255, 0, 76, 0.699)1px 1px 4px;
+}
 
 
 /* ********************* PLACEHOLDERS ******************************************** */

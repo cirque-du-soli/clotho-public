@@ -8,6 +8,7 @@ import '../assets/App.css';
 // IMPORT: Components
 import Header from "../components/Navbars/Header";
 import Footer from "../components/Navbars/Footer";
+import Subheader from "../components/Navbars/Subheader";
 
 // IMPORT: Routes
 import routes from "../util/routes.js";
@@ -31,6 +32,7 @@ function StandardLayout() {
     return (
         <div className="App">
             <Header />
+            <Subheader />
             <Footer />
             <div className="main-panel" ref={mainPanelRef}>
                 <Routes>

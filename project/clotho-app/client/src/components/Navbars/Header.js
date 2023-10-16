@@ -28,6 +28,7 @@ function Header() {
         color="light"
         light
         expand="md"
+        id='header'
       >
         <NavbarBrand href="/">
           <img
@@ -59,7 +60,7 @@ function Header() {
               <NavLink href="/admin" className="nav-link ml-auto">Admin</NavLink>
             </NavItem>
             */}
-            
+
             <NavItem className="mx-auto mx-md-0">
               <NavLink href="/test" className="nav-link ml-auto">Dev</NavLink>
             </NavItem>
