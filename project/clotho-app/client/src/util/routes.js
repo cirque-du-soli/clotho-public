@@ -22,6 +22,9 @@ import UserProfileV2 from '../components/Pages/UserProfileV2';
 import UserProfile from '../components/Pages/UserProfile';
 import UserProfilePrivate from '../components/Pages/UserProfilePrivate';
 import UserProfilePublic from '../components/Pages/UserProfilePublic';
+import Listings from '../components/Tables/Listings';
+
+
 
 // import ListingsV2 from '../components/ListingsV2';
 // import ListingsV3 from '../components/ListingsV3';
@@ -116,6 +119,13 @@ var routes = [
         path: "/logout",
         name: "Test: Logout",
         component: <Logout />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/listings",
+        name: "Test: Listings",
+        component: <Listings />,
     },
 
     /*
