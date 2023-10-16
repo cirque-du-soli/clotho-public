@@ -7,7 +7,7 @@ import {
 } from 'reactstrap';
 import '../../assets/ListingsV2.css';
 
-const ListingsV2 = () => {
+const Listings = () => {
   const [search, setSearch] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -30,18 +30,18 @@ const ListingsV2 = () => {
     "Tops", "Bottoms", "Bags", "Shoes", "Outerwear", "Accessories", "Dresses", "Jeans", "Other"
   ];
 
-  useEffect(() => {
-    async function fetchListings() {
-      try {
-        const response = await fetch(`http://localhost:3001/api/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}`);
-        const data = await response.json();
-        setListings(data);
-        console.log(data);
-      } catch (error) {
-        console.error('Error fetching the listings:', error);
-      }
+  async function fetchListings() {
+    try {
+      const response = await fetch(`http://localhost:3001/api/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}`);
+      const data = await response.json();
+      setListings(data);
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching the listings:', error);
     }
+  }
 
+  useEffect(() => {
     fetchListings();
   }, [search, selectedSize, selectedCategory]);
 
@@ -55,12 +55,12 @@ const ListingsV2 = () => {
    placeholder="Search" 
    value={search} 
    onChange={e => setSearch(e.target.value)} 
-  //  onKeyDown={e => {
-  //     if (e.key === 'Enter') {
-  //        fetchListings();
-  //     } 
-  //  }
-  //  }
+   onKeyDown={e => {
+      if (e.key === 'Enter') {
+         fetchListings();
+      } 
+   }
+   }
 />
             <InputGroupText addonType="append">🔍</InputGroupText>
           </InputGroup>
@@ -106,4 +106,4 @@ const ListingsV2 = () => {
   );
 }
 
-export default ListingsV2;
+export default Listings;
