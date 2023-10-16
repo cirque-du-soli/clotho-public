@@ -30,7 +30,7 @@ function UserProfilePublic() {
 
 
     },[]);
-
+                                                                                                                                                                                             
     return (
         <Container>
             <Row>
