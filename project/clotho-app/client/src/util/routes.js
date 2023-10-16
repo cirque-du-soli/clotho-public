@@ -45,7 +45,7 @@ var routes = [
     ///////////////////////////// USER ROUTES ////////////////////////
     {
         layout: "StandardLayout",
-        path: "/",
+        path: "/home",
         name: "Standard Dashboard",
         component: <StandardDashboard />,
     },
