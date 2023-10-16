@@ -8,7 +8,7 @@ const { User } = require("../models");
 const { Category } = require("../models");
 const { Size } = require("../models");
 const { Gender } = require("../models");
-const { ListingImage } = require("../models/ListingImage");
+const { ListingImage } = require("../models");
 
 /* 
 Get full list of items excluding sold and deleted
@@ -107,8 +107,8 @@ exports.findById = async (req, res) => {
         }
 
         //format decimal
-        item.price /= 100;
-        item.price = item.price.toFixed(2);
+        listing.price /= 100;
+        listing.price = listing.price.toFixed(2);
         res.json(listing);
 
     } catch (err) {

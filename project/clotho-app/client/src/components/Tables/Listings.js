@@ -1,50 +1,75 @@
-
-
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import axios from '../../api/axios';
+//import { Input, FormGroup, Label, Button, Form, Col, Card, CardImg, CardBody, CardTitle, CardText, Container, Row } from 'reactstrap';
 import {
   Container, Row, Col, InputGroup, InputGroupText, Input,
   Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardImg, CardBody, CardTitle, Button, onKeyPress,
 } from 'reactstrap';
-import '../../assets/ListingsV2.css';
-
-const Listings = () => {
+function Listings() {
   const [search, setSearch] = useState('');
-  const [selectedSize, setSelectedSize] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [listings, setListings] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [sizes, setSizes] = useState([]);
+  const [genders, setGenders] = useState([]);
   const [dropdownOpenSize, setDropdownOpenSize] = useState(false);
   const [dropdownOpenCategory, setDropdownOpenCategory] = useState(false);
-  const [listings, setListings] = useState([]);
-
-  const sizes = [
-    "One Size", "Unknown", "XXS", "XS", "S", "M", "L", "XL", "XXL", "2X",
-    "3X", "4X", "5X", "6X", 
-    "0", "2", "4", "6", "8", "10", "12", "14", "16", "18",
-    "20", "22", "24", "26", "28", "23", "25", "27", "29", "30",
-    "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
-    "41", "42", "43", "44", "45", "46", "47", "48", "49", 
-    "4.5", "5.5", "6.5", "5", "7", "7.5", "8.5", "9", "9.5", "10.5", "11",
-    "11.5", "12.5", "13", "13.5", "14.5", "15", "15.5"
-  ];
-
-  const categories = [
-    "Tops", "Bottoms", "Bags", "Shoes", "Outerwear", "Accessories", "Dresses", "Jeans", "Other"
-  ];
-
-  async function fetchListings() {
-    try {
-      const response = await fetch(`http://localhost:3001/api/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}`);
-      const data = await response.json();
-      setListings(data);
-      console.log(data);
-    } catch (error) {
-      console.error('Error fetching the listings:', error);
-    }
-  }
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedGender, setSelectedGender] = useState('');
 
   useEffect(() => {
-    fetchListings();
+
+      axios.get(`/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}`)
+      .then(response => {
+        setListings(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching listings:', error);
+      });
   }, [search, selectedSize, selectedCategory]);
 
+
+  useEffect(() => {
+
+    // Fetch categories
+    axios.get('/attr/categories')
+      .then(response => {
+        setCategories(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching categories:', error);
+      });
+
+    // Fetch sizes
+    axios.get('/attr/sizes') 
+      .then(response => {
+        setSizes(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching sizes:', error);
+      });
+
+          // Fetch genders
+    axios.get('/attr/genders') 
+    .then(response => {
+      setGenders(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching genders:', error);
+    });
+
+  }, []);
+
+
+
+
+   // Filter listings based on search term and selected filters
+   const filteredListings = listings.filter(listing => {
+    return listing.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+           (!selectedSize || listing.size === selectedSize) &&
+           (!selectedCategory || listing.category === selectedCategory);
+  });
 
   return (
     <Container>
@@ -55,12 +80,12 @@ const Listings = () => {
    placeholder="Search" 
    value={search} 
    onChange={e => setSearch(e.target.value)} 
-   onKeyDown={e => {
-      if (e.key === 'Enter') {
-         fetchListings();
-      } 
-   }
-   }
+  //  onKeyDown={e => {
+  //     if (e.key === 'Enter') {
+  //        fetchListings();
+  //     } 
+  //  }
+  //  }
 />
             <InputGroupText addonType="append">🔍</InputGroupText>
           </InputGroup>
@@ -71,7 +96,7 @@ const Listings = () => {
               {selectedSize || "Size"}
             </DropdownToggle>
             <DropdownMenu>
-              {sizes.map(size => <DropdownItem key={size} onClick={() => setSelectedSize(size)}>{size}</DropdownItem>)}
+              {sizes.map(size => <DropdownItem key={size.id} onClick={() => setSelectedSize(size.id)}>{size.name}</DropdownItem>)}
             </DropdownMenu>
           </Dropdown>
         </Col>
@@ -81,7 +106,7 @@ const Listings = () => {
               {selectedCategory || "Category"}
             </DropdownToggle>
             <DropdownMenu>
-              {categories.map(category => <DropdownItem key={category} onClick={() => setSelectedCategory(category)}>{category}</DropdownItem>)}
+              {categories.map(category => <DropdownItem key={category.id} onClick={() => setSelectedCategory(category.id)}>{category.name}</DropdownItem>)}
             </DropdownMenu>
           </Dropdown>
         </Col>
@@ -95,8 +120,8 @@ const Listings = () => {
               <CardBody>
                 <CardTitle tag="h5">{listing.title}</CardTitle>
                 <p>Price: ${listing.price}</p>
-                <p>Size: {listing.sizeId}</p>
-                <p>Seller: {listing.sellerId}</p>
+                <p>Size: {listing.Size.name}</p>
+                <p>Seller: {listing.Seller.username}</p>
               </CardBody>
             </Card>
           </Col>

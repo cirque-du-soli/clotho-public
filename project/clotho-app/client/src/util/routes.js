@@ -23,6 +23,7 @@ import UserProfile from '../components/Pages/UserProfile';
 import UserProfilePrivate from '../components/Pages/UserProfilePrivate';
 import UserProfilePublic from '../components/Pages/UserProfilePublic';
 import Listings from '../components/Tables/Listings';
+import Sell from "../components/Pages/Sell";
 
 
 
@@ -105,6 +106,13 @@ var routes = [
         path: "/createlistinguser",
         name: "Test: Create Listing Admin (test)",
         component: <CreateListingUserTest />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/sell",
+        name: "Test: Create Listing page w photo upload",
+        component: <Sell />,
     },
 
     {

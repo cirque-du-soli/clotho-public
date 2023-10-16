@@ -11,8 +11,8 @@ function UserProfilePublic() {
     const { username } = useParams();
 
     // navigate to private view if loaded by seller
-    if (sessionStorage.getItem('username') && sessionStorage.getItem('username') === username) {
-        navigate('/test/profile');
+    if (sessionStorage.getItem('username') && sessionStorage.getItem('username') == username) {
+        navigate('/test/profile'); //TODO change later
     }
     const [user, setUser] = useState({});
     const [listings, setListings] = useState([]);
