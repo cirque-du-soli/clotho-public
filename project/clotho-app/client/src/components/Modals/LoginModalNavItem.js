@@ -25,7 +25,7 @@ function LoginModal(props) {
     return (
         <div>
             <NavItem className="mx-auto mx-md-0">
-                <NavLink href='#' className="nav-link" onClick={toggle}>Login4</NavLink>
+                <NavLink href='#' className="nav-link" onClick={toggle}>Login(M)</NavLink>
             </NavItem>
 
             <Modal isOpen={modal} toggle={toggle} unmountOnClose={true}>
@@ -33,15 +33,13 @@ function LoginModal(props) {
                 <ModalBody>
                     <Login />
                 </ModalBody>
+{/* 
                 <ModalFooter>
-                    <Button color="primary" onClick={toggle}>
-                        Log In
-                    </Button>{' '}
                     <Button color="danger" onClick={toggle}>
                         Cancel
                     </Button>
                 </ModalFooter>
-
+  */}
             </Modal>
         </div>
     );

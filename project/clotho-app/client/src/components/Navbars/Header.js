@@ -76,13 +76,11 @@ function Header() {
             <NavItem className="mx-auto mx-md-0">
               <NavLink href="/test/listings" className="nav-link">Listings</NavLink>
             </NavItem>
-            
-            // OLD LOGIN (NON MODAL)
+            */}
+
             <NavItem className="mx-auto mx-md-0">
               <NavLink href="/test/login" className="nav-link">Login</NavLink>
             </NavItem>
-            */}
-
             
             <LoginModalNavItem />
             
