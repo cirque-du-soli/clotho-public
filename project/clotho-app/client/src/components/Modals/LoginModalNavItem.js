@@ -33,6 +33,7 @@ function LoginModal(props) {
                 <ModalBody>
                     <Login />
                 </ModalBody>
+
 {/* 
                 <ModalFooter>
                     <Button color="danger" onClick={toggle}>
@@ -40,6 +41,7 @@ function LoginModal(props) {
                     </Button>
                 </ModalFooter>
   */}
+                
             </Modal>
         </div>
     );
