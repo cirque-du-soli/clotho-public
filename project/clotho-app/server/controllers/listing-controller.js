@@ -50,10 +50,10 @@ exports.findAll = async (req, res) => {
                 attributes: ['username', 'id'],
 
             },
-            {
-                model: ListingImage,
-                attributes: ['id', 'priority', 'path', 'isDeleted']
-            },
+            // {
+            //     model: ListingImage,
+            //     attributes: ['id', 'priority', 'path', 'isDeleted']
+            // },
             {
                 model: Category,
                 attributes: ['name', 'id'],
@@ -113,10 +113,10 @@ exports.findById = async (req, res) => {
                     as: 'Seller',
                     attributes: ['username', 'id'],
                 },
-                {
-                    model: ListingImage,
-                    attributes: ['id', 'priority', 'path', 'isDeleted']
-                },
+                // {
+                //     model: ListingImage,
+                //     attributes: ['id', 'priority', 'path', 'isDeleted']
+                // },
                 {
                     model: Category,
                     attributes: ['name', 'id']

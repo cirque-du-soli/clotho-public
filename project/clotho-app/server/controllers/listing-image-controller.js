@@ -75,16 +75,27 @@ exports.processImg = async (req, res) => {
 
 };
 
-// exports.getAllbyListing = async (req, res, next) => {
+ exports.getAllbyListing = async (req, res, next) => {
 
-// const url = await getSignedUrl(
-//   s3Client,
-//   new GetObjectCommand({
-//     Bucket: bucketName,
-//     Key: imageName
-//   }),
-//   { expiresIn: 3600 }
-// );
-  
-// }
 
+  const imgs = await ListingImage.findAll({
+    where: {
+      listingId: req.params.id
+    }
+  });
+
+  for (let i in imgs) { 
+    imgs[i].url = await getSignedUrl(
+      s3Client,
+      new GetObjectCommand({
+        Bucket: bucketName,
+        Key: imgs[i].path
+      }),
+      { expiresIn: 3600 }
+    )
+    console.log(imgs[i].url);
+    imgs[i] = {url: imgs[i].url, priority: imgs[i].priority};
+  }
+
+  res.json(imgs);
+};
