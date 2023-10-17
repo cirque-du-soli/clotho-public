@@ -53,6 +53,7 @@ var routes = [
     },
 
     ///////////////////////////// TEST ROUTES ////////////////////////
+
     {
         layout: "TestLayout",
         path: "/",
@@ -60,13 +61,15 @@ var routes = [
         component: <TestDashboard />,
     },
 
+/* DONE
     {
         layout: "TestLayout",
         path: "/login",
         name: "Test: Login",
         component: <Login />,
     },
-
+ */
+ 
     {
         layout: "TestLayout",
         path: "/profile",
@@ -105,30 +108,34 @@ var routes = [
     {
         layout: "TestLayout",
         path: "/createlistinguser",
-        name: "Test: Create Listing Admin (test)",
+        name: "Test: Create Listing User (test)",
         component: <CreateListingUserTest />,
     },
 
     {
         layout: "TestLayout",
         path: "/sell",
-        name: "Test: Create Listing page w photo upload",
+        name: "Test: SELL -- Create Listing page w photo upload",
         component: <Sell />,
     },
 
+/* DONE
     {
         layout: "TestLayout",
         path: "/header",
         name: "Test: Header",
         component: <Header />,
     },
+*/
 
+/* DONE
     {
         layout: "TestLayout",
         path: "/logout",
         name: "Test: Logout",
         component: <Logout />,
     },
+*/
 
     {
         layout: "TestLayout",
