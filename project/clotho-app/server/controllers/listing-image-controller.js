@@ -1,46 +1,90 @@
 
-const s3 = require('../utils/s3');
-const ListingImage = require('../models/ListingImage');
+require('dotenv').config();
+const crypto = require('crypto');
+// const multer = require('multer');
+const sharp = require('sharp');
+const { S3Client, ListBucketsCommand, GetObjectCommand, PutObjectCommand } = require('@aws-sdk/client-s3');
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
-exports.uploadPhoto = async (req, res) => {
-  const { file, id, priority } = req.body;
+// const storage = multer.memoryStorage()
+// const upload = multer({ storage: storage })
+const { ListingImage } = require("../models");
 
-  // Photo to the S3
+// prepare S3 client
+const bucketName = process.env.BUCKET_NAME
+const region = process.env.BUCKET_REGION
+const accessKeyId = process.env.ACCESS_KEY
+const secretAccessKey = process.env.SECRET_ACCESS_KEY
+
+const s3Client = new S3Client({
+  region,
+  credentials: {
+    accessKeyId,
+    secretAccessKey
+  }
+});
+
+
+//store file in memory before processing and sending
+// exports.storeInMemory = async (req, res, next) => {
+//   try {
+//     upload.single('image');
+//     next();
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json({ message: "Image failed to upload to server" });
+//   }
+// }
+
+//resize img, buffer, encrypt name, send to S3
+exports.processImg = async (req, res) => {
+  const file = req.file;
+
+  const fileBuffer = await sharp(file.buffer)
+    .resize({ height: 1280, width: 1280, fit: "cover" })
+    .toBuffer();
+
+  const fileName = crypto.randomBytes(32).toString('hex');
   const params = {
-    Bucket: 'clotho-bucket',
-    Key: `${item_id}/${Date.now().toString()}`,
-    Body: file,
-  };
+    Bucket: bucketName,
+    Body: fileBuffer,
+    Key: fileName,
+    ContentType: file.mimetype
+  }
 
   try {
-    const { Location } = await s3.upload(params).promise();
-    
-    // Save photo info in DB
-    await ListingImage.create({
-      id,
-      path: Location,
-      priority,
+    await s3Client.send(new PutObjectCommand(params));
+
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Image failed to send to S3" });
+  }
+
+  try {
+    const imgRecord = await ListingImage.create({
+      listingId: req.body.listingId,
+      path: fileName,
+      priority: req.body.priority
     });
 
-    res.status(200).json({ message: 'Upload successful', url: Location });
-  } catch (error) {
-    res.status(500).json({ error: 'Something went wrong' });
+    res.status(201).json({ message: "Successfully added image listing", imgage: imgRecord });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Image record failed to save" });
   }
+
 };
 
-    // display photos
+// exports.getAllbyListing = async (req, res, next) => {
 
-exports.getPhotos = async (req, res) => {
-  const { itemId } = req.params;
+// const url = await getSignedUrl(
+//   s3Client,
+//   new GetObjectCommand({
+//     Bucket: bucketName,
+//     Key: imageName
+//   }),
+//   { expiresIn: 3600 }
+// );
   
-  try {
-    const photos = await ListingImage.findAll({
-      where: { id: itemId },
-      order: [['priority', 'ASC']]
-    });
+// }
 
-    res.status(200).json(photos);
-  } catch (error) {
-    res.status(500).json({ error: 'Something went wrong' });
-  }
-};

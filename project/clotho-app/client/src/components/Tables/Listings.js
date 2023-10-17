@@ -3,7 +3,7 @@ import axios from '../../api/axios';
 //import { Input, FormGroup, Label, Button, Form, Col, Card, CardImg, CardBody, CardTitle, CardText, Container, Row } from 'reactstrap';
 import {
   Container, Row, Col, InputGroup, InputGroupText, Input,
-  Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardImg, CardBody, CardTitle, Button, onKeyPress,
+  Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardImg, CardBottom, CardFooter, CardTitle, Button, onKeyPress,
 } from 'reactstrap';
 function Listings() {
   const [search, setSearch] = useState('');
@@ -117,12 +117,11 @@ function Listings() {
           <Col md="4" key={listing.id}>
             <Card>
               <CardImg top width="100%" src={listing.thumbnail || "placeholder-image.jpg"} alt="lisiting image" />
-              <CardBody>
-                <CardTitle tag="h5">{listing.title}</CardTitle>
-                <p>Price: ${listing.price}</p>
-                <p>Size: {listing.Size.name}</p>
-                <p>Seller: {listing.Seller.username}</p>
-              </CardBody>
+              <CardFooter>
+                {/* <CardTitle tag="h5"> */}
+                  ${listing.price}
+                  {/* </CardTitle> */}
+              </CardFooter>
             </Card>
           </Col>
         ))}

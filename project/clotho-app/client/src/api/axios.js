@@ -9,6 +9,11 @@ export default axios.create({
 export const axiosJWT = axios.create({
     baseURL: BASE_URL,
     headers: { 'Content-Type': 'application/json' },
+
+});
+
+export const axiosImg = axios.create({
+    baseURL: BASE_URL,
+    headers: {'Content-Type': 'multipart/form-data'},
     
-    //withCredentials: true
 });
