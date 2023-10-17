@@ -24,6 +24,7 @@ import UserProfilePrivate from '../components/Pages/UserProfilePrivate';
 import UserProfilePublic from '../components/Pages/UserProfilePublic';
 import Listings from '../components/Tables/Listings';
 import Sell from "../components/Pages/Sell";
+import ListingPage from "../components/Pages/ListingPage"
 
 
 
@@ -134,6 +135,13 @@ var routes = [
         path: "/listings",
         name: "Test: Listings",
         component: <Listings />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/listings/:id",
+        name: "Test: Listing Page",
+        component: <ListingPage />,
     },
 
     /*
