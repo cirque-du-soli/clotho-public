@@ -40,7 +40,7 @@ function LoginModal(props) {
                         Cancel
                     </Button>
                 </ModalFooter>
-  */}
+*/}
                 
             </Modal>
         </div>
