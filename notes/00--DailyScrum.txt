@@ -403,6 +403,77 @@ Meredith:
 		- add validation + error handling in front
 		- help with front end links/redirects/conditional rendering
 
+ 2023-10-17
+===================
+
+Dustin:
+	Done:
+		- Single listing page
+		- Worked on S3 uploads
+		
+	Not-Done:
+		- avatar upload
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- implement cart
+		- implement Stripe
+		- help with images
+		- Validation and error handling for any previous work
+
+Soli:
+	Done:
+		- Finalize/reformat top header (missing search bar for now)
+		- Functional persistent sub-header (filters)
+		- Finalized persistent footer
+		- Created logo images
+		- Login Modal (functional, not pretty)
+		- Set up & tested a generalized flash message / popup for error msgs to user
+		
+	Not-Done:
+		- Auth-based rendering of buttons
+	
+	Needs Assistance:
+		- Auth? 
+
+	Todo Before Next Scrum:
+		- registration page
+		- Start implementing flash messages for signup/login/login
+		- filtering logic, consolidation
+		- start admin charts
+		- start plugging in/cleaning up navlinks/redirects
+		- start cleaning up appearance
+		- Validation and error handling for any previous work
+
+
+Meredith: 
+	Done:
+		- partial solution to listings page in front
+		- implemented POST images to S3 for listing images
+		- implemented GET listing images signed urls
+		- implemented search filters
+
+		
+	Not-Done:
+		- validation + error handling for image requests
+		- front end conditional rendering/error handling
+		- validation search filter query params
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- complete images implementation
+		- Validation and error handling for any previous work
+		- add to flash messages after Soli initial
+		- start cleaning up appearance
+		- start plugging in/cleaning up navlinks/redirects
+
+
+
+
 ===============================================================================
 ===============================================================================
 ===============================================================================
