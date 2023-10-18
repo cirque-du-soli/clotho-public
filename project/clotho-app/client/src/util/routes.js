@@ -56,6 +56,13 @@ var routes = [
         component: <ListingPage />,
     },
 
+    {
+        layout: "StandardLayout",
+        path: "/profile",
+        name: "Test: Private profile",
+        component: <UserProfilePrivate />,
+    },
+
     ///////////////////////////// TEST ROUTES ////////////////////////
 
     {
@@ -65,12 +72,6 @@ var routes = [
         component: <TestDashboard />,
     },
  
-    {
-        layout: "TestLayout",
-        path: "/profile",
-        name: "Test: Private profile",
-        component: <UserProfilePrivate />,
-    },
 
     {
         layout: "TestLayout",
