@@ -471,6 +471,79 @@ Meredith:
 		- start cleaning up appearance
 		- start plugging in/cleaning up navlinks/redirects
 
+2023-10-18
+===================
+
+Dustin:
+	Done:
+		- Added some error handling and validation
+		- links through photos and username
+		- Updated Listings and ListingPage
+		
+	Not-Done:
+		- Cart
+		- Stripe			
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- Edit profile
+		- Heroku Hosting
+		- Start implementing admin view tables (users, listings, orders)
+
+Soli:
+	Done:
+		- registration modal + format
+			- redirects to login, autofills username
+		- login modal + format
+		- Flash messages for signup/login/logout -- Full Implementation
+		- Flash messages for all errors from Header & children
+		- All Header Navlinks & Redirects
+		- "Logged in as" Header NavItem
+		- Validation and error handling -- All Header & Children
+		
+	Not-Done:
+		- Admin Charts
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- Double password input for Signup form (must match)
+		- if user is admin, show admin button in header
+		- SubHeader
+			- pre-determined search filters (mens, women, sale)
+		- FilterHeader
+			- All search criteria -- TOGGLES / multi-select
+			- "Clear filters" button
+			- UPDATE ListingTable each time filter criteria changes (already implemented)
+			- 
+		- Start Admin Charts
+			- Research if google analytics
+
+Meredith: 
+	Done:
+		- partial solution to images
+		- some error handling
+		- added to css
+		- added links
+		- minor bug fixes
+		
+	Not-Done:
+		- complete forms with img uploads
+		- complete layouts/styles
+
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- finish images front and back for users and listings
+			- include sell page
+		- filter/sort by price for search page (backend; add to front if not exists)
+		- begin view order history tab in user profile (toggle between selling/buying tabs)
+		- investigate possible logic error in auth
 
 
 
