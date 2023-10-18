@@ -16,7 +16,7 @@ import {
 } from 'reactstrap';
 
 const ListingPage = () => {
-  const [listing, setListing] = useState(null);
+  const [listing, setListing] = useState();
   const [images, setImages] = useState([]);
 
   const { id } = useParams();
@@ -25,40 +25,31 @@ const ListingPage = () => {
 
 
     getListing();
-    getImages();
-  }, [id]);
 
-  // useEffect(() => {
-  
-  // }, [id]);
+  }, [id]);
 
 
   const getListing = async () => {
 
     try {
 
-      const response = await axios.get(`/listings/${id}`);
+      var list = await axios.get(`/listings/${id}`);
 
-      console.log(response.data);
+      console.log(list.data);
 
-      setListing(response.data);
+      setListing(list.data);
 
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  const getImages = async () => {
-
-    try {
-      const response = await axios.get(`/admin/listingimages/${listing.id}`);
-      var imgs = response.data;
+      var imgs = await axios.get(`/admin/listingimages/${id}`);
+   
  
-      setImages(imgs);
+      setImages(imgs.data);
+
     } catch (err) {
       console.log(err);
     }
   }
+
+
 
 
   if (!listing) {
@@ -73,7 +64,7 @@ const ListingPage = () => {
             <CardBody>
               <CardTitle tag="h5">{listing.title}</CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted">
-              By <Link to={`/users/${listing.Seller.username}`}>{listing.Seller.username}</Link>
+              By <Link to={`/${listing.Seller.username}`}>{listing.Seller.username}</Link>
               </CardSubtitle>
               <CardText>{listing.description}</CardText>
               <CardText>
