@@ -61,11 +61,11 @@ function UserProfilePrivate() {
       {listings.map(listing => (
         <Col md="4" key={listing.id}>
           <Card>
-            <CardImg top width="100%" src={listing.thumbnail} alt="lisiting image" />
+            <CardImg top width="100%" src={listing.thumbnail} alt="listing image" />
             <CardFooter>
-              {/* <CardTitle tag="h5"> */}
+              <CardTitle tag="h5">
               ${(listing.price / 100).toFixed(2)}
-              {/* </CardTitle> */}
+              </CardTitle>
             </CardFooter>
           </Card>
         </Col>

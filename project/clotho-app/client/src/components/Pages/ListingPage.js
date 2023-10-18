@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import {
   Container,
@@ -71,7 +72,9 @@ const ListingPage = () => {
           <Card>
             <CardBody>
               <CardTitle tag="h5">{listing.title}</CardTitle>
-              <CardSubtitle tag="h6" className="mb-2 text-muted">By {listing.Seller.username}</CardSubtitle>
+              <CardSubtitle tag="h6" className="mb-2 text-muted">
+              By <Link to={`/users/${listing.Seller.username}`}>{listing.Seller.username}</Link>
+              </CardSubtitle>
               <CardText>{listing.description}</CardText>
               <CardText>
                 <small className="text-muted">Price: ${listing.price}</small>
