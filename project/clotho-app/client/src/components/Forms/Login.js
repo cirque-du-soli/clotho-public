@@ -25,7 +25,7 @@ const Login = ({ props }) => {
 
         try {
             const response = await axios.post(LOGIN_URL,
-               { username, password }
+                { username, password }
             );
             console.log(JSON.stringify(response?.data));
 
@@ -64,38 +64,56 @@ const Login = ({ props }) => {
 
     return (
         <>
-            
+
             <section>
                 <p ref={errRef} className={errorMessage ? "errorMessage" : "offscreen"} aria-live="assertive">{errorMessage}</p>
-                <h1>Sign In</h1>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        ref={userRef}
-                        autoComplete="off"
-                        onChange={(e) => setUsername(e.target.value)}
-                        value={username}
-                        required
-                    />
 
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                        required
-                    />
-                    <button>Sign In</button>
+                <form onSubmit={handleSubmit}>
+                    <div className='row m-1'>
+                        <label htmlFor="username">Username:</label>
+                    </div>
+
+                    <div className='row m-1'>
+                        <input
+                            type="text"
+                            id="username"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setUsername(e.target.value)}
+                            value={username}
+                            required
+                        />
+                    </div>
+
+                    <div className='row m-1'>
+
+                        <label htmlFor="password">Password:</label>
+                    </div>
+
+                    <div className='row m-1'>
+                        <input
+                            type="password"
+                            id="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                            required
+                        />
+                    </div>
+                    <div className='row m-3 text-center'>
+
+                        <button className='btn btn-dark fs-4'>Log In</button>
+                    </div>
                 </form>
-                <p>
-                    Don't have an account?<br />
-                    <span className="line">
-                        <a href="#">Sign Up</a>
-                    </span>
-                </p>
+                <div className='row m-1 text-center'>
+
+                    <p>
+                        Don't have an account?<br />
+                        <span className="line">
+                            {/* FIXME sign up link */}
+                            <a href="#">Sign Up</a>
+                        </span>
+                    </p>
+                </div>
             </section>
 
         </>

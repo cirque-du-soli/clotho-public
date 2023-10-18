@@ -15,14 +15,17 @@ import {
   NavbarText,
 } from 'reactstrap';
 import logoFull from '../../assets/images/clotho-logo-name-hiRes.png';
+import userIcon from '../../assets/images/avatar.png';
 import LoginModalNavItem from './HeaderItems/LoginModalNavItem';
 import LogoutNavItem from './HeaderItems/LogoutNavItem';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useNavigate} from 'react-router-dom';
 
 function Header() {
 
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -90,11 +93,11 @@ function Header() {
             </NavItem>
             */}
 
-            <NavItem className="mx-auto mx-md-0">
+            {/* <NavItem className="mx-auto mx-md-0">
               <NavLink href="/test" className="nav-link ml-auto">Dev</NavLink>
             </NavItem>
 
-            
+             */}
 
             {/* 
             <NavItem className="mx-auto mx-md-0">
@@ -114,7 +117,16 @@ function Header() {
 */}
             <LoginModalNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
             <LogoutNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
-
+{isLoggedIn ? (
+          <img className='rounded-circle'
+            alt="user menu"
+            src={userIcon}
+            style={{
+              height: 30
+            }}
+            onClick={() => navigate(`/${sessionStorage.getItem('username')}`)}
+          />
+) : (<></>)}
           </Nav>
         </Collapse>
       </Navbar>

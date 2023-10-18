@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const users = require("../controllers/user-controller.js");
 const auth = require("../controllers/auth.js");
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 //get user private profile and listings
 router.get('/profile', auth.getToken, auth.getUser, users.findById);
@@ -10,7 +13,7 @@ router.get('/seller/:username', users.findByUsernamePublic);
 
 
 // create new user
-router.post('/', users.create);
+router.post('/', upload.single('avatar'), users.create);
 
 // update profile by id
 router.put('/profile', auth.getToken, auth.getUser, users.updateById);
