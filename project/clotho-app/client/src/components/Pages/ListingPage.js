@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import {
   Container,
   Row,
@@ -13,14 +14,14 @@ import {
   Button
 } from 'reactstrap';
 
-const ListingPage = ({ match }) => {
+const ListingPage = () => {
   const [listing, setListing] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchListing = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/listings/${match.params.id}`); //FIXME
-                // const response = await axios.get(`http://localhost:3001/api/listings/${6}`);
+        const response = await axios.get(`http://localhost:3001/api/listings/${id}`);
 
         setListing(response.data);
       } catch (error) {
@@ -29,9 +30,7 @@ const ListingPage = ({ match }) => {
     };
 
     fetchListing();
-  // }, [1]);
-  }, [match.params.id]);
-
+  }, [id]);
 
   if (!listing) {
     return <div>Lisiting not found</div>;
