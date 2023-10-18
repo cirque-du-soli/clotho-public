@@ -20,6 +20,8 @@ import LogoutNavItem from './HeaderItems/LogoutNavItem';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Signup from '../Forms/Signup';
+import SignupModalNavItem from './HeaderItems/SignupModalNavItem';
 
 function Header() {
 
@@ -49,6 +51,15 @@ function Header() {
       theme: "colored",
     } 
     success ? toast.success(msg, options) : toast.error(msg, options);
+  }
+
+  // same as above, but transfer to log in modal
+  function popupChangeSignup(success, msg, uname) {
+    popupChange(success, msg);
+
+    // set username in login form
+    // TODO:
+
   }
 
   return (
@@ -114,7 +125,8 @@ function Header() {
 */}
             <LoginModalNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
             <LogoutNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
-
+            <SignupModalNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
+          
           </Nav>
         </Collapse>
       </Navbar>

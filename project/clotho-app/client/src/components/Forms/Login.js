@@ -7,7 +7,7 @@ const Login = ({ props }) => {
 
     const userRef = useRef();
     const errRef = useRef();
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState(props.uname ? props.uname : '');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
@@ -49,7 +49,6 @@ const Login = ({ props }) => {
 
         } catch (err) {
             if (!err?.response) {
-
                 props.onSubmitProp(false, 'No Server Response');
             } else if (err.response?.data?.message) {
                 console.log(err);
@@ -90,12 +89,12 @@ const Login = ({ props }) => {
                     />
                     <button>Sign In</button>
                 </form>
-                <p>
+                {/* <p>
                     Don't have an account?<br />
                     <span className="line">
                         <a href="#">Sign Up</a>
                     </span>
-                </p>
+                </p> */}
             </section>
 
         </>
