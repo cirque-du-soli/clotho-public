@@ -20,7 +20,7 @@ function UserNavItem({ props }) {
                 &&
                 <NavItem className="mx-auto mx-md-0 userNavItem">
                         <NavLink
-                            href='#'
+                            href='/profile'
                             className="nav-link userNavItem"
                             onClick={popupTBD}
                         ><span className='userNavLinkText'>

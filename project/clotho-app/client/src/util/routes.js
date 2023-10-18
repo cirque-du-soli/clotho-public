@@ -52,14 +52,14 @@ var routes = [
     {
         layout: "StandardLayout",
         path: "/products/:id",
-        name: "Test: Listing Page",
+        name: "Listing Page",
         component: <ListingPage />,
     },
 
     {
         layout: "StandardLayout",
         path: "/profile",
-        name: "Test: Private profile",
+        name: "Private profile",
         component: <UserProfilePrivate />,
     },
 
