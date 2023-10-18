@@ -49,6 +49,13 @@ var routes = [
         component: <UserProfilePublic />,
     },
 
+    {
+        layout: "StandardLayout",
+        path: "/products/:id",
+        name: "Test: Listing Page",
+        component: <ListingPage />,
+    },
+
     ///////////////////////////// TEST ROUTES ////////////////////////
 
     {

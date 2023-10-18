@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axios';
 import { useParams } from 'react-router-dom';
 import {
   Container,
@@ -16,21 +16,49 @@ import {
 
 const ListingPage = () => {
   const [listing, setListing] = useState(null);
+  const [images, setImages] = useState([]);
+
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchListing = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/api/listings/${id}`);
 
-        setListing(response.data);
-      } catch (error) {
-        console.error('Something went wrong:', error);
-      }
-    };
 
-    fetchListing();
+    getListing();
+    getImages();
   }, [id]);
+
+  // useEffect(() => {
+  
+  // }, [id]);
+
+
+  const getListing = async () => {
+
+    try {
+
+      const response = await axios.get(`/listings/${id}`);
+
+      console.log(response.data);
+
+      setListing(response.data);
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const getImages = async () => {
+
+    try {
+      const response = await axios.get(`/admin/listingimages/${listing.id}`);
+      var imgs = response.data;
+ 
+      setImages(imgs);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
 
   if (!listing) {
     return <div>Lisiting not found</div>;
@@ -41,7 +69,6 @@ const ListingPage = () => {
       <Row>
         <Col md="6">
           <Card>
-            <CardImg top width="100%" src={`https://s3-bucket-url/${listing.thumbnail}`} alt="Card image cap" />
             <CardBody>
               <CardTitle tag="h5">{listing.title}</CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted">By {listing.Seller.username}</CardSubtitle>
@@ -63,6 +90,23 @@ const ListingPage = () => {
           </Card>
         </Col>
       </Row>
+
+<div>
+<Row>
+
+{images.map(img => (
+    <Col md="6" className="my-2 p-1" key={img.id}>
+        <Card className='border-0 rounded-0'>
+            <img className='border-0 rounded-0' top width="100%" src={img.url} alt="lisiting image" />
+
+        </Card>
+
+    </Col>
+))}
+</Row>
+</div>
+
+
     </Container>
   );
 };
