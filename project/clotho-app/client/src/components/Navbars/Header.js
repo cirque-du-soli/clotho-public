@@ -1,5 +1,12 @@
+// IMPORT: React
+import { React, useState, use } from 'react';
 import { Link } from 'react-router-dom';
-import { React, useState, } from 'react';
+
+// IMPORT: Popups
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// IMPORT: Reactstrap
 import {
   Collapse,
   Navbar,
@@ -8,41 +15,49 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
 } from 'reactstrap';
-import logoFull from '../../assets/images/clotho-logo-name-hiRes.png';
-import userIcon from '../../assets/images/avatar.png';
-import LoginModalNavItem from './HeaderItems/LoginModalNavItem';
-import LogoutNavItem from './HeaderItems/LogoutNavItem';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+// IMPORT: Images
+import logoFull from '../../assets/images/clotho-logo-name-hiRes.png';
+
+// IMPORT: Components
+import LoginNavItem from '../0-LLR/LoginNavItem';
+import SignupNavItem from '../0-LLR/SignupNavItem';
+import LogoutNavItem from '../0-LLR/LogoutNavItem';
+import DevNavItem from '../0-LLR/DevNavItem';
+import AdminNavItem from '../0-LLR/AdminNavItem';
+import UserNavItem from '../0-LLR/UserNavItem';
+
+/* // OLD WORKING:
+import Login from '../0-LLR/Login';
+import LoginModalNavItem from './HeaderItems/LoginModalNavItem';
 import Signup from '../Forms/Signup';
 import SignupModalNavItem from './HeaderItems/SignupModalNavItem';
+import LogoutNavItem from './HeaderItems/LogoutNavItem';
+*/
 
 function Header() {
 
-  const navigate = useNavigate();
+//  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
-
   // initial login state
   const [isLoggedIn, setIsLoggedIn] = useState(!(sessionStorage.getItem('token') === '' || sessionStorage.getItem('token') === null));
+  const [uname, setUname] = useState(sessionStorage.getItem('username'));
+  const [signupUname, setSignupUname] = useState('');
 
-  // update login state (to rerender header)
-  function popupChange(success, msg) {
+  function popupChange(success, msg, signupUname) {
 
-    // first update states
+    // update state (re-renders header)
     setIsLoggedIn(!(sessionStorage.getItem('token') === '' || sessionStorage.getItem('token') === null));
 
-    // then update popup
+    // set uname state for header
+    setUname(sessionStorage.getItem('username'));
+    setSignupUname(signupUname);
+
+    // update popup
     let options = {
       position: "top-center",
       autoClose: 3000,
@@ -78,69 +93,21 @@ function Header() {
             alt="logo"
             src={logoFull}
             style={{
-              height: 50
+              height: 40
             }}
           />
         </NavbarBrand>
-
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="justify-content-end" style={{ width: "100%" }} navbar >
-            {/* 
-            <NavItem className="mx-auto mx-md-0">
-            <NavLink href="/test001" className="nav-link">Test001</NavLink>
-            </NavItem> 
-            */}
 
-            {/* 
-            <NavItem className="mx-auto mx-md-0">
-            <NavLink href="/listingsv2" className="nav-link">Listings V2</NavLink>
-            </NavItem> 
-            */}
-
-            {/* 
-            <NavItem className="mx-auto mx-md-0">
-              <NavLink href="/admin" className="nav-link ml-auto">Admin</NavLink>
-            </NavItem>
-            */}
-
-            {/* <NavItem className="mx-auto mx-md-0">
-              <NavLink href="/test" className="nav-link ml-auto">Dev</NavLink>
-            </NavItem>
-
-             */}
-
-            {/* 
-            <NavItem className="mx-auto mx-md-0">
-              <NavLink href="/test/photoupload" className="nav-link">Photo Upload</NavLink>
-            </NavItem>
-            <NavItem className="mx-auto mx-md-0">
-              <NavLink href="/test/createlisting" className="nav-link">Create Listing</NavLink>
-            </NavItem>
-            <NavItem className="mx-auto mx-md-0">
-              <NavLink href="/test/listings" className="nav-link">Listings</NavLink>
-            </NavItem>
-            
-//OBSOLETE: DELETE // TODO
-            <NavItem className="mx-auto mx-md-0">
-              <NavLink href="/test/login" className="nav-link">Login</NavLink>
-            </NavItem>
-*/}
-            <LoginModalNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
+            <LoginNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange, uname: signupUname }} />
             <LogoutNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
+            <SignupNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
+            <AdminNavItem props={{ isLoggedIn: isLoggedIn }} />
+            <DevNavItem props={{ isLoggedIn: isLoggedIn }} />
+            <UserNavItem props={{ isLoggedIn: isLoggedIn, uname: uname, onClickProp: popupChange}} />
 
-            <SignupModalNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
-            
-            {isLoggedIn ? (
-              <img className='rounded-circle'
-                alt="user menu"
-                src={userIcon}
-                style={{
-                  height: 30
-                }}
-                onClick={() => navigate(`/${sessionStorage.getItem('username')}`)}
-              />
-            ) : (<></>)}
           </Nav>
         </Collapse>
       </Navbar>

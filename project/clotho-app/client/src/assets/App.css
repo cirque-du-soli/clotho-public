@@ -38,7 +38,23 @@ td {
 
 /* ********************* Header ******************************************** */
 
+.avatarNavItem {
+  border-radius: 50%;
+  height: 28px;
+}
 
+.avatarNavItem:hover, .userNavLinkText:hover + .avatarNavItem {
+  box-shadow: 0px 0px 5px 0px rgba(174, 0, 255, 0.658);
+}
+
+.userNavLinkText:has(~ .avatarNavItem), .userNavLinkText {
+  font-weight: 500;
+  color: rgb(97, 1, 141);
+}
+
+.userNavLinkText:has(~ .avatarNavItem:hover), .userNavLinkText:hover {
+  font-weight: 700;
+}
 
 /* ********************* Subheader ******************************************** */
 #subheader {
