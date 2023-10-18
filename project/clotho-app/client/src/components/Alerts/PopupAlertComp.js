@@ -28,6 +28,8 @@ import NotificationAlert from "react-notification-alert";
 function PopupAlert({ props }) {
 
     const notificationAlertRef = React.useRef(null);
+
+    const isPopped = props.isPopped;
     
     const pop = () => {
         var options = {};
@@ -50,20 +52,31 @@ function PopupAlert({ props }) {
 
     return (
         <>
+        
+            {(isPopped)}
+            {(props.isPopped) ? (
+                pop
+            ): (
+                null
+            )}
+            
             <div className="popupAlertContent">
                 <div className="react-notification-alert-container">
                     <NotificationAlert ref={notificationAlertRef} />
                 </div>
 
-                <Button
+
+                {/* <Button
                     className="btn-round"
                     size='lg'
                     color="warning"
                     onClick={pop}
                 >
                     Test Alert
-                </Button>
+                </Button> */}
             </div>
+            
+            
         </>
     );
 }

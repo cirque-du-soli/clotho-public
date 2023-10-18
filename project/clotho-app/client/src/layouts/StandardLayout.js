@@ -12,6 +12,7 @@ import Subheader from "../components/Navbars/Subheader";
 
 // IMPORT: Routes
 import routes from "../util/routes.js";
+import PopupAlert from "../components/Alerts/PopupAlertComp";
 
 const getRoutes = (routes) => {
     return routes.map((prop, key) => {
@@ -29,6 +30,12 @@ function StandardLayout() {
 
     const mainPanelRef = useRef(null);
 
+    /*     const newPopup = (msg) => {
+            console.log("StandardLayout.js: newPopup() called");
+            console.log("StandardLayout.js: msg: " + msg);
+            PopupAlert({ props: { msg: msg } });
+        } */
+
     return (
         <div className="App">
             <Header />
@@ -45,7 +52,7 @@ function StandardLayout() {
 
                 </Routes>
             </div>
-            
+
         </div>
     );
 }
