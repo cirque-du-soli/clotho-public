@@ -43,10 +43,10 @@ function Listings() {
         throw new Error('Invalid input');
       }
 
-const response = await axios.get(`/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}&gender=${selectedGender}`);
+  var response = await axios.get(`/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}&gender=${selectedGender}`);
       console.log('Fetched listings:', response.data); // log response
 
-      const list = response.data;
+      var list = response.data;
       for (let i in list) {
         const img = await axios.get(`/admin/listingimages/thumbnail/${list[i].id}`);
         list[i].thumbnail = img.data.url;
