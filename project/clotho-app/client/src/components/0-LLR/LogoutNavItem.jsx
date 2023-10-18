@@ -5,6 +5,7 @@ import {
     NavItem,
     NavLink,
 } from 'reactstrap';
+import { redirect } from 'react-router';
 
 function Logout({ props }) {
 
@@ -17,7 +18,7 @@ function Logout({ props }) {
 
         try {
             const response = await axiosJWT.delete('/auth/logout');
-            console.log("***** response?.data *****");
+            console.log("response?.data");
             console.log(response?.data);
 
             sessionStorage.setItem('token', '');
@@ -25,8 +26,12 @@ function Logout({ props }) {
             sessionStorage.setItem('isAdmin', '');
             sessionStorage.setItem('userId', '');
             sessionStorage.setItem('username', '');
-
+            
+            redirect('/test');
+            
             props.onSubmitProp(true, "Logged out successfully!");
+
+            
 
         } catch (err) {
 
