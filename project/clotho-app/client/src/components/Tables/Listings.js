@@ -23,36 +23,43 @@ function Listings() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGender, setSelectedGender] = useState('');
 
-  useEffect(() => {
-  
-    getListings();
+  // loading and error states
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  }, [search, selectedSize, selectedCategory]);
+  useEffect(() => {
+    setLoading(true); // loading is true before the API call
+    getListings().finally(() => setLoading(false));
+  }, [search, selectedSize, selectedCategory, selectedGender]);
 
 
 
   const getListings = async () => {
-
     try {
+      setLoading(true); //  loading while fetching listings
 
-      var response = await axios.get(`/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}&gender=${selectedGender}`);
+      // input validation before the api call
+      if (typeof search !== 'string' || typeof selectedSize !== 'string' || typeof selectedCategory !== 'string') {
+        throw new Error('Invalid input');
+      }
 
-      console.log(response.data)
+const response = await axios.get(`/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}&gender=${selectedGender}`);
+      console.log('Fetched listings:', response.data); // log response
 
-      var list = response.data;
-
+      const list = response.data;
       for (let i in list) {
-
-
-        var img = await axios.get(`/admin/listingimages/thumbnail/${list[i].id}`);
+        const img = await axios.get(`/admin/listingimages/thumbnail/${list[i].id}`);
         list[i].thumbnail = img.data.url;
       }
       setListings(list);
-
+      setError(null); 
     } catch (err) {
-      console.log(err);
+      console.error('Error fetching listings:', err);
+      setError('Failed to fetch listings');
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
 
 useEffect(() => {
@@ -64,6 +71,7 @@ useEffect(() => {
     })
     .catch(error => {
       console.error('Error fetching categories:', error);
+      setError('Failed to fetch categories');
     });
 
   // Fetch sizes
@@ -73,6 +81,7 @@ useEffect(() => {
     })
     .catch(error => {
       console.error('Error fetching sizes:', error);
+      setError('Failed to fetch sizes');
     });
 
   // Fetch genders
@@ -82,6 +91,7 @@ useEffect(() => {
     })
     .catch(error => {
       console.error('Error fetching genders:', error);
+      setError('Failed to fetch genders');
     });
 
 }, []);
