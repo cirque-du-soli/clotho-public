@@ -7,6 +7,8 @@ import {
   Container, Row, Col, InputGroup, InputGroupText, Input,
   Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardImg, CardBottom, CardFooter, CardTitle, Button, onKeyPress,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
 
 function Listings() {
 
@@ -151,19 +153,20 @@ return (
 
     <Row>
 
-{listings.map(listing => (
+    {listings.map(listing => (
     <Col md="2" className="my-2 p-1" key={listing.id}>
-        <Card className='border-0 rounded-0'>
-            <img className='border-0 rounded-0' top width="100%" src={listing.thumbnail} alt="lisiting image" />
-
-        </Card>
-        <Row className='px-3 fs-5'>
-            {/* <CardTitle tag="h5"> */}
-            ${listing.price}
-            {/* </CardTitle> */}
-        </Row>
+        <Link to={`/products/${listing.id}`}>
+            <Card className='border-0 rounded-0'>
+                <img className='border-0 rounded-0' top width="100%" src={listing.thumbnail} alt="listing image" />
+            </Card>
+            <Row className='px-3 fs-5'>
+                ${listing.price}
+            </Row>
+        </Link>
     </Col>
 ))}
+
+
 </Row>
   </Container>
 );
