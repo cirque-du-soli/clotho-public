@@ -9,8 +9,6 @@ require('dotenv').config();
 
 /*
  Cache for tokens after logout
- Not complete solution, may want to store in db
- Refresh tokens not yet implemented
  */
 var deadTokens = [];
 var deadRefreshTokens = [];
@@ -31,26 +29,26 @@ exports.login = async (req, res) => {
         User.findOne({ where: { username: req.body.username } }).then(user => {
 
             if (!user) {
-                return res.status(400).json({message: "Incorrect username and password combination"});
+                return res.status(400).json({ message: "Incorrect username and password combination" });
             }
 
             bcrypt.compare(req.body.password, user.password).then(async (match) => {
 
                 if (!match) {
-                    return res.status(400).json({message: "Incorrect username and password combination"});
+                    return res.status(400).json({ message: "Incorrect username and password combination" });
                 }
 
                 const token = signToken(user);
                 const refreshToken = signRefresh(user);
-            
-                return res.json({token: token, refreshToken: refreshToken, userId: user.id, isAdmin: user.isAdmin, username: user.username});
+
+                return res.json({ token: token, refreshToken: refreshToken, userId: user.id, isAdmin: user.isAdmin, username: user.username });
             });
         });
 
     } catch (err) {
 
         console.log(err.message);
-        res.status(500).json("something went wrong");
+        return res.status(500).json({ message: "Something went wrong" });
     }
 };
 
@@ -60,21 +58,17 @@ Verify login, cache tokens
 */
 exports.logout = (req, res) => {
 
-    jwt.verify(req.token, process.env.SECRET, (err, data) => {
-
-        if (err) {
-            console.log(err);
-            return res.status(403).json("CANNOT VERIFY TOKEN");
-
-        } else {
-
-            deadTokens.push(req.token);
-            deadRefreshTokens.push(req.refreshToken);
-            console.log("deadtokens " + deadTokens[0]);
+    try {
+        deadTokens.push(req.token);
+        deadRefreshTokens.push(req.refreshToken);
+        console.log("deadtokens " + deadTokens[0]);
 
         res.status(200).json("Successfully logged out");
-        }
-    })
+
+    } catch (err) {
+        console.log(err.message);
+        return res.status(500).json({ message: "Something went wrong" });
+    }
 };
 
 /*
@@ -110,7 +104,7 @@ Authorize resources to admin only
 exports.adminOnly = (req, res, next) => {
 
     if (!req.isAdmin) {
-        return res.status(404).json({ message: "Page not found"})
+        return res.status(404).json({ message: "Page not found" })
     }
     next();
 
@@ -127,7 +121,7 @@ exports.getToken = (req, res, next) => {
 
         const reqToken = header.split(' ')[1];
         req.token = reqToken;
-        
+
         next();
 
     } else {
@@ -161,7 +155,7 @@ exports.refreshToken = (req, res) => {
 
         const newToken = signToken(data.user);
 
-        res.json({token: newToken});
+        res.json({ token: newToken });
 
     });
 }
