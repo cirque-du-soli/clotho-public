@@ -1,5 +1,23 @@
 import { useRef, useState, useEffect } from 'react';
 
+// Reactstrap
+import {
+    Row,
+    Col,
+    Card,
+    CardHeader,
+    CardTitle,
+    CardBody,
+    CardText,
+    CardFooter,
+    Table,
+    Button,
+    Form,
+    FormGroup,
+    Input,
+    Label
+} from "reactstrap";
+
 import axios from '../../api/axios';
 const LOGIN_URL = '/auth/login';
 
@@ -65,39 +83,54 @@ const Login = ({ props }) => {
 
     return (
         <>
-            <section>
+            <div className="content">
                 <p ref={errRef} className={errorMessage ? "errorMessage" : "offscreen"} aria-live="assertive">{errorMessage}</p>
-                <h1>Sign In</h1>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        ref={userRef}
-                        autoComplete="off"
-                        onChange={(e) => setUsername(e.target.value)}
-                        value={username}
-                        required
-                        defaultValue={props.uname ? props.uname : ''}
-                    />
+                <Form onSubmit={handleSubmit}>
+                    <Row>
+                        <Col className="pr-md-1">
+                            <FormGroup>
+                                <label htmlFor="username">Username:</label>
+                                <Input
+                                    type="text"
+                                    id="username"
+                                    ref={userRef}
+                                    autoComplete="off"
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    value={username}
+                                    required
+                                    defaultValue={props.uname ? props.uname : ''}
+                                />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className="pr-md-1">
+                            <FormGroup>
+                                <label htmlFor="password">Password:</label>
+                                <Input
+                                    type="password"
+                                    id="password"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    value={password}
+                                    required
+                                />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className="pl-md-1">
+                            <button className='btn btn-success'>Sign In</button>
+                        </Col>
+                    </Row>
+                </Form>
 
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                        required
-                    />
-                    <button>Sign In</button>
-                </form>
                 {/* <p>
                     Don't have an account?<br />
                     <span className="line">
                         <a href="#">Sign Up</a>
                     </span>
                 </p> */}
-            </section>
+            </div>  
         </>
     )
 }

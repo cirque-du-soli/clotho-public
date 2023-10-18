@@ -108,7 +108,7 @@ function Signup( { props }) {
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="px-md-1">
+                        <Col className="pr-md-1">
                             <FormGroup>
                                 <label>Password:</label>
                                 <Input
@@ -122,7 +122,7 @@ function Signup( { props }) {
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="pl-md-1">
+                        <Col className="pr-md-1">
                             <FormGroup>
                                 <label>Email:</label>
                                 <Input
@@ -135,7 +135,7 @@ function Signup( { props }) {
                             </FormGroup>
                         </Col>
                     </Row>
-                    <button>Sign Up</button>
+                    <button className='btn btn-success'>Sign Up</button>
                 </Form>
         
             </div>
