@@ -36,15 +36,26 @@ function LoginModal({ props }) {
         <>
 
 
-        {(props.isLoggedIn) ? (
-            <NavItem className="mx-auto mx-md-0">
-                <NavLink href='#' className="nav-link" >**Logged In**</NavLink>
-            </NavItem>
-        ) : (
-            <NavItem className = "mx-auto mx-md-0">
-                <NavLink href = '#' className = "nav-link" onClick = { toggle }>Log In</NavLink >
-            </NavItem >        
-        )}
+            {
+                !props.isLoggedIn
+                &&
+                <NavItem className = "mx-auto mx-md-0">
+                    <NavLink href = '#' className = "nav-link" onClick = { toggle }>Log In</NavLink >
+                </NavItem >        
+            }
+            
+
+           {/*  OLD: WORKING
+           {(props.isLoggedIn) ? (
+                <NavItem className="mx-auto mx-md-0">
+                    <NavLink href='#' className="nav-link" >**Logged In**</NavLink>
+                </NavItem>
+            ) : (
+                <NavItem className = "mx-auto mx-md-0">
+                    <NavLink href = '#' className = "nav-link" onClick = { toggle }>Log In</NavLink >
+                </NavItem >        
+            )} 
+            */}
 
         <div>
             

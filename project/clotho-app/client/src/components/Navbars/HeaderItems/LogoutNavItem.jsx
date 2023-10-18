@@ -50,6 +50,15 @@ function Logout({ props }) {
 
     return (
         <>
+            {
+                props.isLoggedIn
+                &&
+                <NavItem className="mx-auto mx-md-0">
+                    <NavLink href='#' className="nav-link" onClick={handleLogout}>Logout</NavLink>
+                </NavItem>
+           }
+
+            {/* OLD: WORKING
             {(props.isLoggedIn) ? (
                 <NavItem className="mx-auto mx-md-0">
                     <NavLink href='#' className="nav-link" onClick={handleLogout}>Logout</NavLink>
@@ -58,7 +67,10 @@ function Logout({ props }) {
                 <NavItem className="mx-auto mx-md-0">
                     <NavLink href='#' className="nav-link" >**Logged Out**</NavLink>
                 </NavItem>
-            )}
+            )} 
+            */}
+
+
         </>
     )
 }
