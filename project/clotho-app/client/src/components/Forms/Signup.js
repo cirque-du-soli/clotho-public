@@ -111,7 +111,7 @@ function Signup( { props }) {
                                 <Input
                                     id='newUserPassword'
                                     placeholder="Pa$$word123"
-                                    type="text"
+                                    type="password"
                                     required
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
