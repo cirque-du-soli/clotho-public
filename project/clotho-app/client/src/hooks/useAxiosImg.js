@@ -15,8 +15,11 @@ const useAxiosImg = () => {
                     config.headers['authorization'] = `Bearer ${token}`;
                 }
                 return config;
-            }, (error) => Promise.reject(error)
-        );
+            }, error => {
+                console.error('Request error:', error);
+                return Promise.reject(error);
+              }
+            );
 
         const responseIntercept = axiosImg.interceptors.response.use(
             response => response,
@@ -24,6 +27,7 @@ const useAxiosImg = () => {
                 const prevRequest = error?.config;
                 if ((error?.response?.status === 403) && !prevRequest?.sent) {
                     prevRequest.sent = true;
+                try {
                     const response = await axios.get('/auth/refresh', 
                     {
                         headers:
@@ -35,8 +39,13 @@ const useAxiosImg = () => {
                     sessionStorage.setItem('token', response.data.token);
                     return axiosImg(prevRequest);
                 }
+                catch (err) {
+                    console.error('Could not refresh token:', err);
+                    // Invalidate tokens
+                    sessionStorage.removeItem('token');
+                    sessionStorage.removeItem('refreshToken');
                 return Promise.reject(error);
-            }
+            }}}
         );
 
         return () => {

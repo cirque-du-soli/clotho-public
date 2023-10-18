@@ -19,8 +19,8 @@ const ListingPage = ({ match }) => {
   useEffect(() => {
     const fetchListing = async () => {
       try {
-        // const response = await axios.get(`http://localhost:3001/api/listings/${match.params.id}`); //FIXME
-                const response = await axios.get(`http://localhost:3001/api/listings/${6}`);
+        const response = await axios.get(`http://localhost:3001/api/listings/${match.params.id}`); //FIXME
+                // const response = await axios.get(`http://localhost:3001/api/listings/${6}`);
 
         setListing(response.data);
       } catch (error) {
@@ -29,8 +29,8 @@ const ListingPage = ({ match }) => {
     };
 
     fetchListing();
-  }, [1]);
-  // }, [match.params.id]);
+  // }, [1]);
+  }, [match.params.id]);
 
 
   if (!listing) {
