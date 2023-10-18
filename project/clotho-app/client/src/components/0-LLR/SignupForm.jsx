@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useAxiosJWT from '../../hooks/useAxiosJWT'; 
+import axios from '../../api/axios';
 // Reactstrap
 import {
     Row,
@@ -21,7 +21,6 @@ import {
 
 function Signup( { props }) {
 
-    const axiosJWT = useAxiosJWT();
 
     // STATES
     const [username, setUsername] = useState('');
@@ -52,7 +51,7 @@ function Signup( { props }) {
     
         try {
 
-            const response = await axiosJWT.post("/admin/users", {
+            const response = await axios.post("/users", {
 
                 username: username,
                 password: password,

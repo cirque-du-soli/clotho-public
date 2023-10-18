@@ -27,9 +27,9 @@ function UserProfilePublic() {
 
             console.log(response.data)
 
-            setUser(response?.data?.user);
+            setUser(response.data.user);
 
-            var list = response?.data?.listings;
+            var list = response.data.listings;
 
             if (list[0]) {
                 for (let i in list) {
@@ -63,7 +63,7 @@ function UserProfilePublic() {
             <div className='row m-5'></div>
 
 
-            {listings[0] ? (
+            {user && listings[0] ? (
                 <Row>
                     {listings.map(listing => (
                         <Col md="2" className="my-2 p-1" key={listing.id}>
@@ -80,7 +80,15 @@ function UserProfilePublic() {
                     ))}
                 </Row>
 
-            ) : (<h4>{username} isn't selling anything yet.</h4>)}
+            ) : (
+                <div>
+                {user.username ? (
+            <h4>{username} isn't selling anything yet.</h4>
+                ) : (
+                    <h4>Not found.</h4>
+                )}
+</div>
+            )}
 
         </div>
     );
