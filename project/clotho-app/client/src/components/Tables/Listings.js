@@ -7,6 +7,7 @@ import {
   Container, Row, Col, InputGroup, InputGroupText, Input,
   Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardImg, CardBottom, CardFooter, CardTitle, Button, onKeyPress,
 } from 'reactstrap';
+import { Alert, CloseButton } from 'reactstrap';
 
 function Listings() {
 
@@ -26,6 +27,7 @@ function Listings() {
   // loading and error states
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showAlert, setShowAlert] = useState(true);
 
   useEffect(() => {
     setLoading(true); // loading is true before the API call
@@ -39,7 +41,7 @@ function Listings() {
       setLoading(true); //  loading while fetching listings
 
       // input validation before the api call
-      if (typeof search !== 'string' || typeof selectedSize !== 'string' || typeof selectedCategory !== 'string') {
+      if (typeof search !== 'string' || typeof selectedCategory !== 'string') {
         throw new Error('Invalid input');
       }
 
@@ -55,7 +57,7 @@ function Listings() {
       setError(null); 
     } catch (err) {
       console.error('Error fetching listings:', err);
-      setError('Failed to fetch listings');
+      // setError('Failed to fetch listings');
     } finally {
       setLoading(false);
     }
@@ -71,7 +73,7 @@ useEffect(() => {
     })
     .catch(error => {
       console.error('Error fetching categories:', error);
-      setError('Failed to fetch categories');
+      // setError('Failed to fetch categories');
     });
 
   // Fetch sizes
@@ -81,18 +83,18 @@ useEffect(() => {
     })
     .catch(error => {
       console.error('Error fetching sizes:', error);
-      setError('Failed to fetch sizes');
+      // setError('Failed to fetch sizes');
     });
 
   // Fetch genders
-  axios.get('/attr/genders')
-    .then(response => {
-      setGenders(response.data);
-    })
-    .catch(error => {
-      console.error('Error fetching genders:', error);
-      setError('Failed to fetch genders');
-    });
+  // axios.get('/attr/genders')
+  //   .then(response => {
+  //     setGenders(response.data);
+  //   })
+  //   .catch(error => {
+  //     console.error('Error fetching genders:', error);
+  //     // setError('Failed to fetch genders');
+  //   });
 
 }, []);
 
@@ -107,7 +109,13 @@ const filteredListings = listings.filter(listing => {
 
 return (
   <Container>
-    <Row className="mb-4">
+    {/* // flash alert for errors // */}
+    {error && showAlert && ( // Only show the alert if there's an error and showAlert is true
+        <Alert color="danger">
+          {error}
+          <CloseButton onClick={() => setShowAlert(false)} aria-label="Close" /> {/* Close button */}
+        </Alert>
+      )}    <Row className="mb-4">
       <Col md="8">
         <InputGroup>
           <Input
