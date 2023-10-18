@@ -38,7 +38,7 @@ function StandardLayout() {
     return (
         <div className="App">
             <Header />
-            <Subheader />
+            {/* <Subheader /> */}
             <Footer />
             <div className="main-panel" ref={mainPanelRef}>
                 <Routes>

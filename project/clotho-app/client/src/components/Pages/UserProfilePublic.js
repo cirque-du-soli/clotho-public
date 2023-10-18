@@ -51,33 +51,37 @@ function UserProfilePublic() {
             <div className='row m-5'></div>
             <div className='row my-5'>
 
-            <div className='col-2 col-md-1'>
-                <img src={userIcon} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle" width={50} />
-            </div>
-            <div className='col-1 text-start'>
+                <div className='col-2 col-md-1'>
+                    <img src={userIcon} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle" width={50} />
+                </div>
+                <div className='col-1 text-start'>
 
-                <h2>{user.username}</h2>
+                    <h2>{user.username}</h2>
 
-            </div>
+                </div>
             </div>
             <div className='row m-5'></div>
 
-            <Row>
 
-                {listings.map(listing => (
-                    <Col md="2" className="my-2 p-1" key={listing.id}>
-                        <Card className='border-0 rounded-0'>
-                            <img className='border-0 rounded-0' top width="100%" src={listing.thumbnail} alt="lisiting image" />
+            {listings[0] ? (
+                <Row>
+                    {listings.map(listing => (
+                        <Col md="2" className="my-2 p-1" key={listing.id}>
+                            <Card className='border-0 rounded-0'>
+                                <img className='border-0 rounded-0' top width="100%" src={listing.thumbnail} alt="lisiting image" />
 
-                        </Card>
-                        <Row className='px-3 fs-5'>
-                            {/* <CardTitle tag="h5"> */}
-                            ${listing.price}
-                            {/* </CardTitle> */}
-                        </Row>
-                    </Col>
-                ))}
-            </Row>
+                            </Card>
+                            <Row className='px-3 fs-5'>
+                                {/* <CardTitle tag="h5"> */}
+                                ${listing.price}
+                                {/* </CardTitle> */}
+                            </Row>
+                        </Col>
+                    ))}
+                </Row>
+
+            ) : (<h4>{username} isn't selling anything yet.</h4>)}
+
         </div>
     );
 }
