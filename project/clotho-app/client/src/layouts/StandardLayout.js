@@ -12,7 +12,6 @@ import Subheader from "../components/Navbars/Subheader";
 
 // IMPORT: Routes
 import routes from "../util/routes.js";
-import PopupAlert from "../components/Alerts/PopupAlertComp";
 
 const getRoutes = (routes) => {
     return routes.map((prop, key) => {

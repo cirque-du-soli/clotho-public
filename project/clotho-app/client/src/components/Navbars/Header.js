@@ -18,6 +18,9 @@ import logoFull from '../../assets/images/clotho-logo-name-hiRes.png';
 import LoginModalNavItem from './HeaderItems/LoginModalNavItem';
 import LogoutNavItem from './HeaderItems/LogoutNavItem';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Header() {
 
   const [isOpen, setIsOpen] = useState(false);
@@ -26,11 +29,26 @@ function Header() {
 
 
   // initial login state
-  const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem('token') === '' ? false : true);
+  const [isLoggedIn, setIsLoggedIn] = useState(!(sessionStorage.getItem('token') === '' || sessionStorage.getItem('token') === null));
 
   // update login state (to rerender header)
-  function checkLoginStatus() {
-    setIsLoggedIn(sessionStorage.getItem('token') === '' ? false : true);
+  function popupChange(success, msg) {
+
+    // first update states
+    setIsLoggedIn(!(sessionStorage.getItem('token') === '' || sessionStorage.getItem('token') === null));
+
+    // then update popup
+    let options = {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    } 
+    success ? toast.success(msg, options) : toast.error(msg, options);
   }
 
   return (
@@ -94,12 +112,24 @@ function Header() {
               <NavLink href="/test/login" className="nav-link">Login</NavLink>
             </NavItem>
 */}
-            <LoginModalNavItem props={{ isLoggedIn: isLoggedIn }} change={checkLoginStatus} />
-            <LogoutNavItem props={{ isLoggedIn: isLoggedIn }} change={checkLoginStatus} />
+            <LoginModalNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
+            <LogoutNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
 
           </Nav>
         </Collapse>
       </Navbar>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 }

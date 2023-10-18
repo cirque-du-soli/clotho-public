@@ -1,21 +1,19 @@
 import { useRef, useState, useEffect } from 'react';
 import useAxiosJWT from '../../../hooks/useAxiosJWT';
 
-import PopupAlert from '../../Alerts/PopupAlertComp';
 
 import {
     NavItem,
     NavLink,
 } from 'reactstrap';
 
-function Logout({ props, change }) {
+function Logout({ props }) {
 
     const errRef = useRef();
     const [logoutErrorMessage, setLogoutErrorMessage] = useState('');
     //const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn);
     const axiosJWT = useAxiosJWT();
 
-    let logoutMessage = '';
 
     useEffect(() => {
         setLogoutErrorMessage('');
@@ -34,28 +32,25 @@ function Logout({ props, change }) {
             sessionStorage.setItem('username', '');
             //setIsLoggedIn(false);
 
-            // soli test
-            logoutMessage = 'You have been successfully logged out.';
-
-            change();
+            props.onSubmitProp(true, "Logged out successfully!");
 
         } catch (err) {
             if (!err?.response) {
-                <PopupAlert props={{ msg: 'No Server Response' }} />
+                props.onSubmitProp(false, 'No Server Response')
             } else if (err.response?.data?.message) {
                 console.log(err);
-                <PopupAlert props={{ msg: err.response.data.message }} />
+                props.onSubmitProp(false, err.response.data.message);
             } else {
                 console.log(err);
-                <PopupAlert props={{ msg: "Logout Failed!" }} />
+                props.onSubmitProp(false, "Logout Failed!");
             }
-            errRef.current.focus();
+            // errRef.current.focus();
         }
     }
 
     return (
         <>
-            {(props.isLoggedIn == true) ? (
+            {(props.isLoggedIn) ? (
                 <NavItem className="mx-auto mx-md-0">
                     <NavLink href='#' className="nav-link" onClick={handleLogout}>Logout</NavLink>
                 </NavItem>

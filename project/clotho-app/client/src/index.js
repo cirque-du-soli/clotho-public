@@ -12,7 +12,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import AdminLayout from './layouts/AdminLayout';
 import StandardLayout from './layouts/StandardLayout';
 import TestLayout from './layouts/TestLayout';
-import PopupAlert from './components/Alerts/PopupAlertComp';
 
 // IMPORT: Contexts
 //import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper";
