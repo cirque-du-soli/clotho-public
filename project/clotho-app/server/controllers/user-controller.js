@@ -68,6 +68,7 @@ exports.findById = async (req, res) => {
         for (let i in user.listings) {
             user.listings[i].price /= 100;
             user.listings[i].price = user.listings[i].price.toFixed(2);
+            console.log(user.listings[i].price);
         }
         const result = {
             user: {
@@ -133,7 +134,12 @@ exports.findByUsernamePublic = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
-
+        // format decimal
+        for (let i in user.listings) {
+            user.listings[i].price /= 100;
+            user.listings[i].price = user.listings[i].price.toFixed(2);
+            console.log(user.listings[i].price);
+        }
         const result = {
             user: {
                 username: user.username,
