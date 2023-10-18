@@ -10,9 +10,7 @@ function StandardDashboard(props) {
     return (
         <>
             <div className="text-center">
-                <h1>Standard Dashboard</h1>
-                {/* <Listings /> */}
-                <TestSquarePlaceholder details={{ text: "This is where the listings will be shown" }} />
+                <Listings />
 
             </div>
         </>

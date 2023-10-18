@@ -19,6 +19,7 @@ function Listings() {
   const [genders, setGenders] = useState([]);
   const [dropdownOpenSize, setDropdownOpenSize] = useState(false);
   const [dropdownOpenCategory, setDropdownOpenCategory] = useState(false);
+  const [dropdownOpenGender, setDropdownOpenGender] = useState(false);
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
@@ -86,15 +87,15 @@ useEffect(() => {
       // setError('Failed to fetch sizes');
     });
 
-  // Fetch genders
-  // axios.get('/attr/genders')
-  //   .then(response => {
-  //     setGenders(response.data);
-  //   })
-  //   .catch(error => {
-  //     console.error('Error fetching genders:', error);
-  //     // setError('Failed to fetch genders');
-  //   });
+  //Fetch genders
+  axios.get('/attr/genders')
+    .then(response => {
+      setGenders(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching genders:', error);
+      // setError('Failed to fetch genders');
+    });
 
 }, []);
 
@@ -132,7 +133,7 @@ return (
           <InputGroupText addonType="append">🔍</InputGroupText>
         </InputGroup>
       </Col>
-      <Col md="2">
+      <div className='col-md-1 mx-1 text-center'>
         <Dropdown isOpen={dropdownOpenSize} toggle={() => setDropdownOpenSize(prevState => !prevState)}>
           <DropdownToggle caret>
             {selectedSize || "Size"}
@@ -141,8 +142,8 @@ return (
             {sizes.map(size => <DropdownItem key={size.id} onClick={() => setSelectedSize(size.id)}>{size.name}</DropdownItem>)}
           </DropdownMenu>
         </Dropdown>
-      </Col>
-      <Col md="2">
+      </div>
+      <div className='col-md-1 mx-1 text-center'>
         <Dropdown isOpen={dropdownOpenCategory} toggle={() => setDropdownOpenCategory(prevState => !prevState)}>
           <DropdownToggle caret>
             {selectedCategory || "Category"}
@@ -151,23 +152,37 @@ return (
             {categories.map(category => <DropdownItem key={category.id} onClick={() => setSelectedCategory(category.id)}>{category.name}</DropdownItem>)}
           </DropdownMenu>
         </Dropdown>
-      </Col>
+      </div>
+      <div className='col-md-1 mx-1 text-center'>
+        <Dropdown isOpen={dropdownOpenGender} toggle={() => setDropdownOpenGender(prevState => !prevState)}>
+          <DropdownToggle caret>
+            {selectedGender || "Gender"}
+          </DropdownToggle>
+          <DropdownMenu>
+            {genders.map(gender => <DropdownItem key={gender.id} onClick={() => setSelectedGender(gender.id)}>{gender.name}</DropdownItem>)}
+          </DropdownMenu>
+        </Dropdown>
+      </div>
     </Row>
 
+
+
     <Row>
-      {listings.map(listing => (
-        <Col md="4" key={listing.id}>
-          <Card>
-            <CardImg top width="100%" src={listing.thumbnail} alt="lisiting image" />
-            <CardFooter>
-              {/* <CardTitle tag="h5"> */}
-              ${listing.price}
-              {/* </CardTitle> */}
-            </CardFooter>
-          </Card>
-        </Col>
-      ))}
-    </Row>
+
+{listings.map(listing => (
+    <Col md="2" className="my-2 p-1" key={listing.id}>
+        <Card className='border-0 rounded-0'>
+            <img className='border-0 rounded-0' top width="100%" src={listing.thumbnail} alt="lisiting image" />
+
+        </Card>
+        <Row className='px-3 fs-5'>
+            {/* <CardTitle tag="h5"> */}
+            ${listing.price}
+            {/* </CardTitle> */}
+        </Row>
+    </Col>
+))}
+</Row>
   </Container>
 );
 }

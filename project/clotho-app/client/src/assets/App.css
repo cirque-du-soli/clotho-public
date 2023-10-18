@@ -21,7 +21,7 @@ td {
 
 .main-panel {
   padding: 20px 0px;
-  background-color: lightgrey;
+  background-color: white;
   width: 100%;
   min-height: fit-content;
   transition: all 0.3s ease-in-out;

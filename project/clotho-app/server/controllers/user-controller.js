@@ -16,7 +16,7 @@ const validator = require('validator');
 const bcrypt = require('bcrypt');
 
 /* 
-Get user by id (private profile view for logged in user)
+Get user by id (private profile view for logged in user) 
 */
 exports.findById = async (req, res) => {
 
@@ -43,7 +43,11 @@ exports.findById = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
-
+        // format decimal
+        for (let i in user.listings) {
+            user.listings[i].price /= 100;
+            user.listings[i].price = user.listings[i].price.toFixed(2);
+        }
         const result = {
             user: {
                 username: user.username,

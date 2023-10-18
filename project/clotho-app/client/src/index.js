@@ -24,7 +24,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/app/*" element={<StandardLayout />} />
+        <Route path="/*" element={<StandardLayout />} />
         <Route path="/admin/*" element={<AdminLayout />} />
         <Route path="/test/*" element={<TestLayout />} />
         <Route path="/*" element={<Navigate to="/app" replace />} />

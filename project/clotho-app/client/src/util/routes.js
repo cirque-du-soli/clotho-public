@@ -37,9 +37,16 @@ var routes = [
     ///////////////////////////// USER ROUTES ////////////////////////
     {
         layout: "StandardLayout",
-        path: "/home",
+        path: "/",
         name: "Standard Dashboard",
         component: <StandardDashboard />,
+    },
+
+    {
+        layout: "StandardLayout",
+        path: "/:username",
+        name: "Test: Public profile (add username param)",
+        component: <UserProfilePublic />,
     },
 
     ///////////////////////////// TEST ROUTES ////////////////////////
@@ -60,7 +67,7 @@ var routes = [
 
     {
         layout: "TestLayout",
-        path: "/seller/:username",
+        path: "/:username",
         name: "Test: Public profile (add username param)",
         component: <UserProfilePublic />,
     },
@@ -109,7 +116,7 @@ var routes = [
 
     {
         layout: "TestLayout",
-        path: "/listings/:id",
+        path: "/products/:id",
         name: "Test: Listing Page",
         component: <ListingPage />,
     },

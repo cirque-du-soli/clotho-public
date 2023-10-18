@@ -47,7 +47,7 @@ function StandardLayout() {
                     {getRoutes(routes)}
 
                     {/* Catch-all non-declared routes*/}
-                    <Route path="/*" element={<Navigate to="/app/home" replace />} />
+                    <Route path="/*" element={<Navigate to="/" replace />} />
 
                 </Routes>
             </div>
