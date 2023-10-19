@@ -546,6 +546,71 @@ Meredith:
 		- investigate possible logic error in auth
 
 
+2023-10-19
+===================
+
+Dustin:
+	Done:
+		- Edit profile - needs some testing and debugging
+		- Admin tables - users/listings/orders front-end - needs logic
+		- Heroku started
+		-Started cart dropdown
+
+	Not-Done:
+		- Admin & Edit profile logic
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- Finish Heroic Setup
+		- Finish edit profile logic
+		- Finish Admin Tables Logic
+		- Add sort to admin tables
+					
+
+Soli:
+	Done:
+		- Started filter header
+		- research for charts (npm simple-charts)
+		
+	Not-Done:
+		- double password
+		- toggle admin navitem
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- Double password input for Signup form (must match)
+		- if user is admin, show admin button in header
+		- SubHeader
+			- pre-determined search filters (mens, women, sale)
+		- FilterHeader
+			- All search criteria -- TOGGLES / multi-select
+			- "Clear filters" button
+			- UPDATE ListingTable each time filter criteria changes (already implemented)
+			- 
+		- Start Admin Charts
+			- Research if google analytics
+
+Meredith: 
+	Done:
+		- create listing with images front and back (works but front needs modifications)
+		- user avatar backend
+		- filter min max price in listings api
+		- fixed logout error
+		
+	Not-Done:
+		- order history view
+		- implement user avatar in front (view + update)
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- finish user avatar
+		- order history view
 
 ===============================================================================
 ===============================================================================
