@@ -35,9 +35,23 @@ exports.findAll = async (req, res) => {
                     }
                 ]
             } : {};
+        const minPrice = req.query.minPrice ? 
+        { price: 
+            {
+                [Op.gt]: (req.query.minPrice * 100) - 1
+            }
+         } : {};
+         const maxPrice = req.query.maxPrice ? 
+         { price: 
+             {
+                 [Op.lt]: (req.query.maxPrice * 100) + 1
+             }
+          } : {};
         const category = req.query.category ? { id: req.query.category } : {};
         const gender = req.query.gender ? { id: req.query.gender } : {};
         const size = req.query.size ? { id: req.query.size } : {};
+   
+
         console.log(req.query.size);
         console.log(size);
         console.log(size.id);
@@ -51,10 +65,6 @@ exports.findAll = async (req, res) => {
                 attributes: ['username', 'id'],
 
             },
-            // {
-            //     model: ListingImage,
-            //     attributes: ['id', 'priority', 'path', 'isDeleted']
-            // },
             {
                 model: Category,
                 attributes: ['name', 'id'],
@@ -76,7 +86,9 @@ exports.findAll = async (req, res) => {
                 isDeleted: false,
                 isSold: false,
             },
-                search
+                search,
+                minPrice,
+                maxPrice
             ]
         });
 
