@@ -10,6 +10,7 @@ const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 // const upload = multer({ storage: storage })
 const { ListingImage } = require("../models");
 const { Listing } = require("../models");
+const { User } = require("../models");
 
 
 // prepare S3 client
@@ -46,6 +47,33 @@ exports.send = async (req, res) => {
 
   const fileBuffer = await sharp(file.buffer)
     .resize({ height: 1280, width: 1280, fit: "cover" })
+    .toBuffer();
+
+  const fileName = crypto.randomBytes(32).toString('hex');
+  const params = {
+    Bucket: bucketName,
+    Body: fileBuffer,
+    Key: fileName,
+    ContentType: file.mimetype
+  }
+
+    var result = await s3Client.send(new PutObjectCommand(params));
+    return res.status(201).json({ fileName: fileName });
+
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Image failed to send to S3" });
+  }
+}
+
+// send with different size
+exports.sendAvatar = async (req, res) => {
+
+  try {
+  const file = req.file;
+
+  const fileBuffer = await sharp(file.buffer)
+    .resize({ height: 100, width: 100, fit: "cover" })
     .toBuffer();
 
   const fileName = crypto.randomBytes(32).toString('hex');
@@ -125,6 +153,30 @@ exports.getThumbnail = async (req, res) => {
     )
     console.log(listing.img);
     img = { listingId: listing.id, url: listing.img };
+
+    res.json(img);
+
+  } catch (err) {
+
+    console.log(err.message);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+exports.getAvatar = async (req, res) => {
+  try {
+    var user = await User.findByPk(req.params.id);
+
+    user.img = await getSignedUrl(
+      s3Client,
+      new GetObjectCommand({
+        Bucket: bucketName,
+        Key: user.avatar
+      }),
+      { expiresIn: 3600 }
+    )
+    console.log(listing.img);
+    img = { url: img };
 
     res.json(img);
 

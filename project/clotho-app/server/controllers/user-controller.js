@@ -1,16 +1,9 @@
 /*
 
 User controller for non-admin users
-TODO: images, username regex
+TODO: username regex
 
 */
-require('dotenv').config();
-const crypto = require('crypto');
-// const multer = require('multer');
-const sharp = require('sharp');
-const { S3Client, ListBucketsCommand, GetObjectCommand, PutObjectCommand } = require('@aws-sdk/client-s3');
-const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
-
 
 const { User } = require("../models");
 const { Listing } = require("../models");
@@ -21,20 +14,6 @@ const { Gender } = require("../models");
 
 const validator = require('validator');
 const bcrypt = require('bcrypt');
-
-// prepare S3 client
-const bucketName = process.env.BUCKET_NAME
-const region = process.env.BUCKET_REGION
-const accessKeyId = process.env.ACCESS_KEY
-const secretAccessKey = process.env.SECRET_ACCESS_KEY
-
-const s3Client = new S3Client({
-    region,
-    credentials: {
-        accessKeyId,
-        secretAccessKey
-    }
-});
 
 /* 
 Get user by id (private profile view for logged in user) 
@@ -163,34 +142,6 @@ Regiser new user
 exports.create = async (req, res) => {
 
     if (isValidPost(req, res)) {
-        
-        if (!req.file) {
-
-            return res.status(400).json({ message: "avatar image required" });
-        }
-
-
-        const file = req.file;
-
-        const fileBuffer = await sharp(file.buffer)
-            .resize({ height: 1280, width: 1280, fit: "cover" })
-            .toBuffer();
-
-        const fileName = crypto.randomBytes(32).toString('hex');
-        const params = {
-            Bucket: bucketName,
-            Body: fileBuffer,
-            Key: fileName,
-            ContentType: file.mimetype
-        }
-
-        try {
-            await s3Client.send(new PutObjectCommand(params));
-
-        } catch (err) {
-            console.log(err);
-            return res.status(500).json({ message: "Image failed to send to S3" });
-        }
 
         try {
 
@@ -222,8 +173,7 @@ exports.create = async (req, res) => {
                 var user = await User.create({
                     username: req.body.username,
                     password: hash,
-                    email: req.body.email,
-                    avatar: fileName
+                    email: req.body.email
                 });
 
                 res.status(201).json({ message: "Successfully added user", user: { id: user.id, username: user.username, email: user.email } });
