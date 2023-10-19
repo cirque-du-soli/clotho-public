@@ -10,6 +10,7 @@ const { Size } = require("../models");
 const { Gender } = require("../models");
 const { ListingImage } = require("../models");
 const { Op } = require("sequelize");
+const { sequelize } = require("../models");
 
 /* 
 Get full list of items excluding sold and deleted
@@ -220,6 +221,8 @@ exports.create = async (req, res) => {
 
     if (isValidPost(req, res)) {
 
+        const t = await sequelize.transaction();
+
         try {
 
             //check foreign keys
@@ -248,18 +251,29 @@ exports.create = async (req, res) => {
                 sellerId: req.userId,
                 title: req.body.title,
                 description: req.body.description,
-                thumbnail: 'placeholder', //TODO imgs
+                thumbnail: req.body.thumbnail,
                 price: req.body.price * 100,
                 sizeId: req.body.sizeId,
                 categoryId: req.body.categoryId,
                 genderId: req.body.genderId
             });
 
+            for (let i in req.body.images) {
+
+                const img = await ListingImage.create({
+                    listingId: listing.id,
+                    path: req.body.images[i].path,
+                    priority: i
+                  });
+              
+            }
             res.status(201).json({ message: "Successfully added listing", listing: listing });
 
+            await t.commit();
 
         } catch (err) {
 
+            await t.rollback();
             console.log(err.message);
             res.status(500).json({ message: "Something went wrong" });
         }
@@ -432,10 +446,12 @@ function isValidPost(req, res) {
         case (req.body.categoryId != Number(req.body.categoryId).toFixed()):
             res.status(400).json({ message: "Category id must be an integer" });
             return false;
-        // case (!req.body.thumbnail): //TODO imgs
-        //     return res.status(400).json({ message: "Path to thumbnail image cannot be null" });
-        // case (req.body.thumbnail.length > 200): //TODO imgs
-        //     return res.status(400).json({ message: "Path to thumbnail image cannot exceed 200 characters" });
+        case (!req.body.thumbnail): //TODO imgs
+            res.status(400).json({ message: "Path to thumbnail image cannot be null" });
+                return false;
+        case (!req.body.images[0]): //TODO imgs
+            res.status(400).json({ message: "Images required" });
+                return false;
         default:
             return true;
     }

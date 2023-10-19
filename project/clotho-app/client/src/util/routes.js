@@ -36,6 +36,12 @@ var routes = [
         component: <AdminDashboard />,
     },
 
+    {
+        layout: "AdminLayout",
+        path: "/admintables/",
+        name: "Admin Tables",
+        component: <AdminTables />,
+    },
     ///////////////////////////// USER ROUTES ////////////////////////
     {
         layout: "StandardLayout",
@@ -67,17 +73,16 @@ var routes = [
 
     {
         layout: "StandardLayout",
-        path: "/editprofile/",
-        name: "Edit Profile",
+        path: "/settings",
+        name: "Settings",
         component: <EditProfile />,
     },
 
-
     {
         layout: "StandardLayout",
-        path: "/admintables/",
-        name: "Admin Tables",
-        component: <AdminTables />,
+        path: "/sell",
+        name: "Sell",
+        component: <Sell />,
     },
 
     ///////////////////////////// TEST ROUTES ////////////////////////
@@ -123,13 +128,6 @@ var routes = [
         path: "/createlistinguser",
         name: "Test: Create Listing User (test)",
         component: <CreateListingUserTest />,
-    },
-
-    {
-        layout: "TestLayout",
-        path: "/sell",
-        name: "Test: SELL -- Create Listing page w photo upload",
-        component: <Sell />,
     },
 
     {

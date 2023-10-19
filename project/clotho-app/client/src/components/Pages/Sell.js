@@ -3,7 +3,7 @@ import useAxiosImg from '../../hooks/useAxiosImg';
 import useAxiosJWT from '../../hooks/useAxiosJWT';
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
+import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import {
     Card,
@@ -20,14 +20,17 @@ import {
 } from "reactstrap";
 
 function Sell() {
-    const [selectedFiles, setSelectedFiles] = useState(undefined);
-    const [imagePreviews, setImagePreviews] = useState([]);
     const axiosImg = useAxiosImg();
+    const axiosJWT = useAxiosJWT();
+
+    const [files, setFiles] = useState([]);
+    const [thumbnail, setThumbnail] = useState('');
+    const [imgInfo, setImgInfo] = useState([]);
+
 
     const errRef = useRef();
     const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
-    const [message, setMessage] = useState([]);
 
 
     useEffect(() => {
@@ -38,7 +41,8 @@ function Sell() {
     const [genders, setGenders] = useState([]);
     const [categories, setCategories] = useState([]);
     const [sizes, setSizes] = useState([]);
-    var imgCount = 0;
+    const [newId, setNewId] = useState('');
+    
 
     const [inputs, setinputs] = useState({
         title: '',
@@ -49,8 +53,7 @@ function Sell() {
         sizeId: ''
     });
 
-    const [thumbnail, setThumbnail] = useState('');
-    const [files, setFiles] = useState([]);
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -59,8 +62,8 @@ function Sell() {
     };
 
     const handleFilesChange = async (e) => {
-        if (e.target.files[imgCount]) {
-            const file = e.target.files[imgCount];
+        if (e.target.files[0]) {
+            const file = e.target.files[0];
             const formData = new FormData();
             formData.append("image", file);
             try {
@@ -68,13 +71,14 @@ function Sell() {
                 const response = await axiosImg.post('/images/', formData);
                 // get image url
                 const fileName = response.data.fileName;
-                const url = await axiosImg.get(`/images/${fileName}`);
-
-                setFiles(prevState => ({ ...prevState, [fileName] : { file: e.target.files[imgCount], priority: imgCount, url: url }}));
+                const img = await axiosImg.get(`/images/preview/${fileName}`);
+                const url = img.data.url
+                setFiles(prevState => [ ...prevState, { url: url, fileName: fileName }]);
+                setImgInfo(prevState => [...prevState, {path: fileName}]);
                 console.log(files);
-                imgCount++;
+                console.log(JSON.stringify(imgInfo));
+
             } catch (err) {
-                imgCount = 0;
                 if (!err.response) {
                     console.log(err);
 
@@ -94,14 +98,22 @@ function Sell() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const form = new FormData();
-        for (const key in inputs) {
-            form.append(key, inputs[key]);
-        };
-        form.append('images', files);
+
         try {
-            const response = await axiosImg.post('/listings', form);
-            console.log(response.status);
+            const response = await axiosJWT.post('/listings',
+            {
+                title: inputs.title,
+                description: inputs.description,
+                price: inputs.price,
+                categoryId: inputs.categoryId,
+                genderId: inputs.genderId,
+                sizeId: inputs.sizeId,
+                thumbnail: imgInfo[0].path,
+                images: imgInfo
+            });
+            console.log(response?.data);
+            setNewId(response?.data?.listing?.id);
+            
             setSuccess(true);
 
         } catch (err) {
@@ -164,6 +176,7 @@ function Sell() {
         return (
             <>
                 <h4>Item successfuly posted.</h4>
+                <Link to={`/products/${newId}`}>View your item</Link>
             </>
         );
     }
@@ -258,13 +271,13 @@ function Sell() {
                             <FormGroup>
                                 <Label for="image">Add images to your post.</Label>
 
-                                <Input type="file" name='image' id="img1" onChange={handleFilesChange} required accept="image/*" />
+                                <Input type="file" name='image' id="image" onChange={handleFilesChange} required accept="image/*" />
 
 
 
                             </FormGroup>
                             <div>
-                                {/* <Row>
+                                <Row>
 
                                     {files.map(img => (
                                         <Col className="col-md-1 my-2 p-1" key={img.fileName}>
@@ -273,7 +286,7 @@ function Sell() {
                                             </Card>
                                         </Col>
                                     ))}
-                                </Row> */}
+                                </Row>
                             </div>
                             <Button color="primary" type="submit">Create Listing</Button>
                         </Form>
