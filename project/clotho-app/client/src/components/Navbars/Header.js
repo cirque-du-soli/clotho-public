@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 // IMPORT: Popups
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../../assets/Header.css';
+// import { FaShoppingCart } from 'react-icons/fa';
+// import { Badge, Container, FormControl, Nav, Navbar, Dropdown } from 'reactstrap';
 
 // IMPORT: Reactstrap
 import {
@@ -15,6 +18,7 @@ import {
   Nav,
   NavItem,
   NavLink,
+  Dropdown,
 } from 'reactstrap';
 
 // IMPORT: Images
@@ -109,6 +113,14 @@ function Header() {
             <UserNavItem props={{ isLoggedIn: isLoggedIn, uname: uname, onClickProp: popupChange}} />
 
           </Nav>
+          {/* <Nav>
+            <Dropdown alignRight>
+              <Dropdown.Toggle variant="success">
+                <FaShoppingCart color="white" size="1.5em" />
+                <Badge>{cart.length}</Badge> {}
+              </Dropdown.Toggle>
+            </Dropdown>
+            </Nav>   */}
         </Collapse>
       </Navbar>
       <ToastContainer
