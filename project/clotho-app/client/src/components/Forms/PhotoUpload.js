@@ -10,15 +10,12 @@ const PhotoUpload = () => {
 
   const onFileChange = async (e) => {
     const file = e.target.files[0];
-    const listingId = 1; // Replace with actual item ID?
     const priority = photos.length;
     const formData = new FormData();
     formData.append("image", file);
-    formData.append("listingId", listingId);
-    formData.append("priority", priority);
 
     // Upload photo to server
-    const response = await axiosImg.post('/admin/listingimages/', formData);
+    const response = await axiosImg.post('/images/', formData);
 
     // Update local state
     setPhotos([...photos, { url: response.data.path, order: priority }]);

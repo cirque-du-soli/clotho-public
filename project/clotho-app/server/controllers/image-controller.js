@@ -9,6 +9,8 @@ const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 // const storage = multer.memoryStorage()
 // const upload = multer({ storage: storage })
 const { ListingImage } = require("../models");
+const { Listing } = require("../models");
+
 
 // prepare S3 client
 const bucketName = process.env.BUCKET_NAME
@@ -37,7 +39,9 @@ const s3Client = new S3Client({
 // }
 
 //resize img, buffer, encrypt name, send to S3
-exports.processImg = async (req, res) => {
+exports.send = async (req, res) => {
+
+  try {
   const file = req.file;
 
   const fileBuffer = await sharp(file.buffer)
@@ -52,18 +56,21 @@ exports.processImg = async (req, res) => {
     ContentType: file.mimetype
   }
 
-  try {
-    await s3Client.send(new PutObjectCommand(params));
+    var result = await s3Client.send(new PutObjectCommand(params));
+    return res.status(201).json({ fileName: fileName });
 
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Image failed to send to S3" });
   }
+}
 
+//save record
+exports.save = async (req, res) => {
   try {
     const imgRecord = await ListingImage.create({
       listingId: req.body.listingId,
-      path: fileName,
+      path: req.body.fileName,
       priority: req.body.priority
     });
 
@@ -75,51 +82,78 @@ exports.processImg = async (req, res) => {
 
 };
 
- exports.getAllbyListing = async (req, res) => {
+exports.getAllbyListing = async (req, res) => {
+  try {
 
+    const imgs = await ListingImage.findAll({
+      where: {
+        listingId: req.params.id
+      }
+    });
 
-  const imgs = await ListingImage.findAll({
-    where: {
-      listingId: req.params.id
+    for (let i in imgs) {
+      imgs[i].url = await getSignedUrl(
+        s3Client,
+        new GetObjectCommand({
+          Bucket: bucketName,
+          Key: imgs[i].path
+        }),
+        { expiresIn: 3600 }
+      )
+      console.log(imgs[i].url);
+      imgs[i] = { url: imgs[i].url, priority: imgs[i].priority };
     }
-  });
+    res.json(imgs);
+  } catch (err) {
 
-  for (let i in imgs) { 
-    imgs[i].url = await getSignedUrl(
-      s3Client,
-      new GetObjectCommand({
-        Bucket: bucketName,
-        Key: imgs[i].path
-      }),
-      { expiresIn: 3600 }
-    )
-    console.log(imgs[i].url);
-    imgs[i] = {url: imgs[i].url, priority: imgs[i].priority};
+    console.log(err.message);
+    res.status(500).json({ message: "Something went wrong" });
   }
-
-  res.json(imgs);
 };
 
 exports.getThumbnail = async (req, res) => {
+  try {
+    var listing = await Listing.findByPk(req.params.id);
 
-  var img = await ListingImage.findOne({
-    where: {
-      listingId: req.params.id,
-      priority: 0
-    }
-  });
-
-    img.url = await getSignedUrl(
+    listing.img = await getSignedUrl(
       s3Client,
       new GetObjectCommand({
         Bucket: bucketName,
-        Key: img.path
+        Key: listing.thumbnail
       }),
       { expiresIn: 3600 }
     )
-    console.log(img.url);
-    img = {listingId: img.listingId, url: img.url, priority: img.priority};
-  
+    console.log(listing.img);
+    img = { listingId: listing.id, url: listing.img };
 
-  res.json(img);
+    res.json(img);
+
+  } catch (err) {
+
+    console.log(err.message);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+exports.getPreview = async (req, res) => {
+  try {
+
+    img = await getSignedUrl(
+      s3Client,
+      new GetObjectCommand({
+        Bucket: bucketName,
+        Key: req.params.fileName
+      }),
+      { expiresIn: 3600 }
+    )
+    console.log(img);
+    img = { url: img };
+
+    res.json(img);
+
+  } catch (err) {
+
+    console.log(err.message);
+    res.status(500).json({ message: "Something went wrong" });
+  }
 };

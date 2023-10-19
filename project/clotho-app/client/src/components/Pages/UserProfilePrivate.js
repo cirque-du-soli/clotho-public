@@ -39,7 +39,7 @@ function UserProfilePrivate() {
                   if (list[0]) {
                     for (let i in list) {
             
-                        var img = await axios.get(`/admin/listingimages/thumbnail/${list[i].id}`);
+                        var img = await axios.get(`/images/thumbnail/${list[i].id}`);
                         list[i].thumbnail = img.data.url;
                       }
                       setListings(list);

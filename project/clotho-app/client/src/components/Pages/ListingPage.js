@@ -39,7 +39,7 @@ const ListingPage = () => {
 
       setListing(list.data);
 
-      var imgs = await axios.get(`/admin/listingimages/${id}`);
+      var imgs = await axios.get(`/images/${id}`);
    
  
       setImages(imgs.data);

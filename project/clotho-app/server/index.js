@@ -32,8 +32,8 @@ app.use("/api/admin/listings", adminListingRouter);
 const adminOrderRouter = require("./routes/admin-order-routes");
 app.use("/api/admin/orders", adminOrderRouter);
 
-const adminImageRouter = require('./routes/listing-image-routes'); // Import admin routes
-app.use('/api/admin/listingimages', adminImageRouter); // Use admin route for images
+const adminImageRouter = require('./routes/image-routes'); // Import admin routes
+app.use('/api/images', adminImageRouter); // Use admin route for images
 
 
 /* ALL USERS */ 
