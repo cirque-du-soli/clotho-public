@@ -20,6 +20,7 @@ import Login from '../components/Forms/Login';
 import Logout from '../components/Buttons/Logout';
 import UserProfileV2 from '../components/Pages/UserProfileV2';
 import UserProfile from '../components/Pages/UserProfile';
+import EditProfile from "../components/Pages/EditProfile";
 // import ListingsV2 from '../components/ListingsV2';
 // import ListingsV3 from '../components/ListingsV3';
 // import Listings from '../../TEMP/Listings';
@@ -61,6 +62,13 @@ var routes = [
         path: "/profile",
         name: "Private profile",
         component: <UserProfilePrivate />,
+    },
+
+    {
+    layout: "StandardLayout",
+    path: "/editprofile/",
+    name: "Edit Profile",
+    component: <EditProfile />,
     },
 
     ///////////////////////////// TEST ROUTES ////////////////////////
