@@ -21,6 +21,7 @@ import Logout from '../components/Buttons/Logout';
 import UserProfileV2 from '../components/Pages/UserProfileV2';
 import UserProfile from '../components/Pages/UserProfile';
 import EditProfile from "../components/Pages/EditProfile";
+import AdminTables from "../components/Tables/AdminTables";
 // import ListingsV2 from '../components/ListingsV2';
 // import ListingsV3 from '../components/ListingsV3';
 // import Listings from '../../TEMP/Listings';
@@ -65,10 +66,18 @@ var routes = [
     },
 
     {
-    layout: "StandardLayout",
-    path: "/editprofile/",
-    name: "Edit Profile",
-    component: <EditProfile />,
+        layout: "StandardLayout",
+        path: "/editprofile/",
+        name: "Edit Profile",
+        component: <EditProfile />,
+    },
+
+
+    {
+        layout: "StandardLayout",
+        path: "/admintables/",
+        name: "Admin Tables",
+        component: <AdminTables />,
     },
 
     ///////////////////////////// TEST ROUTES ////////////////////////
