@@ -6,6 +6,11 @@ import { Link } from 'react-router-dom';
 
 import { Button, Container, Row, Col, Card, CardBody, CardImg, CardFooter, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
+function isAuthenticated() {
+    const token = localStorage.getItem('token'); // Assuming 'token' is the key where you store the JWT
+    return token != null;
+}
+
 function UserProfilePrivate() {
     
     const axiosJWT = useAxiosJWT();
@@ -58,7 +63,9 @@ function UserProfilePrivate() {
 
                     <h2>{user.username}</h2>
                     <p>{user.email}</p>
-
+                        <Link to="/editprofile">
+                            <Button color="primary">Edit Profile</Button>
+                        </Link>
                 </div>
             </div>
             <div className='row m-5'></div>
