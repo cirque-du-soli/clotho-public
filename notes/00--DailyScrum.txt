@@ -612,6 +612,66 @@ Meredith:
 		- finish user avatar
 		- order history view
 
+2023-10-20
+===================
+
+Dustin:
+	Done:
+		- heroku deployment 90%
+		- worked on logic for admin tables
+		
+	Not-Done:
+		- edit profile
+		- 
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- deployment
+		- edit listings
+		- edit profile
+		- admin tables
+
+Soli:
+	Done:
+		- subheader layout + redirects
+		- filter header: dropdowns
+		
+	Not-Done:
+		- filter header api calls
+		- double password + admin
+	
+	Needs Assistance:
+		- admin undelete
+
+	Todo Before Next Scrum:
+		- double password
+		- admin button
+		- subheader + filter header api calls
+		- admin undelete user
+		- start working on ppt/presentation materials
+
+Meredith: 
+	Done:
+		- Partial implementation of user avatars (update avatar form component + axios requests to view)
+		
+	Not-Done:
+		- Complete avatars (set default, include pic in header)
+		- view order history
+	
+	Needs Assistance:
+		- 
+
+	Todo Before Next Scrum:
+		- api sort by price high/low
+		- finish images
+		- view order history in user profile
+		- help with admin undelete + check routes doc
+		- update doc with search query params
+		- bug fix price in form
+		- add regex
+		- look into string casting/sanitization
 ===============================================================================
 ===============================================================================
 ===============================================================================
