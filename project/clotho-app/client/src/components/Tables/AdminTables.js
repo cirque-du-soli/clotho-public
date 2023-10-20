@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../../api/axios';
+import useAxiosJWT from '../../hooks/useAxiosJWT';
 import { Table } from 'reactstrap';
 
-function AdminPage() {
+function AdminTables() {
+  const axiosJWT = useAxiosJWT();
+
   const [users, setUsers] = useState([]);
   const [listings, setListings] = useState([]);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     // Fetch Users
-    axios.get('api/admin/users')
+    axiosJWT.get('/admin/users')
       .then(response => {
         setUsers(response.data);
       })
@@ -18,7 +20,7 @@ function AdminPage() {
       });
 
     // Fetch Listings
-    axios.get('api/admin/listings')
+    axiosJWT.get('/admin/listings')
       .then(response => {
         setListings(response.data);
       })
@@ -27,7 +29,7 @@ function AdminPage() {
       });
 
     // Fetch Orders
-    axios.get('api/admin/orders')
+    axiosJWT.get('/admin/orders')
       .then(response => {
         setOrders(response.data);
       })
@@ -130,4 +132,4 @@ function AdminPage() {
   
 }
 
-export default AdminPage;
+export default AdminTables;

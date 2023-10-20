@@ -3,9 +3,6 @@ const app = express();
 const db = require('./models');
 const cors = require('cors');
 
-// import multer from 'multer';
-// import sharp;
-
 
 
 
@@ -32,8 +29,8 @@ app.use("/api/admin/listings", adminListingRouter);
 const adminOrderRouter = require("./routes/admin-order-routes");
 app.use("/api/admin/orders", adminOrderRouter);
 
-const adminImageRouter = require('./routes/image-routes'); // Import admin routes
-app.use('/api/images', adminImageRouter); // Use admin route for images
+const imageRouter = require('./routes/image-routes');
+app.use('/api/images', imageRouter);
 
 
 /* ALL USERS */ 

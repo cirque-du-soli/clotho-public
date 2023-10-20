@@ -84,9 +84,6 @@ exports.findByUsernamePublic = async (req, res) => {
                     {
                         model: Listing,
                         as: 'listings',
-                        // where: {
-                        //     isDeleted: false
-                        // },
                         required: false,
                         where: {
 

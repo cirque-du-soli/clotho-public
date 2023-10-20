@@ -18,9 +18,6 @@ router.post('/', users.create);
 // update profile by id
 router.put('/', auth.getToken, auth.getUser, users.updateById);
 
-// undelete by id
-// router.patch('/undelete/:id([0-9]+)', users.unDeleteById);
-
 
 // delete by id
 router.delete('/:id([0-9]+)', auth.getToken, auth.getUser, users.deleteById);

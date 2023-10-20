@@ -17,44 +17,83 @@ Get full list of items including deleted
 exports.findAll = async (req, res) => {
 
     try {
-
-        var itemList = await Listing.findAll({
-            attributes: ['id', 'title', 'description', 'thumbnail', 'price', 'isSold', 'isDeleted', 'createdAt', 'updatedAt'],
-            include: [{
-                model: User,
-                as: 'Seller',
-                attributes: ['username', 'id'],
-
-            },
-            //TODO handle deleted images
-            {
-                model: ListingImage,
-                attributes: ['id', 'priority', 'path', 'isDeleted']
-            },
-            {
-                model: Category,
-                attributes: ['name', 'id']
-            },
-            {
-                model: Size,
-                attributes: ['name', 'id']
-            },
-            {
-                model: Gender,
-                attributes: ['name', 'id']
-            }]
-        });
-
-        if (!itemList[0]) {
-            return res.status(404).json({ message: "No listings found" });
+        const search = req.query.search ?
+        {
+            [Op.or]: [
+                {
+                    title:
+                    {
+                        [Op.like]: `%${req.query.search}%`
+                    }
+                },
+                {
+                    description:
+                    {
+                        [Op.like]: `%${req.query.search}%`
+                    }
+                }
+            ]
+        } : {};
+    const minPrice = req.query.minPrice ? 
+    { price: 
+        {
+            [Op.gt]: (req.query.minPrice * 100) - 1
         }
-        // format decimal
-        for (let i in itemList) {
-            itemList[i].price /= 100;
-            itemList[i].price = itemList[i].price.toFixed(2);
-        }
+     } : {};
+     const maxPrice = req.query.maxPrice ? 
+     { price: 
+         {
+             [Op.lt]: (req.query.maxPrice * 100) + 1
+         }
+      } : {};
+    const category = req.query.category ? { id: req.query.category } : {};
+    const gender = req.query.gender ? { id: req.query.gender } : {};
+    const size = req.query.size ? { id: req.query.size } : {};
 
-        res.json(itemList);
+
+    console.log(req.query.size);
+    console.log(size);
+    console.log(size.id);
+    console.log(`'%${req.query.search}%'`);
+
+    var itemList = await Listing.findAll({
+        attributes: ['id', 'title', 'description', 'thumbnail', 'price', 'isSold', 'isDeleted', 'createdAt', 'updatedAt'],
+        include: [{
+            model: User,
+            as: 'Seller',
+            attributes: ['username', 'id'],
+
+        },
+        {
+            model: Category,
+            attributes: ['name', 'id'],
+            where: category
+        },
+        {
+            model: Size,
+            attributes: ['name', 'id'],
+            where: size
+
+        },
+        {
+            model: Gender,
+            attributes: ['name', 'id'],
+            where: gender
+
+        }],
+        where: [
+            search,
+            minPrice,
+            maxPrice
+        ]
+    });
+
+    // format decimal
+    for (let i in itemList) {
+        itemList[i].price /= 100;
+        itemList[i].price = itemList[i].price.toFixed(2);
+    }
+    res.json(itemList);
 
     } catch (err) {
 

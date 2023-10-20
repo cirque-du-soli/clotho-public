@@ -48,7 +48,7 @@ POST new listing:                       api/admin/listings
 PUT edit existing listing               
 (title, desc, img, price, attributes):  api/admin/listing/:id([0-9]+)
 DELETE listing:                         api/admin/listings/:id([0-9]+)
-PATCH undelete user:                    api/admin/listings/undelete/:id([0-9]+)
+PATCH undelete listing:                    api/admin/listings/undelete/:id([0-9]+)
 PATCH mark as sold:                     api/admin/listings/sold/:id([0-9]+)
 PATCH mark as for sale (cancel sale):   api/admin/listings/unsold/:id([0-9]+)
 
@@ -99,6 +99,7 @@ POST register new user                  api/users/
 PUT update user profile                 api/users/profile
 DELETE close account                    api/users/:id([0-9]+)
 
+note: for updating profile, include any or all fields (username, email, avatar, password), but only where changes are being made; any null fields will leave those columns unchanged
         -------------------------------listings-------------------------------
 
 GET all available                       api/listings/
@@ -107,6 +108,16 @@ POST new listing                        api/listings/
 PUT update listing                      api/listings/:id([0-9]+)
 DELETE listing                          api/listings/:id([0-9]+)
 
+note: search filters are only available in GET api/listings and GET api/admin listings
+query params:
+- category
+- gender
+- size
+- search (uses where %LIKE% on title and description)
+- minPrice
+- maxPrice (prices are converted to decimal in back end so ?maxPrice=50 means $50.00 aka 5000 in decimal type)
+
+coming soon: sort by price asc and desc
         -------------------------------orders-------------------------------
 
 GET by id:                              api/orders/:id([0-9]+)
@@ -114,3 +125,14 @@ GET private list for buyer:             api/orders
 POST new order:                         api/orders
 DELETE cancel order:                    api/orders/:id([0-9]+)
 
+        -------------------------------images-------------------------------
+
+GET listing thumbnail by listing id:    api/images/thumbnail/:id([0-9]+)
+GET user avatar by filename:            api/images/avatar/:fileName
+GET image preview by filename:          api/images/preview/:fileName
+
+POST upload user avatar:                api/images/avatar
+POST upload listing images:             api/images
+
+note: preview is used after uploading to S3 and before saving to db
+POST requests upload photos to s3 and return record to store in db
