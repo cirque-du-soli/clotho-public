@@ -22,6 +22,7 @@ import UserProfileV2 from '../components/Pages/UserProfileV2';
 import UserProfile from '../components/Pages/UserProfile';
 import EditProfile from "../components/Pages/EditProfile";
 import AdminTables from "../components/Tables/AdminTables";
+import Avatar from "../components/Forms/Avatar";
 // import ListingsV2 from '../components/ListingsV2';
 // import ListingsV3 from '../components/ListingsV3';
 // import Listings from '../../TEMP/Listings';
@@ -107,6 +108,13 @@ var routes = [
         path: "/photoupload",
         name: "Test: Photo Upload",
         component: <PhotoUpload />,
+    },
+
+    {
+        layout: "TestLayout",
+        path: "/avatar",
+        name: "Test: Avatar Upload",
+        component: <Avatar />,
     },
 
     {

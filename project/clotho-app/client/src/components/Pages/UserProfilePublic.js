@@ -10,6 +10,7 @@ function UserProfilePublic() {
     const navigate = useNavigate();
     const { username } = useParams();
 
+    const [avi, setAvi] = useState('');
 
     const [user, setUser] = useState({});
     const [listings, setListings] = useState([]);
@@ -26,7 +27,8 @@ function UserProfilePublic() {
             var response = await axios.get('/users/seller/' + username);
 
             console.log(response.data)
-
+            const avatar = await axios.get(`/images/avatar/${response.data.user.avatar}`);
+setAvi(avatar.data.url);
             setUser(response.data.user);
 
             var list = response.data.listings;
@@ -51,8 +53,8 @@ function UserProfilePublic() {
             <div className='row m-5'></div>
             <div className='row my-5'>
 
-                <div className='col-2 col-md-1'>
-                    <img src={userIcon} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle" width={50} />
+                <div className='col-2 col-lg-1'>
+                    <img src={avi} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle w-100" />
                 </div>
                 <div className='col-1 text-start'>
 

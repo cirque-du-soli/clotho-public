@@ -165,9 +165,12 @@ exports.getThumbnail = async (req, res) => {
 
 exports.getAvatar = async (req, res) => {
   try {
-    var user = await User.findByPk(req.params.id);
+    var user = await User.findOne(
+      {where: {
+        avatar: req.params.fileName
+      }});
 
-    user.img = await getSignedUrl(
+    img = await getSignedUrl(
       s3Client,
       new GetObjectCommand({
         Bucket: bucketName,
@@ -175,7 +178,6 @@ exports.getAvatar = async (req, res) => {
       }),
       { expiresIn: 3600 }
     )
-    console.log(listing.img);
     img = { url: img };
 
     res.json(img);

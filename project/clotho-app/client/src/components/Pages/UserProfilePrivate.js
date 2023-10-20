@@ -6,16 +6,14 @@ import { Link } from 'react-router-dom';
 
 import { Button, Container, Row, Col, Card, CardBody, CardImg, CardFooter, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
-function isAuthenticated() {
-    const token = localStorage.getItem('token'); // Assuming 'token' is the key where you store the JWT
-    return token != null;
-}
+
 
 function UserProfilePrivate() {
     
     const axiosJWT = useAxiosJWT();
     const [user, setUser] = useState({});
     const [listings, setListings] = useState([]);
+    const [avi, setAvi] = useState('');
 
 
 
@@ -31,8 +29,11 @@ function UserProfilePrivate() {
                   var response = await  axiosJWT.get('/users/profile');
             
                   console.log(response.data)
-        
-                  setUser(response?.data?.user);
+
+                  const avatar = await axios.get(`/images/avatar/${response.data.user.avatar}`);
+                
+                  setAvi(avatar.data.url);
+                  setUser(response.data.user);
             
                   var list = response?.data?.listings;
             
@@ -56,8 +57,8 @@ function UserProfilePrivate() {
             <div className='row m-5'></div>
             <div className='row my-5'>
 
-                <div className='col-2 col-md-1'>
-                    <img src={user.avatar} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle" width={60} />
+                <div className='col-2 col-lg-1'>
+                    <img src={avi} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle w-100" />
                 </div>
                 <div className='col-1 text-start'>
 

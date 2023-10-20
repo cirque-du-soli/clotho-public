@@ -51,6 +51,7 @@ exports.findById = async (req, res) => {
         }
         const result = {
             user: {
+                id: user.id,
                 username: user.username,
                 email: user.email,
                 avatar: user.avatar
@@ -121,6 +122,7 @@ exports.findByUsernamePublic = async (req, res) => {
         }
         const result = {
             user: {
+                id: user.id,
                 username: user.username,
                 email: user.email,
                 avatar: user.avatar

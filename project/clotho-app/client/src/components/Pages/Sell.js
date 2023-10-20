@@ -1,7 +1,6 @@
 import axios from '../../api/axios';
 import useAxiosImg from '../../hooks/useAxiosImg';
 import useAxiosJWT from '../../hooks/useAxiosJWT';
-
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
@@ -228,7 +227,6 @@ function Sell() {
 
                 </div>
             </div> */}
-
 
             <Container>
                 <Card>
