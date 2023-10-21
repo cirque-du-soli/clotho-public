@@ -25,6 +25,7 @@ function Signup( { props }) {
     // STATES
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     const [isAdmin, setIsAdmin] = useState(false);
     const [isDeleted, setIsDeleted] = useState(false);
@@ -48,42 +49,48 @@ function Signup( { props }) {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-    
-        try {
 
-            const response = await axios.post("/users", {
+        if (password !== confirmPassword) {
+            props.onSubmitProp(false, "Passwords do not match", '');
+        } else {
 
-                username: username,
-                password: password,
-                email: email,
-                isAdmin: false,
-                isDeleted: false,
-                imgUrl: "placeholder"
-
-            });
-
-            console.log(JSON.stringify(response?.data));
-
-            const uname = response?.data?.user.username;
-            setSuccess(true);
-
-            props.onSubmitProp(true, "Signed up successfully. Please log in.", uname);
         
-        } catch (err) {
+            try {
 
-            if (!err?.response) {
-                props.onSubmitProp(false, 'No Server Response', '');
-            } else if (err.response?.data?.message) {
-                console.log(err);
-                console.log("err.response.data.message");
-                console.log(err.response.data.message);
+                const response = await axios.post("/users", {
 
-                props.onSubmitProp(false, err.response.data.message, '');
-            } else {
-                console.error("Error 0033:", err);
-                props.onSubmitProp(false, "Signup failed", '');
+                    username: username,
+                    password: password,
+                    email: email,
+                    isAdmin: false,
+                    isDeleted: false,
+                    imgUrl: "placeholder"
+
+                });
+
+                console.log(JSON.stringify(response?.data));
+
+                const uname = response?.data?.user.username;
+                setSuccess(true);
+
+                props.onSubmitProp(true, "Signed up successfully. Please log in.", uname);
+            
+            } catch (err) {
+
+                if (!err?.response) {
+                    props.onSubmitProp(false, 'No Server Response', '');
+                } else if (err.response?.data?.message) {
+                    console.log(err);
+                    console.log("err.response.data.message");
+                    console.log(err.response.data.message);
+
+                    props.onSubmitProp(false, err.response.data.message, '');
+                } else {
+                    console.error("Error 0033:", err);
+                    props.onSubmitProp(false, "Signup failed", '');
+                }
+                // errRef.current.focus();
             }
-            // errRef.current.focus();
         }
     }
 
@@ -116,6 +123,20 @@ function Signup( { props }) {
                                     type="password"
                                     required
                                     onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className="pr-md-1">
+                            <FormGroup>
+                                <label>Confirm Password:</label>
+                                <Input
+                                    id='newUserConfirmPassword'
+                                    placeholder="Pa$$word123"
+                                    type="password"
+                                    required
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
                                 />
                             </FormGroup>
                         </Col>

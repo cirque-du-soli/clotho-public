@@ -49,6 +49,7 @@ function Header() {
 
   // initial login state
   const [isLoggedIn, setIsLoggedIn] = useState(!(sessionStorage.getItem('token') === '' || sessionStorage.getItem('token') === null));
+  const [isAdmin, setIsAdmin] = useState((sessionStorage.getItem('isAdmin') === 'true'));
   const [uname, setUname] = useState(sessionStorage.getItem('username'));
   const [signupUname, setSignupUname] = useState('');
 
@@ -108,7 +109,7 @@ function Header() {
             <LoginNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange, uname: signupUname }} />
             <LogoutNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
             <SignupNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
-            <AdminNavItem props={{ isLoggedIn: isLoggedIn }} />
+            <AdminNavItem props={{ isLoggedIn: isLoggedIn, isAdmin: isAdmin, onSubmitProp: popupChange }} />
             <DevNavItem props={{ isLoggedIn: isLoggedIn }} />
             <UserNavItem props={{ isLoggedIn: isLoggedIn, uname: uname, onClickProp: popupChange}} />
 
