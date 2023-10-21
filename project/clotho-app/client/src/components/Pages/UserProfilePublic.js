@@ -28,7 +28,7 @@ function UserProfilePublic() {
 
             console.log(response.data)
             const avatar = await axios.get(`/images/avatar/${response.data.user.avatar}`);
-setAvi(avatar.data.url);
+            setAvi(avatar.data.url);
             setUser(response.data.user);
 
             var list = response.data.listings;
@@ -69,14 +69,18 @@ setAvi(avatar.data.url);
                 <Row>
                     {listings.map(listing => (
                         <Col md="2" className="my-2 p-1" key={listing.id}>
-                            <Card className='border-0 rounded-0'>
-                                <img className='border-0 rounded-0' top width="100%" src={listing.thumbnail} alt="lisiting image" />
-
+                            <Card className='border-0 rounded-0'onClick={!listing.isSold ? () => navigate (`/products/${listing.id}`) : undefined}>
+                                <img className='border-0 rounded-0 card-img' top width="100%" src={listing.thumbnail} alt="lisiting image" />
+                                {listing.isSold ? (
+                                    <div className="card-img-overlay text-center align-middle">
+                                        <div class="card-body d-flex align-items-center justify-content-center h-100 text-warning">
+                                            <h4 class="card-title">SOLD</h4>
+                                        </div>
+                                    </div>
+                                ) : (<></>)}
                             </Card>
                             <Row className='px-3 fs-5'>
-                                {/* <CardTitle tag="h5"> */}
                                 ${listing.price}
-                                {/* </CardTitle> */}
                             </Row>
                         </Col>
                     ))}
@@ -84,12 +88,12 @@ setAvi(avatar.data.url);
 
             ) : (
                 <div>
-                {user.username ? (
-            <h4>{username} isn't selling anything yet.</h4>
-                ) : (
-                    <h4>Not found.</h4>
-                )}
-</div>
+                    {user.username ? (
+                        <h4>{username} isn't selling anything yet.</h4>
+                    ) : (
+                        <h4>Not found.</h4>
+                    )}
+                </div>
             )}
 
         </div>
