@@ -14,6 +14,8 @@ function UserProfilePrivate() {
     const axiosJWT = useAxiosJWT();
     const [user, setUser] = useState({});
     const [listings, setListings] = useState([]);
+    const [orders, setOrders] = useState([]);
+
     const [avi, setAvi] = useState('');
 
     const navigate = useNavigate();
@@ -21,7 +23,7 @@ function UserProfilePrivate() {
 
     useEffect(() => {
         getProfile();
-
+        getOrders();
     }, []);
 
     const getProfile = async () => {
@@ -53,9 +55,48 @@ function UserProfilePrivate() {
             console.log(err);
         }
     }
-if (!user.username) {
-    return <PageNotFound />
-}
+
+    const getOrders = async () => {
+
+        try {
+
+            var response = await axiosJWT.get('/orders');
+
+            console.log(response.data)
+
+            setOrders(response.data);
+            // console.log(response.data);
+
+            var orderList = response?.data;
+
+            if (orderList[0]) {
+
+
+                for (let i in orderList) {
+
+                    let items = orderList[i].OrderItems;
+                    for (let j in items) {
+
+                        var img = await axios.get(`/images/thumbnail/${items[j].Listing.id}`);
+                        items[j].thumbnail = img.data.url;
+
+                    }
+                    //orderList[i].OrderItems = items;    
+                    // console.log(orderList[i]);
+                }
+                setOrders(orderList);
+                console.log(orderList[0]);
+
+            }
+
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    if (!user.username) {
+        return <PageNotFound />
+    }
     return (
         <div className='col-10 offset-1'>
             <div className='row m-5'></div>
@@ -75,7 +116,7 @@ if (!user.username) {
             </div>
             <div className='row m-5'></div>
 
-            <Row>
+            <Row className='my-3'>
                 <h4>Selling</h4>
             </Row>
             <Row>
@@ -83,7 +124,7 @@ if (!user.username) {
                 {listings.map(listing => (
                     <Col md="2" className="my-2 p-1" key={listing.id}>
                         <Card className='border-0 rounded-0' onClick={!listing.isSold ? () => navigate(`/products/${listing.id}`) : undefined}>
-                            <img className='border-0 rounded-0 card-img' top width="100%" src={listing.thumbnail} alt="lisiting image" />
+                            <img className='border-0 rounded-0 card-img' top width="100%" src={listing.thumbnail} alt="listing image" />
                             {listing.isSold ? (
                                 <div className="card-img-overlay text-center align-middle">
                                     <div class="card-body d-flex align-items-center justify-content-center h-100 text-warning">
@@ -101,6 +142,35 @@ if (!user.username) {
 
             </Row>
 
+            <Row className='my-3'>
+                <h4>Purchases</h4>
+            </Row>
+            {orders.map(order => (
+                <div className='card my-5'>
+                                        <div className='card-title m-3 mb-0'>
+                        <h5>{order.createdAt.slice(0, 10)}</h5>
+                                <p className='fs-5'>Order #{order.id}</p>
+                        </div>
+
+
+<div className='card-body'>
+    <Row>
+{order.OrderItems.map(item => (
+
+<Col md="1" className="my-2 p-1" key={item.id}>
+    <Card className='border-0 rounded-0'>
+        <img className='border-0 rounded-0 card-img' top width="100%" src={item.thumbnail} alt="item image" />
+
+    </Card>
+    <Row className='px-3 fs-5'>
+    </Row>
+</Col>
+))}
+</Row>
+</div>
+
+                </div>
+            ))}
         </div>
     );
 }

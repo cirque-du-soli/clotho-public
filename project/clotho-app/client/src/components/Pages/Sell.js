@@ -66,16 +66,17 @@ function Sell() {
             const formData = new FormData();
             formData.append("image", file);
             try {
+
                 // Upload photo to server
                 const response = await axiosImg.post('/images/', formData);
-                // get image url
+                // get image file name
                 const fileName = response.data.fileName;
+                // get image url
                 const img = await axiosImg.get(`/images/preview/${fileName}`);
                 const url = img.data.url
                 setFiles(prevState => [ ...prevState, { url: url, fileName: fileName }]);
                 setImgInfo(prevState => [...prevState, {path: fileName}]);
-                console.log(files);
-                console.log(JSON.stringify(imgInfo));
+
 
             } catch (err) {
                 if (!err.response) {
@@ -280,7 +281,7 @@ function Sell() {
                                     {files.map(img => (
                                         <Col className="col-md-1 my-2 p-1" key={img.fileName}>
                                             <Card className='card border-0 rounded-0'>
-                                                <img className='border-0 rounded-0' top width="100%" src={img.url} alt="uploaded image file" />
+                                                <img className='border-0 rounded-0' top width="100%" src={img.url} alt="uploaded image preview" />
                                             </Card>
                                         </Col>
                                     ))}

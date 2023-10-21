@@ -79,7 +79,7 @@ exports.findAllByBuyer = async (req, res) => {
                 },
                 {
                     model: OrderItem,
-                    attributes: [],
+                    attributes: ['id'],
                     include: [{
                         model: Listing,
                         attributes: ['id', 'title', 'description', 'thumbnail', 'price'],
@@ -89,9 +89,9 @@ exports.findAllByBuyer = async (req, res) => {
             }
         );
 
-        if (!orderList[0]) {
-            return res.status(404).json({ message: "No orders found" });
-        }
+        // if (!orderList[0]) {
+        //     return res.status(404).json({ message: "No orders found" });
+        // }
 
         res.json(orderList);
 
