@@ -22,9 +22,12 @@ exports.findById = async (req, res) => {
 
     try {
 
-        var user = await User.findByPk(
-            req.userId,
+        var user = await User.findOne(
             {
+                where: {
+                    id:   req.params.id,
+                    isDeleted: false
+                },
                 attributes: ['username', 'email', 'avatar'],
                 include: [
                     {
@@ -77,7 +80,8 @@ exports.findByUsernamePublic = async (req, res) => {
         var user = await User.findOne(
             {
                 where: {
-                    username: req.params.username
+                    username: req.params.username,
+                    isDeleted: false
                 },
                 attributes: ['id', 'username', 'avatar'],
                 include: [

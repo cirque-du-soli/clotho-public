@@ -39,9 +39,9 @@ exports.findById = async (req, res) => {
     try {
 
         var size = await Size.findByPk(
-            req.params.id,
             {
                 where: {
+                    id:   req.params.id,
                     isDeleted: false
                 }
             });

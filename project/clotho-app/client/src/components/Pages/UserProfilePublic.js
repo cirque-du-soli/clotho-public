@@ -52,24 +52,29 @@ function UserProfilePublic() {
         <div className='col-10 offset-1'>
             <div className='row m-5'></div>
             <div className='row my-5'>
+                {user.username ? (
+                    <>
+                        <div className='col-2 col-lg-1'>
+                            <img src={avi} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle w-100" />
+                        </div>
+                        <div className='col-1 text-start'>
 
-                <div className='col-2 col-lg-1'>
-                    <img src={avi} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle w-100" />
-                </div>
-                <div className='col-1 text-start'>
+                            <h2>{user.username}</h2>
 
-                    <h2>{user.username}</h2>
+                        </div>
+                    </>
 
-                </div>
+                ) : (<></>)}
+
             </div>
             <div className='row m-5'></div>
 
 
-            {user && listings[0] ? (
+            {listings[0] ? (
                 <Row>
                     {listings.map(listing => (
                         <Col md="2" className="my-2 p-1" key={listing.id}>
-                            <Card className='border-0 rounded-0'onClick={!listing.isSold ? () => navigate (`/products/${listing.id}`) : undefined}>
+                            <Card className='border-0 rounded-0' onClick={!listing.isSold ? () => navigate(`/products/${listing.id}`) : undefined}>
                                 <img className='border-0 rounded-0 card-img' top width="100%" src={listing.thumbnail} alt="lisiting image" />
                                 {listing.isSold ? (
                                     <div className="card-img-overlay text-center align-middle">

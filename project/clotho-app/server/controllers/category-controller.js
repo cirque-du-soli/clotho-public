@@ -38,10 +38,11 @@ exports.findById = async (req, res) => {
 
     try {
 
-        var category = await Category.findByPk(
-            req.params.id,
+        var category = await Category.findOne(
+          
             {
                 where: {
+                    id:   req.params.id,
                     isDeleted: false
                 }
             });

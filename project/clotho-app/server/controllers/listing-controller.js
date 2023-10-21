@@ -117,10 +117,13 @@ exports.findById = async (req, res) => {
 
     try {
 
-        const listing = await Listing.findByPk(req.params.id,
+        const listing = await Listing.findOne(
             {
                 attributes: ['id', 'title', 'description', 'thumbnail', 'price', 'isSold', 'isDeleted', 'createdAt', 'updatedAt'],
-
+                where: {
+                    id: req.params.id,
+                    isDeleted: 'false'
+                },
                 include: [{
                     model: User,
                     as: 'Seller',
@@ -141,10 +144,7 @@ exports.findById = async (req, res) => {
                 {
                     model: Gender,
                     attributes: ['name', 'id']
-                }],
-                where: {
-                    isDeleted: false
-                }
+                }]
             });
 
         if (!listing) {
@@ -201,7 +201,7 @@ exports.findAllBySeller = async (req, res) => {
                     attributes: ['name', 'id']
                 }],
                 where: {
-                    isDeleted: false
+                    isDeleted: 'false'
                 },
                 order: ['isSold']
             }

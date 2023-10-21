@@ -59,6 +59,20 @@ const ListingPage = () => {
   return (
     <Container>
       <Row>
+      <Col md="6">
+      <Row>
+
+{images.map(img => (
+    <Col md="12" className="my-2 p-1" key={img.id}>
+        <Card className='border-0 rounded-0'>
+            <img className='border-0 rounded-0' top width="100%" src={img.url} alt="lisiting image" />
+
+        </Card>
+
+    </Col>
+))}
+</Row>
+      </Col>
         <Col md="6">
           <Card>
             <CardBody>
@@ -86,18 +100,7 @@ const ListingPage = () => {
       </Row>
 
 <div>
-<Row>
 
-{images.map(img => (
-    <Col md="6" className="my-2 p-1" key={img.id}>
-        <Card className='border-0 rounded-0'>
-            <img className='border-0 rounded-0' top width="100%" src={img.url} alt="lisiting image" />
-
-        </Card>
-
-    </Col>
-))}
-</Row>
 </div>
 
 
