@@ -14,7 +14,7 @@ const { Gender } = require("../models");
 
 const validator = require('validator');
 const bcrypt = require('bcrypt');
-
+const unameRegex = /^[a-zA-Z0-9]([_-]|[a-zA-Z0-9]){1,18}[a-zA-Z0-9]$/;
 /* 
 Get user by id (private profile view for logged in user) 
 */
@@ -421,8 +421,8 @@ function isValidPost(req, res) {
         case (!req.body.username):
             res.status(400).json({ message: "Username cannot be null" });
             return false;
-        case (req.body.username.length > 50):
-            res.status(400).json({ message: "Username cannot exceed 50 characters" });
+        case (!req.body.username.match(unameRegex)):
+            res.status(400).json({ message: "Username must be 3-20 characters, be composed of only letters, numbers, underscore and hyphen. Must start and end with letter or number." });
             return false;
         case (!req.body.email):
             res.status(400).json({ message: "Email cannot be null" });
@@ -447,9 +447,9 @@ function isValidPost(req, res) {
 
 function isValidPut(req, res) {
     switch (true) {
-        case (req.body.username && req.body.username.length > 50): //TODO regex
-            res.status(400).json({ message: "Username cannot exceed 50 characters" });
-            return false;
+        case (req.body.username && !req.body.username.match(unameRegex)): //TODO regex
+        res.status(400).json({ message: "Username must be 3-20 characters, be composed of only letters, numbers, underscore and hyphen. Must start and end with letter or number." });
+        return false;
         case (req.body.email && req.body.email.length > 360):
             res.status(400).json({ message: "Email cannot exceed 360 characters" });
             return false;
