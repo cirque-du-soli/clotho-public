@@ -3,6 +3,8 @@ import axios from '../../api/axios';
 import { Button, Container, Row, Col, Card, CardBody, CardImg, CardFooter, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import userIcon from '../../assets/images/avatar.png';
+import PageNotFound from './PageNotFound';
+
 
 
 function UserProfilePublic() {
@@ -96,7 +98,9 @@ function UserProfilePublic() {
                     {user.username ? (
                         <h4>{username} isn't selling anything yet.</h4>
                     ) : (
-                        <h4>Not found.</h4>
+
+                              <PageNotFound />
+
                     )}
                 </div>
             )}

@@ -8,16 +8,16 @@ const PageNotFound = () => {
     const goHome = () => navigate('/');
 
     return (
-        <article>
-            <h1>Oops!</h1>
-            <p>Page Not Found</p>
+        <div className='col-10 offset-1'>
+            <h1 className='mt-5'>Oops!</h1>
+            <h5 className='my-5'>Not found.</h5>
             <div>
-            <button onClick={goBack}>Go Back</button>
+            <button className='btn btn-light my-2'onClick={goBack}>Go Back</button>
             </div>
             <div>
-                <button onClick={goHome}>Go to Home</button>
+                <button className='btn btn-light my-2' onClick={goHome}>Go to Home</button>
             </div>
-        </article>
+        </div>
     )
 };
 

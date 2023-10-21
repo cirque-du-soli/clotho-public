@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import {
   Container,
@@ -14,6 +14,7 @@ import {
   CardText,
   Button
 } from 'reactstrap';
+import PageNotFound from './PageNotFound';
 
 const ListingPage = () => {
   const [listing, setListing] = useState();
@@ -53,7 +54,9 @@ const ListingPage = () => {
 
 
   if (!listing) {
-    return <div>Lisiting not found</div>;
+    return (
+      <PageNotFound />
+    )
   }
 
   return (
