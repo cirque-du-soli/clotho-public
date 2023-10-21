@@ -47,6 +47,7 @@ exports.findAll = async (req, res) => {
                  [Op.lt]: (req.query.maxPrice * 100) + 1
              }
           } : {};
+        const sortByPrice = req.query.sortByPrice == 'asc' ? [['price', 'ASC']] : req.query.sortByPrice == 'desc' ? [['price', 'DESC']] : [];
         const category = req.query.category ? { id: req.query.category } : {};
         const gender = req.query.gender ? { id: req.query.gender } : {};
         const size = req.query.size ? { id: req.query.size } : {};
@@ -89,7 +90,8 @@ exports.findAll = async (req, res) => {
                 search,
                 minPrice,
                 maxPrice
-            ]
+            ],
+            order: sortByPrice
         });
 
         // if (!itemList[0]) {

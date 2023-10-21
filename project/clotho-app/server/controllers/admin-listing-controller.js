@@ -18,82 +18,86 @@ exports.findAll = async (req, res) => {
 
     try {
         const search = req.query.search ?
-        {
-            [Op.or]: [
-                {
-                    title:
+            {
+                [Op.or]: [
                     {
-                        [Op.like]: `%${req.query.search}%`
-                    }
-                },
-                {
-                    description:
+                        title:
+                        {
+                            [Op.like]: `%${req.query.search}%`
+                        }
+                    },
                     {
-                        [Op.like]: `%${req.query.search}%`
+                        description:
+                        {
+                            [Op.like]: `%${req.query.search}%`
+                        }
                     }
+                ]
+            } : {};
+        const minPrice = req.query.minPrice ?
+            {
+                price:
+                {
+                    [Op.gt]: (req.query.minPrice * 100) - 1
                 }
-            ]
-        } : {};
-    const minPrice = req.query.minPrice ? 
-    { price: 
-        {
-            [Op.gt]: (req.query.minPrice * 100) - 1
+            } : {};
+        const maxPrice = req.query.maxPrice ?
+            {
+                price:
+                {
+                    [Op.lt]: (req.query.maxPrice * 100) + 1
+                }
+            } : {};
+        const sortByPrice = req.query.sortByPrice == 'asc' ? [['price', 'ASC']] : req.query.sortByPrice == 'desc' ? [['price', 'DESC']] : [];
+        const category = req.query.category ? { id: req.query.category } : {};
+        const gender = req.query.gender ? { id: req.query.gender } : {};
+        const size = req.query.size ? { id: req.query.size } : {};
+
+
+        console.log(req.query.size);
+        console.log(size);
+        console.log(size.id);
+        console.log(`'%${req.query.search}%'`);
+
+        var itemList = await Listing.findAll({
+            attributes: ['id', 'title', 'description', 'thumbnail', 'price', 'isSold', 'isDeleted', 'createdAt', 'updatedAt'],
+            include: [{
+                model: User,
+                as: 'Seller',
+                attributes: ['username', 'id'],
+
+            },
+            {
+                model: Category,
+                attributes: ['name', 'id'],
+                where: category
+            },
+            {
+                model: Size,
+                attributes: ['name', 'id'],
+                where: size
+
+            },
+            {
+                model: Gender,
+                attributes: ['name', 'id'],
+                where: gender
+
+            }],
+            where: [
+                search,
+                minPrice,
+                maxPrice
+            ],
+            order: sortByPrice
+        });
+
+        // format decimal
+        for (let i in itemList) {
+            itemList[i].price /= 100;
+            itemList[i].price = itemList[i].price.toFixed(2);
         }
-     } : {};
-     const maxPrice = req.query.maxPrice ? 
-     { price: 
-         {
-             [Op.lt]: (req.query.maxPrice * 100) + 1
-         }
-      } : {};
-    const category = req.query.category ? { id: req.query.category } : {};
-    const gender = req.query.gender ? { id: req.query.gender } : {};
-    const size = req.query.size ? { id: req.query.size } : {};
-
-
-    console.log(req.query.size);
-    console.log(size);
-    console.log(size.id);
-    console.log(`'%${req.query.search}%'`);
-
-    var itemList = await Listing.findAll({
-        attributes: ['id', 'title', 'description', 'thumbnail', 'price', 'isSold', 'isDeleted', 'createdAt', 'updatedAt'],
-        include: [{
-            model: User,
-            as: 'Seller',
-            attributes: ['username', 'id'],
-
-        },
-        {
-            model: Category,
-            attributes: ['name', 'id'],
-            where: category
-        },
-        {
-            model: Size,
-            attributes: ['name', 'id'],
-            where: size
-
-        },
-        {
-            model: Gender,
-            attributes: ['name', 'id'],
-            where: gender
-
-        }],
-        where: [
-            search,
-            minPrice,
-            maxPrice
-        ]
-    });
-
-    // format decimal
-    for (let i in itemList) {
-        itemList[i].price /= 100;
-        itemList[i].price = itemList[i].price.toFixed(2);
-    }
-    res.json(itemList);
+        res.json(itemList);
 
     } catch (err) {
 

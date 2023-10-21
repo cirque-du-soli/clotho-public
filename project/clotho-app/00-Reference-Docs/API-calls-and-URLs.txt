@@ -116,8 +116,7 @@ query params:
 - search (uses where %LIKE% on title and description)
 - minPrice
 - maxPrice (prices are converted to decimal in back end so ?maxPrice=50 means $50.00 aka 5000 in decimal type)
-
-coming soon: sort by price asc and desc
+- sorByPrice: either 'asc' or 'desc'
         -------------------------------orders-------------------------------
 
 GET by id:                              api/orders/:id([0-9]+)
