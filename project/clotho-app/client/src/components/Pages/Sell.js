@@ -245,7 +245,7 @@ function Sell() {
                             </FormGroup>
                             <FormGroup>
                                 <Label for="price">Price</Label>
-                                <Input type="number" name="price" id="price" placeholder="Price" onChange={handleInputChange} required />
+                                <Input type="number" min='0.01' step='0.01' name="price" id="price" placeholder="Price" onChange={handleInputChange} required />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="categoryId">Category</Label>
