@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from '../../api/axios'; 
+import useAxiosJWT from '../../hooks/useAxiosJWT';
+
 
 // Reactstrap
 import {
@@ -21,6 +22,7 @@ import {
 
 
 function NewUserForm() {
+    const axiosJWT = useAxiosJWT();
 
     /*
     // TODO: live-update user list when a new user is created. Will need these:
@@ -58,7 +60,7 @@ function NewUserForm() {
         // e.g. check for duplicate usernames, etc.
 
         // post to db
-        axios.post("/admin/users", { //FIXME HANDLE SUBMIT, ERROR HANDLING, ASYNC
+        axiosJWT.post("/admin/users", { //FIXME HANDLE SUBMIT, ERROR HANDLING, ASYNC
             username: username,
             password: password,
             email: email,
