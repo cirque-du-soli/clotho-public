@@ -29,6 +29,9 @@ const Login = ({ props }) => {
             );
             console.log(JSON.stringify(response?.data));
 
+            const avatar = await axios.get(`/images/avatar/${response.data.user.avatar}`);
+
+
             const token = response?.data?.token;
             const refreshToken = response?.data?.refreshToken;
             const isAdmin = response?.data?.isAdmin;
@@ -39,6 +42,7 @@ const Login = ({ props }) => {
             sessionStorage.setItem('isAdmin', isAdmin);
             sessionStorage.setItem('userId', userId);
             sessionStorage.setItem('username', uname);
+            sessionStorage.setItem('avi', avatar);
             console.log(sessionStorage.getItem('token'));
 
             setUsername('');

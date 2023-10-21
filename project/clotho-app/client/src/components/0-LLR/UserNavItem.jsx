@@ -28,9 +28,7 @@ function UserNavItem({ props }) {
                             <img
                                 className='avatarNavItem'
                                 src={
-                                    'https://robohash.org/'
-                                    + (props.uname ? props.uname : 'default')
-                                    + '?set=set4'
+                                    sessionStorage.getItem('avi')
                                 }
                             />
                         </NavLink >

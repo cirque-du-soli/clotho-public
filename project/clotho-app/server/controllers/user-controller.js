@@ -172,7 +172,8 @@ exports.create = async (req, res) => {
                 var user = await User.create({
                     username: req.body.username,
                     password: hash,
-                    email: req.body.email
+                    email: req.body.email,
+                    avatar: '7e117ea59b13abf41bb4c655474b229ea44d18597f9ab4c1bad12b9eb420d909'
                 });
 
                 res.status(201).json({ message: "Successfully added user", user: { id: user.id, username: user.username, email: user.email } });

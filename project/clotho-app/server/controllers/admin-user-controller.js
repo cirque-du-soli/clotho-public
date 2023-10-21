@@ -93,7 +93,7 @@ exports.create = async (req, res) => {
                     username: req.body.username,
                     password: hash,
                     email: req.body.email,
-                    avatar: req.body.avatar ? req.body.avatar : 'placeholder', //TODO imgs
+                    avatar: req.body.avatar ? req.body.avatar : '7e117ea59b13abf41bb4c655474b229ea44d18597f9ab4c1bad12b9eb420d909',
                     isAdmin: req.body.isAdmin ? req.body.isAdmin : false
 
                 });

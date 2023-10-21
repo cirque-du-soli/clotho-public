@@ -57,13 +57,19 @@ const Login = ({ props }) => {
             sessionStorage.setItem('isAdmin', isAdmin);
             sessionStorage.setItem('userId', userId);
             sessionStorage.setItem('username', uname);
+
+            //get avi url
+            const avatar = await axios.get(`/images/avatar/${response?.data?.avatar}`);
+            const avi = avatar.data.url
+            sessionStorage.setItem('avi', avi);
+
             console.log(sessionStorage.getItem('token'));
 
             setUsername('');
             setPassword('');
             setSuccess(true);
 
-            props.onSubmitProp(true, "Logged in successfully!", uname);
+            props.onSubmitProp(true, "Logged in successfully!", uname, avi);
 
         } catch (err) {
 
