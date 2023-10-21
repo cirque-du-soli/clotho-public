@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import useAxiosJWT from '../../hooks/useAxiosJWT';
 import axios from '../../api/axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Button, Container, Row, Col, Card, CardBody, CardImg, CardFooter, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
@@ -15,6 +15,7 @@ function UserProfilePrivate() {
     const [listings, setListings] = useState([]);
     const [avi, setAvi] = useState('');
 
+    const navigate = useNavigate();
 
 
     useEffect(() => {
