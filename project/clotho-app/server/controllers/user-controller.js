@@ -25,7 +25,7 @@ exports.findById = async (req, res) => {
         var user = await User.findOne(
             {
                 where: {
-                    id:   req.params.id,
+                    id:   req.userId,
                     isDeleted: false
                 },
                 attributes: ['username', 'email', 'avatar'],
