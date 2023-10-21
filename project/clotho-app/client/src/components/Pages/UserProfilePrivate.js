@@ -5,6 +5,7 @@ import axios from '../../api/axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button, Container, Row, Col, Card, CardBody, CardImg, CardFooter, CardTitle, CardSubtitle, CardText } from 'reactstrap';
+import PageNotFound from './PageNotFound';
 
 
 
@@ -19,11 +20,11 @@ function UserProfilePrivate() {
 
 
     useEffect(() => {
-        getListings();
+        getProfile();
 
     }, []);
 
-    const getListings = async () => {
+    const getProfile = async () => {
 
         try {
 
@@ -52,7 +53,9 @@ function UserProfilePrivate() {
             console.log(err);
         }
     }
-
+if (!user.username) {
+    return <PageNotFound />
+}
     return (
         <div className='col-10 offset-1'>
             <div className='row m-5'></div>
