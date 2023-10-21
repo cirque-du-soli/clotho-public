@@ -437,12 +437,11 @@ function isValidPost(req, res) {
             res.status(400).json({ message: "Password cannot be null" });
             return false;
         case (!validator.isStrongPassword(req.body.password)):
-            res.status(400).json({ message: "Strong password required" });
+            res.status(400).json({ message: "Password must be 8 or more characters, including at least one uppercase letter, one lowercase letter, one number and one symbol." });
             return false;
         default:
             return true;
     }
-
 }
 
 function isValidPut(req, res) {
@@ -457,7 +456,7 @@ function isValidPut(req, res) {
             res.status(400).json({ message: "Invalid email" });
             return false;
         case (req.body.password && !validator.isStrongPassword(req.body.password)):
-            res.status(400).json({ message: "Strong password required" });
+            res.status(400).json({ message: "Password must be 8 or more characters, including at least one uppercase letter, one lowercase letter, one number and one symbol." });
             return false;
         case (req.body.avatar && req.body.avatar.length > 200): //TODO imgs
             res.status(400).json({ message: "Path to avatar image cannot exceed 200 characters" });
