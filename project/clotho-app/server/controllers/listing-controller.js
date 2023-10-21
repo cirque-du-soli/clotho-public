@@ -63,7 +63,7 @@ exports.findAll = async (req, res) => {
             include: [{
                 model: User,
                 as: 'Seller',
-                attributes: ['username', 'id'],
+                attributes: ['username', 'id', 'avatar'],
 
             },
             {
@@ -129,7 +129,7 @@ exports.findById = async (req, res) => {
                 include: [{
                     model: User,
                     as: 'Seller',
-                    attributes: ['username', 'id'],
+                    attributes: ['username', 'id', 'avatar'],
                 },
                 // {
                 //     model: ListingImage,

@@ -93,7 +93,7 @@ exports.findByUsernamePublic = async (req, res) => {
 
                             isDeleted: false
                         },
-                        order: ['isSold'],
+                        order: [['isSold', 'ASC']],
                         attributes: ['id', 'title', 'description', 'thumbnail', 'price', 'isSold', 'createdAt'],
                         include: [
                             {

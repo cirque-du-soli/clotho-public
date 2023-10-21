@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import {
   Container,
@@ -17,8 +17,12 @@ import {
 import PageNotFound from './PageNotFound';
 
 const ListingPage = () => {
+
+  const navigate = useNavigate();
   const [listing, setListing] = useState();
   const [images, setImages] = useState([]);
+  const [sellerAvi, setSellerAvi] = useState('');
+
 
   const { id } = useParams();
 
@@ -41,9 +45,10 @@ const ListingPage = () => {
       setListing(list.data);
 
       var imgs = await axios.get(`/images/${id}`);
-   
- 
       setImages(imgs.data);
+
+      const avatar = await axios.get(`/images/avatar/${list.data.Seller.avatar}`);
+      setSellerAvi(avatar.data.url);
 
     } catch (err) {
       console.log(err);
@@ -77,28 +82,54 @@ const ListingPage = () => {
 </Row>
       </Col>
         <Col md="6">
-          <Card>
+          <Row>
+          <Card className="border-0">
             <CardBody>
-              <CardTitle tag="h5">{listing.title}</CardTitle>
+              <CardTitle tag="h3" className="mb-5">{listing.title}</CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted">
-              By <Link to={`/${listing.Seller.username}`}>{listing.Seller.username}</Link>
+              <h3 className="text-muted">${listing.price}</h3>
               </CardSubtitle>
-              <CardText>{listing.description}</CardText>
-              <CardText>
-                <small className="text-muted">Price: ${listing.price}</small>
+
+                            <CardText>
+                <p className="text-muted fs-5">Size {listing.Size.name}</p>
               </CardText>
               <CardText>
-                <small className="text-muted">Category: {listing.Category.name}</small>
+              <button className='btn border-dark fs-5'>Add to Cart</button>
               </CardText>
               <CardText>
-                <small className="text-muted">Size: {listing.Size.name}</small>
+                <p className="text-muted">{listing.Category.name}</p>
               </CardText>
+
               <CardText>
-                <small className="text-muted">Gender: {listing.Gender.name}</small>
+                <p className="text-muted">Gender: {listing.Gender.name}</p>
               </CardText>
-              <Button>Add to Cart</Button>
+              <CardText className='fs-5'>{listing.description}</CardText>
+
             </CardBody>
           </Card>
+          </Row>
+          <Row>
+          <Card className="border-0">
+            <CardBody>
+              <div className='row my-5'>
+
+                        <div className='col-3 col-lg-2'>
+                            <img src={sellerAvi} alt={`${listing.Seller.username}'s avatar`} className="img-fluid rounded-circle w-100" />
+                        </div>
+                        <div className='col-8 text-start'>
+                        <CardTitle tag="h5" className="mb-5">{listing.Seller.username}</CardTitle>
+
+
+                            <Link to={`/${listing.Seller.username}`}></Link>
+                        </div>
+            </div>
+            <div className='row my-2'>
+              <div className='col'><button className='btn border-dark fs-5' onClick={() => navigate(`/${listing.Seller.username}`)}>Visit Shop</button></div>
+              </div>
+
+            </CardBody>
+          </Card>
+          </Row>
         </Col>
       </Row>
 
