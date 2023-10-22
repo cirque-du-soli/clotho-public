@@ -1,9 +1,12 @@
 // EditProfile.js
 import React, { useState } from 'react';
 import axios from '../../api/axios';
+import useAxiosJWT from '../../hooks/useAxiosJWT';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 function EditProfile() {
+
+  const axiosJWT = useAxiosJWT();
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -20,11 +23,10 @@ function EditProfile() {
       return;
     }
     try {
-      const response = await axios.put('/users', {
+      const response = await axiosJWT.put('/users', {
         currentPassword,
         newPassword,
         email,
-        avatar,
       });
       toggle();
       console.log(response.data);
@@ -35,7 +37,6 @@ function EditProfile() {
 
   return (
     <Form onSubmit={handleSubmit}>
-        {/* ... other form fields ... */}
         <FormGroup>
             <Label for="currentPassword">Current Password</Label>
             <Input type="password" name="currentPassword" id="currentPassword" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} required />
@@ -56,7 +57,6 @@ function EditProfile() {
             <Label for="avatar">Avatar URL</Label>
             <Input type="text" name="avatar" id="avatar" value={avatar} onChange={(e) => setAvatar(e.target.value)} />
         </FormGroup> */}
-        {/* ... other form fields ... */}
         <Button type="submit">Update Profile</Button>
         <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader toggle={toggle}>Profile Updated</ModalHeader>
