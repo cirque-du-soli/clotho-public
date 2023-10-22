@@ -18,6 +18,9 @@ import {
     Placeholder,
 } from "reactstrap";
 
+import Card2RPD from "../components/1-Admin/Card2RPD";
+import UsersList from "../components/Tables/UsersList";
+
 function AdminDashboard(props) {
 
     return (
@@ -41,13 +44,39 @@ function AdminDashboard(props) {
                     </Col>
                 </Row>
                 <Row className="px-3">
-                    <Col xs="12" lg="6">
+                    <Col xs="12" lg="4">
                         <Placeholder animation="glow">
-
+                            <p>Holder of places (Left)</p>
                         </Placeholder>
                     </Col>
-                    <Col xs="12" lg="6">
+                    <Col xs="12" lg="4">
+                        <Placeholder animation="glow">
+                            <p>Hi. (Middle)</p>
+                        </Placeholder>
                     </Col>
+                    <Col xs="12" lg="4">
+                        <Placeholder animation="glow">
+                            <p>The placiest holder (Right)</p>
+                        </Placeholder>
+                    </Col>
+
+                </Row>
+                <Row className="px-3">
+                    <Col xs="12" lg="12">
+                        
+                            <p>Holder of places</p>
+                        {/* <CardRPD /> */}
+                        <Card2RPD />
+                        
+                    </Col>
+
+                </Row>
+                <Row className="px-3">
+                    <Col xs="12" lg="12">
+                        <UsersList />
+                        
+                    </Col>
+
                 </Row>
 
 

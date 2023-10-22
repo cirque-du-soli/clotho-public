@@ -78,7 +78,12 @@ td {
   content: "\ea0c";
 }
 
-
+.custom-icons {
+  display: inline-block;
+  font: normal normal normal 1em/1 'Nucleo';
+  vertical-align: middle;
+  text-transform: none;
+}
 
 
 
