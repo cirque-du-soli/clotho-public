@@ -109,7 +109,7 @@ function UserProfilePrivate() {
 
                     <h2>{user.username}</h2>
                     <p>{user.email}</p>
-                    <Link to="/editprofile">
+                    <Link to="/settings">
                         <Button color="primary">Edit Profile</Button>
                     </Link>
                 </div>

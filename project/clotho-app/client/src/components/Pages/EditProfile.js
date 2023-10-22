@@ -8,7 +8,7 @@ function EditProfile() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [avatar, setAvatar] = useState('');
+  // const [avatar, setAvatar] = useState('');
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -52,10 +52,10 @@ function EditProfile() {
             <Label for="email">Email</Label>
             <Input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </FormGroup>
-        <FormGroup>
+        {/* <FormGroup>
             <Label for="avatar">Avatar URL</Label>
             <Input type="text" name="avatar" id="avatar" value={avatar} onChange={(e) => setAvatar(e.target.value)} />
-        </FormGroup>
+        </FormGroup> */}
         {/* ... other form fields ... */}
         <Button type="submit">Update Profile</Button>
         <Modal isOpen={modal} toggle={toggle}>
