@@ -126,7 +126,7 @@ exports.getAllbyListing = async (req, res) => {
           Bucket: bucketName,
           Key: imgs[i].path
         }),
-        { expiresIn: 3600 }
+        { expiresIn: 86400 }
       )
       console.log(imgs[i].url);
       imgs[i] = { url: imgs[i].url, priority: imgs[i].priority };

@@ -26,6 +26,8 @@ function Logout({ props }) {
             sessionStorage.setItem('isAdmin', '');
             sessionStorage.setItem('userId', '');
             sessionStorage.setItem('username', '');
+            sessionStorage.setItem('avi', '');
+
             
             redirect('/test');
             
