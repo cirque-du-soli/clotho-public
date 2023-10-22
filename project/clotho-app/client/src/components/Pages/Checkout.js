@@ -138,9 +138,9 @@ const Checkout = () => {
                                     <div className='col-6'>Payment Method:</div>
                                     <div className='col-6 text-end'>N/A</div>
                                 </CardText>
-                                <form>
+                                <form onSubmit={handleSubmit}>
                                     <div className='row m-3 mt-5 text-center'>
-                                        <button className='btn btn-dark fs-4' onSubmit={handleSubmit}>Place order</button>
+                                        <button className='btn btn-dark fs-4'>Place order</button>
                                     </div>
                                 </form>
                             </CardBody>
