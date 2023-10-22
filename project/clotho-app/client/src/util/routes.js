@@ -65,6 +65,13 @@ var routes = [
         component: <ListingPage />,
     },
 
+    // {
+    //     layout: "StandardLayout",
+    //     path: "/products/:id",
+    //     name: "Edit Listing",
+    //     component: <ListingPage />,
+    // },
+
     {
         layout: "StandardLayout",
         path: "/profile",
