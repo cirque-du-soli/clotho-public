@@ -18,8 +18,9 @@ import {
     Placeholder,
 } from "reactstrap";
 
-import Card2RPD from "../components/1-Admin/Card2RPD";
-import UsersList from "../components/Tables/UsersList";
+import Card2RPD from "../components/1-Admin/NewUsersPerDayCardAdmin";
+import UsersTableCardAdmin from "../components/1-Admin/UsersTableCardAdmin";
+import LoaderSpinner from "../components/LoaderSpinner";
 
 function AdminDashboard(props) {
 
@@ -27,7 +28,7 @@ function AdminDashboard(props) {
         <>
 
             <Container className="adminDashboardHolder p-0 text-center">
-                
+
 
                 <Row>
                     <Col className="py-3">
@@ -63,26 +64,14 @@ function AdminDashboard(props) {
                 </Row>
                 <Row className="px-3">
                     <Col xs="12" lg="12">
-                        
-                            <p>Holder of places</p>
-                        {/* <CardRPD /> */}
                         <Card2RPD />
-                        
                     </Col>
-
                 </Row>
                 <Row className="px-3">
                     <Col xs="12" lg="12">
-                        <UsersList />
-                        
+                        <UsersTableCardAdmin />
                     </Col>
-
                 </Row>
-
-
-
-
-
 
             </Container>
 

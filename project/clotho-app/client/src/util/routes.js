@@ -16,8 +16,6 @@ import ListingPage from "../components/Pages/ListingPage"
 import Header from '../components/Navbars/Header';
 import { Auth } from '../context/Auth';
 import PageNotFound from '../components/Pages/PageNotFound';
-import Login from '../components/Forms/Login';
-import Logout from '../components/Buttons/Logout';
 import UserProfileV2 from '../components/Pages/UserProfileV2';
 import UserProfile from '../components/Pages/UserProfile';
 import EditProfile from "../components/Pages/EditProfile";
@@ -173,24 +171,6 @@ var routes = [
         path: "/header",
         name: "Test: Header",
         component: <Header />,
-    },
-*/
-
-/* DONE
-    {
-        layout: "TestLayout",
-        path: "/logout",
-        name: "Test: Logout",
-        component: <Logout />,
-    },
-*/
-
-/* DONE
-    {
-        layout: "TestLayout",
-        path: "/login",
-        name: "Test: Login",
-        component: <Login />,
     },
 */
 
