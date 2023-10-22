@@ -31,6 +31,7 @@ import LogoutNavItem from '../0-LLR/LogoutNavItem';
 import DevNavItem from '../0-LLR/DevNavItem';
 import AdminNavItem from '../0-LLR/AdminNavItem';
 import UserNavItem from '../0-LLR/UserNavItem';
+import HomeNavItem from '../0-LLR/HomeNavItem';
 
 /* // OLD WORKING:
 import Login from '../0-LLR/Login';
@@ -106,6 +107,8 @@ function Header() {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="justify-content-end" style={{ width: "100%" }} navbar >
 
+            
+            <HomeNavItem props={{ isLoggedIn: isLoggedIn, isAdmin: isAdmin, onSubmitProp: popupChange }} />
             <LoginNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange, uname: signupUname }} />
             <LogoutNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
             <SignupNavItem props={{ isLoggedIn: isLoggedIn, onSubmitProp: popupChange }} />
