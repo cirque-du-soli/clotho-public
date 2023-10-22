@@ -15,6 +15,8 @@ import {
   Button
 } from 'reactstrap';
 import PageNotFound from './PageNotFound';
+import Checkout from './Checkout';
+
 
 const ListingPage = () => {
 
@@ -22,8 +24,9 @@ const ListingPage = () => {
   const [listing, setListing] = useState();
   const [images, setImages] = useState([]);
   const [sellerAvi, setSellerAvi] = useState('');
-
-
+  const [checkout, setCheckout] = useState(false);
+  const [props, setProps] = useState({});
+  const [data, setData] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
@@ -31,7 +34,7 @@ const ListingPage = () => {
 
     getListing();
 
-  }, [id]);
+  }, [id, checkout]);
 
 
   const getListing = async () => {
@@ -55,15 +58,37 @@ const ListingPage = () => {
     }
   }
 
+  const buyNow = () => {
+   setData({listing, images, sellerAvi});
 
+    console.log(data);
+    // setCheckout(true);
 
+    sessionStorage.setItem('checkoutId', listing.id);
 
-  if (!listing) {
-    return (
-      <PageNotFound />
-    )
+    navigate('/checkout', {state: {
+     id: listing.id
+    }});
+
+    // navigate('/checkout', {state: {
+    //   listing: {...listing},
+    //   images: {...images},
+    //   sellerAvi: sellerAvi
+    // }});
+
   }
 
+  // if (checkout) {
+
+ 
+  //   return (
+  //     // <Checkout listing={{listing}} images={{images}} sellerAvi={{sellerAvi}}/>
+  //     <Checkout {...props}/>
+
+  //   )
+  // }
+
+  if (listing) {
   return (
     <Container>
       <Row>
@@ -94,7 +119,7 @@ const ListingPage = () => {
                 <p className="text-muted fs-5">Size {listing.Size.name}</p>
               </CardText>
               <CardText>
-              <button className='btn border-dark fs-5'>Add to Cart</button>
+              <button className='btn border-dark fs-5' onClick={buyNow}>Buy Now</button>
               </CardText>
               <CardText>
                 <p className="text-muted">{listing.Category.name}</p>
@@ -140,6 +165,15 @@ const ListingPage = () => {
 
     </Container>
   );
+}
+
+if (!listing) {
+return (
+  <PageNotFound />
+)
+}
+
+
 };
 
 export default ListingPage;

@@ -142,7 +142,7 @@ exports.create = async (req, res) => {
         }
 
         if (err > 0) {
-            return res.status(400).json({ message: "One or more items in the cart are not available" });
+            return res.status(400).json({ message: "One or more items are not available" });
         }
 
         // save order with buyer and total

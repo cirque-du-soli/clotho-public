@@ -23,6 +23,7 @@ import UserProfile from '../components/Pages/UserProfile';
 import EditProfile from "../components/Pages/EditProfile";
 import AdminTables from "../components/Tables/AdminTables";
 import Avatar from "../components/Forms/Avatar";
+import Checkout from "../components/Pages/Checkout";
 // import ListingsV2 from '../components/ListingsV2';
 // import ListingsV3 from '../components/ListingsV3';
 // import Listings from '../../TEMP/Listings';
@@ -91,6 +92,13 @@ var routes = [
         path: "/sell",
         name: "Sell",
         component: <Sell />,
+    },
+
+    {
+        layout: "StandardLayout",
+        path: "/checkout",
+        name: "Checkout",
+        component: <Checkout />
     },
 
     ///////////////////////////// TEST ROUTES ////////////////////////

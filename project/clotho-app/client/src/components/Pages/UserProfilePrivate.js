@@ -127,8 +127,8 @@ function UserProfilePrivate() {
                             <img className='border-0 rounded-0 card-img' top width="100%" src={listing.thumbnail} alt="listing image" />
                             {listing.isSold ? (
                                 <div className="card-img-overlay text-center align-middle">
-                                    <div class="card-body d-flex align-items-center justify-content-center h-100 text-warning">
-                                        <h4 class="card-title">SOLD</h4>
+                                    <div className="card-body d-flex align-items-center justify-content-center h-100 text-warning">
+                                        <h4 className="card-title">SOLD</h4>
                                     </div>
                                 </div>
                             ) : (<></>)}
