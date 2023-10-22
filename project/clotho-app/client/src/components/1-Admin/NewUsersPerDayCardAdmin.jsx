@@ -3,6 +3,7 @@ import useAxiosJWT from '../../hooks/useAxiosJWT';
 import { Line } from 'react-chartjs-2';
 
 import calculateUsersByDate from "./calculateUsersByDate.js";
+import LoaderSpinner from '../LoaderSpinner';
 
 import {
     Chart as ChartJS,
@@ -52,7 +53,6 @@ function Card2RPD() {
         try {
 
             var users = await axiosJWT.get("/admin/users");
-            console.log(users.data);
 
             let ubdData = calculateUsersByDate(users.data);
 
@@ -84,6 +84,7 @@ function Card2RPD() {
             setCardReady(true);
 
         } catch (err) {
+            console.log("Error Code: 0066");
             console.log(err); // TODO: Flash Messages?
         }
     }
@@ -97,27 +98,30 @@ function Card2RPD() {
         },
     };
 
-    // TODO: default render loading wheel
     return (
-        <>
-            {
-                !cardReady ? <h1>Loading...</h1> :
-                    <Card className="card-chart my-5" >
-                        <CardHeader>
-                            <CardTitle tag="h3">
-                                <i className="custom-icons bell-icon text-info" /> New Users Per Day
-                            </CardTitle>
+        <>    
+            <Card className="card-chart my-5 custom-card" >
+                <CardHeader>
+                    <CardTitle tag="h3">
+                        <i className="custom-icons bell-icon text-info" /> New Users Per Day
+                    </CardTitle>
 
-                        </CardHeader>
-                        <CardBody>
-                            <div className="chart-area">
-                                <h4>Total Users Created: {totalUsers}</h4>
-                                <Line data={allChartData} options={chartOptions} />
-                            </div>
-                        </CardBody>
-                    </Card>
-            }
+                </CardHeader>
+                <CardBody className="">
+                    {!cardReady
+                        ?
+                        <LoaderSpinner />
+                        :
+                        <div className="chart-area">
+                            <h4>Total Users Created: {totalUsers}</h4>
+                            <Line data={allChartData} options={chartOptions} />
+                        </div>
+                    }
 
+
+                    
+                </CardBody>
+            </Card>
         </>
     );
 }

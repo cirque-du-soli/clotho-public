@@ -12,7 +12,7 @@ import {
     Table,
 } from "reactstrap";
 
-function UsersList() {
+function UsersTable() {
 
     const axiosJWT = useAxiosJWT();
 
@@ -113,4 +113,4 @@ function UsersList() {
     );
 }
 
-export default UsersList;
+export default UsersTable;
