@@ -12,7 +12,7 @@ app.use(
 
     cors({
   
-      origin: ["https://clotho-frontend-e926130cfc7f.herokuapp.com/","http://localhost:3000"],
+      origin: ["https://clotho-frontend-e926130cfc7f.herokuapp.com","http://localhost:3000"],
       // why the fuck? //
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE","OPTION"],
   
