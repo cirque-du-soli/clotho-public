@@ -110,7 +110,7 @@ function Avatar(){
         <>
 <Form onSubmit={handleSubmit}>
         <FormGroup>
-        <Label for="image">Add images to your post.</Label>
+        <Label for="image" className='text-muted'>Upload image file</Label>
 
         <Input type="file" name='image' id="image" onChange={handleFilesChange} required accept="image/*" />
     </FormGroup>
@@ -128,7 +128,7 @@ function Avatar(){
 ) : (<></>)}
 
 
-    <Button color="primary" type="submit">Save new Avatar</Button>
+    <button className='btn border-dark w-100 mt-4' type="submit">Save</button>
     <span ref={errRef} className={errorMessage ? "errorMessage" : "offscreen"} aria-live="assertive">{errorMessage}</span>
 
 </Form>

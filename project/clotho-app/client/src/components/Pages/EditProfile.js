@@ -1,8 +1,10 @@
 // EditProfile.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
 import useAxiosJWT from '../../hooks/useAxiosJWT';
-import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Card, CardBody, CardText, CardTitle, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Avatar from '../Forms/Avatar';
+import { useNavigate } from 'react-router-dom';
 
 function EditProfile() {
 
@@ -11,10 +13,42 @@ function EditProfile() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({});
+  const [avi, setAvi] = useState({});
+
+  const navigate = useNavigate();
+
+
   // const [avatar, setAvatar] = useState('');
   const [modal, setModal] = useState(false);
 
+
   const toggle = () => setModal(!modal);
+
+  useEffect(() => {
+    getProfile();
+
+  }, []);
+
+  const getProfile = async () => {
+
+    try {
+
+      var response = await axiosJWT.get('/users/profile');
+
+      console.log(response.data)
+
+      const avatar = await axios.get(`/images/avatar/${response.data.user.avatar}`);
+
+      setAvi(avatar.data.url);
+      setUser(response.data.user);
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,9 +58,9 @@ function EditProfile() {
     }
     try {
       const response = await axiosJWT.put('/users', {
-        currentPassword,
-        newPassword,
+        password,
         email,
+        username
       });
       toggle();
       console.log(response.data);
@@ -36,40 +70,106 @@ function EditProfile() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-        <FormGroup>
+
+    <div className="container">
+      <div className="col-10 offset-1">
+
+      <div className='row'>
+
+        <div className='row my-5'>
+          <h2>Settings</h2>
+        </div>
+
+
+        <div className="col-md-6">
+
+          <div className='row'>
+            <div className="card pb-3">
+              <div className="card-body">
+                <div className="card-title fs-4 mb-5">Update details</div>
+                <Form onSubmit={handleSubmit}>
+                  {/* <FormGroup>
             <Label for="currentPassword">Current Password</Label>
             <Input type="password" name="currentPassword" id="currentPassword" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} required />
         </FormGroup>
         <FormGroup>
             <Label for="newPassword">New Password</Label>
             <Input type="password" name="newPassword" id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
-        </FormGroup>
-        <FormGroup>
+        </FormGroup> */}
+                  {/* <FormGroup>
             <Label for="confirmNewPassword">Confirm New Password</Label>
             <Input type="password" name="confirmNewPassword" id="confirmNewPassword" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} required />
-        </FormGroup>
-        <FormGroup>
-            <Label for="email">Email</Label>
-            <Input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </FormGroup>
-        {/* <FormGroup>
-            <Label for="avatar">Avatar URL</Label>
-            <Input type="text" name="avatar" id="avatar" value={avatar} onChange={(e) => setAvatar(e.target.value)} />
         </FormGroup> */}
-        <Button type="submit">Update Profile</Button>
-        <Modal isOpen={modal} toggle={toggle}>
-            <ModalHeader toggle={toggle}>Profile Updated</ModalHeader>
-            <ModalBody>
-                Your profile has been updated successfully!
-            </ModalBody>
-            <ModalFooter>
-                <Button color="primary" onClick={toggle}>Ok</Button>
-            </ModalFooter>
-        </Modal>
-    </Form>
-);
-  }
+                  <FormGroup>
+                    <Label for="email">Email</Label>
+                    <Input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='example@email.com' />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="email">Usename</Label>
+                    <Input type="text" name="username" id="username" value={email} onChange={(e) => setUsername(e.target.value)} placeholder='enter new username' />
+                  </FormGroup>
+                  <button type="submit" className="btn border-dark w-100">Save changes</button>
+                </Form>
+                {/* <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>Profile Updated</ModalHeader>
+                <ModalBody>
+                  Your profile has been updated successfully!
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="primary" onClick={toggle}>Ok</Button>
+                </ModalFooter>
+              </Modal> */}
+
+              </div>
+            </div>
+          </div>
+          <div className='row my-5'>
+            <div className="card pb-4">
+              <div className="card-body ">
+                <div className="card-title fs-4 mb-5">New profile image</div>
+                <Avatar />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div className='col-md-4'>
+          <Row>
+            <Card className="border-0">
+              <CardBody>
+                <div className='row mb-5'>
+
+                  <div className='col-3'>
+                    <img src={avi} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle w-100" />
+                  </div>
+                  <div className='col-8 text-start'>
+                    <CardTitle tag="h5" className="mb-1 px-2">{user.username}</CardTitle>
+                    <div className='my-2'>
+                      <span className="m-2 text-muted fs-5">{user.email}</span>
+                    </div>
+                    <div className=''>
+                      <span className="m-2 text-danger">&#x2605; &#x2605; &#x2605; &#x2605; &#x2605;</span>
+                    </div>
+                  </div>
+                </div>
+                <CardText className="row border-bottom pb-4">
+                  <button className='btn border-dark fs-5 mb-2' onClick={() => navigate(`/${user.username}`)}>Back to profile</button>
+                </CardText>
+                <div className='row my-2'>
+                </div>
+              </CardBody>
+            </Card>
+          </Row>
+        </div>
+
+</div>
+
+      </div>
+    </div>
+
+  );
+}
 export default EditProfile;
 
 
