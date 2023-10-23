@@ -120,7 +120,7 @@ return (
           //  }
           //  }
           />
-          <InputGroupText addonType="append">🔍</InputGroupText>
+          <InputGroupText addontype="append">🔍</InputGroupText>
         </InputGroup>
       </Col>
       </Row>
