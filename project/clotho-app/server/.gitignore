@@ -30,4 +30,3 @@ server/config/config.json
 #db sql inserts
 server/data.sql
 node_modules
-node_modules
