@@ -1,5 +1,6 @@
-import { React, useRef, useState, useEffect, useNavigate } from 'react';
+import { React, useRef, useState, useEffect } from 'react';
 import useAxiosJWT from '../../hooks/useAxiosJWT';
+import { useNavigate } from 'react-router-dom';
 
 import {
     NavItem,
