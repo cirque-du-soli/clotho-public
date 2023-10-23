@@ -90,9 +90,8 @@ db.sequelize.sync().then(() => {
   
   //   app.listen(process.env.PORT || 3000, () => {
   
-  //     console.log("server running on port " + process.env.DEV_PORT);
+  //     console.log("server running on port " + process.env.PORT);
   
   //   });
   
-  // });
-  })
+  });
