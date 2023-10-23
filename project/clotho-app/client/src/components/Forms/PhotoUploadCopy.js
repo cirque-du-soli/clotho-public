@@ -12,7 +12,7 @@ const PhotoUpload = () => {
     const priority = photos.length;
 
     // Upload photo to server
-    const { data } = await axios.post('BASE_API_URL' + '/api/admin/listingimages/upload', {
+    const { data } = await axios.post(BASE_API_URL + '/api/admin/listingimages/upload', {
       file,
       id,
       priority,
