@@ -1,1 +1,1 @@
-export const BASE_API_URL = "https://clotho-1-20769fe47198.herokuapp.com"
+export const BASE_API_URL = "https://clotho-backend-674c0a2a2db0.herokuapp.com/"

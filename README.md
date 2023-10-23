@@ -2,6 +2,10 @@
 Repository for Web Dev II Project
 
 
+server: https://clotho-back-eefdf9fb483a.herokuapp.com/
+
+client:  https://clotho-front-64986b95b892.herokuapp.com/
+
 - clotho
   - notes
   - project

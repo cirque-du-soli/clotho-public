@@ -32,7 +32,7 @@ const Listings = () => {
 
   async function fetchListings() {
     try {
-      const response = await fetch(`http://localhost:3001/api/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}`);
+      const response = await fetch(`BASE_API_URL' + '/api/listings?search=${search}&size=${selectedSize}&category=${selectedCategory}`);
       const data = await response.json();
       setListings(data);
       console.log(data);
