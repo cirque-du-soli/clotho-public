@@ -230,18 +230,23 @@ function Sell() {
             </div> */}
 
             <Container>
+                <div className='col-10 offset-1'>
+                    <div className='my-5'><h3>Sell an item</h3></div>
                 <Card>
-                    <CardHeader>Create New Listing</CardHeader>
                     <CardBody>
                         <span ref={errRef} className={errorMessage ? "errorMessage" : "offscreen"} aria-live="assertive">{errorMessage}</span>
 
                         <Form onSubmit={handleSubmit}>
                             <FormGroup>
                                 <Label for="title">Title</Label>
+                                <span ref={errRef} className={errorMessage ? "errorMessage" : "offscreen"} aria-live="assertive">{errorMessage}</span>
+
                                 <Input type="text" name="title" id="title" placeholder="Title" onChange={handleInputChange} required />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="description">Description</Label>
+                                <span ref={errRef} className={errorMessage ? "errorMessage" : "offscreen"} aria-live="assertive">{errorMessage}</span>
+
                                 <Input type="textarea" name="description" id="description" placeholder="Description" onChange={handleInputChange} required />
                             </FormGroup>
                             <FormGroup>
@@ -251,18 +256,21 @@ function Sell() {
                             <FormGroup>
                                 <Label for="categoryId">Category</Label>
                                 <Input type="select" name="categoryId" id="categoryId" onChange={handleInputChange}>
+                                <option disabled selected value> Select </option>
                                     {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
                                 </Input>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="genderId">Gender</Label>
                                 <Input type="select" name="genderId" id="genderId" onChange={handleInputChange}>
+                                      <option disabled selected value> Select </option>
                                     {genders.map(gender => <option key={gender.id} value={gender.id}>{gender.name}</option>)}
                                 </Input>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="sizeId">Size</Label>
                                 <Input type="select" id="sizeId" name="sizeId" onChange={handleInputChange}>
+                                <option disabled selected value> Select </option>
                                     {sizes.map(size => <option key={size.id} value={size.id}>{size.name}</option>)}
                                 </Input>
                             </FormGroup>
@@ -291,6 +299,7 @@ function Sell() {
                         </Form>
                     </CardBody>
                 </Card>
+                </div>
             </Container>
         </>
 

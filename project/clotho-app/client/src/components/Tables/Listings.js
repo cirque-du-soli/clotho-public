@@ -30,7 +30,7 @@ function Listings() {
   
     getListings();
 
-  }, [search, selectedSize, selectedCategory]);
+  }, [search, selectedSize, selectedCategory, selectedGender]);
 
 
 
@@ -98,10 +98,16 @@ const filteredListings = listings.filter(listing => {
     (!selectedCategory || listing.category === selectedCategory);
 });
 
+const clearFilters = () => {
+  setSelectedCategory('');
+  setSelectedGender('');
+  setSelectedSize('');
+}
+
 return (
   <Container>
     <Row className="mb-4">
-      <Col md="8">
+      <Col md="8" className="offset-2">
         <InputGroup>
           <Input
             placeholder="Search"
@@ -117,19 +123,11 @@ return (
           <InputGroupText addonType="append">🔍</InputGroupText>
         </InputGroup>
       </Col>
-      <div className='col-md-1 mx-1 text-center'>
-        <Dropdown isOpen={dropdownOpenSize} toggle={() => setDropdownOpenSize(prevState => !prevState)}>
-          <DropdownToggle caret>
-            {selectedSize || "Size"}
-          </DropdownToggle>
-          <DropdownMenu>
-            {sizes.map(size => <DropdownItem key={size.id} onClick={() => setSelectedSize(size.id)}>{size.name}</DropdownItem>)}
-          </DropdownMenu>
-        </Dropdown>
-      </div>
-      <div className='col-md-1 mx-1 text-center'>
+      </Row>
+      <Row>
+      <div className='col-md-2 offset-2 text-center'>
         <Dropdown isOpen={dropdownOpenCategory} toggle={() => setDropdownOpenCategory(prevState => !prevState)}>
-          <DropdownToggle caret>
+          <DropdownToggle caret className="w-100">
             {selectedCategory || "Category"}
           </DropdownToggle>
           <DropdownMenu>
@@ -137,9 +135,20 @@ return (
           </DropdownMenu>
         </Dropdown>
       </div>
-      <div className='col-md-1 mx-1 text-center'>
+      <div className='col-md-2 text-center'>
+        <Dropdown isOpen={dropdownOpenSize} toggle={() => setDropdownOpenSize(prevState => !prevState)}>
+          <DropdownToggle caret className="w-100">
+            {selectedSize || "Size"}
+          </DropdownToggle>
+          <DropdownMenu>
+            {sizes.map(size => <DropdownItem key={size.id} onClick={() => setSelectedSize(size.id)}>{size.name}</DropdownItem>)}
+          </DropdownMenu>
+        </Dropdown>
+      </div>
+
+      <div className='col-md-2 text-center'>
         <Dropdown isOpen={dropdownOpenGender} toggle={() => setDropdownOpenGender(prevState => !prevState)}>
-          <DropdownToggle caret>
+          <DropdownToggle caret className="w-100">
             {selectedGender || "Gender"}
           </DropdownToggle>
           <DropdownMenu>
@@ -147,6 +156,12 @@ return (
           </DropdownMenu>
         </Dropdown>
       </div>
+      {selectedCategory || selectedGender || selectedSize ? (
+<div className='col-md-2'>
+<button className='btn btn-light text-danger' onClick={clearFilters}>Clear filters</button>
+
+</div>
+      ) : (<></>)}
     </Row>
 
 
@@ -159,7 +174,7 @@ return (
             <Card className='border-0 rounded-0'>
                 <img className='border-0 rounded-0' top width="100%" src={listing.thumbnail} alt="listing image" />
             </Card>
-            <Row className='px-3 fs-5'>
+            <Row className='px-3 fs-5 fw-bold'>
                 ${listing.price}
             </Row>
         </Link>

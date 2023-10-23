@@ -9,7 +9,7 @@ const upload = multer({ storage: storage });
 router.get('/profile', auth.getToken, auth.getUser, users.findById);
 
 // get public seller profile and listings
-router.get('/seller/:username(^[a-zA-Z0-9]([_-]|[a-zA-Z0-9]){1,18}[a-zA-Z0-9]$)', users.findByUsernamePublic);
+router.get('/seller/:username', users.findByUsernamePublic);
 
 
 // create new user

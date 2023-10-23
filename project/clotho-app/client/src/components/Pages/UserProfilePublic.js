@@ -59,10 +59,15 @@ function UserProfilePublic() {
                         <div className='col-2 col-lg-1'>
                             <img src={avi} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle w-100" />
                         </div>
-                        <div className='col-1 text-start'>
+                        <div className='col-3 text-start'>
 
-                            <h2>{user.username}</h2>
-
+                            <h2 className='ps-2'>{user.username}</h2>
+                            <div className=''>
+                                        <span className="m-2 text-muted">@{user.username}</span>
+                                    </div>
+                                    <div className=''>
+                                        <span className="m-2 text-danger">&#x2605; &#x2605; &#x2605; &#x2605; &#x2605;</span>
+                                    </div>
                         </div>
                     </>
 
@@ -79,8 +84,8 @@ function UserProfilePublic() {
                             <Card className='border-0 rounded-0' onClick={!listing.isSold ? () => navigate(`/products/${listing.id}`) : undefined}>
                                 <img className='border-0 rounded-0 card-img' top width="100%" src={listing.thumbnail} alt="lisiting image" />
                                 {listing.isSold ? (
-                                    <div className="card-img-overlay text-center align-middle">
-                                        <div class="card-body d-flex align-items-center justify-content-center h-100 text-warning">
+                                <div className="card-img-overlay text-center align-middle bg-dark bg-opacity-50">
+                                <div class="card-body d-flex align-items-center justify-content-center h-100 text-warning">
                                             <h4 class="card-title">SOLD</h4>
                                         </div>
                                     </div>

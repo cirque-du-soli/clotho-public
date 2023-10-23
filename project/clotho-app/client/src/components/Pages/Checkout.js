@@ -150,7 +150,7 @@ const Checkout = () => {
                 <Col md="4">
                     <Row>
                         <Card className="">
-                            {/* <CardBody>
+                            <CardBody>
                                 <div className='row'>
 
                                     <div className='col-2 offset-5 p-0 my-3'>
@@ -163,11 +163,11 @@ const Checkout = () => {
                                         <span className="m-2 text-muted">@{listing.Seller.username}</span>
                                     </div>
                                     <div className='col-12 text-center m-0'>
-                                        <span className="m-2 text-danger">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</span>
+                                        <span className="m-2 text-danger">&#x2605; &#x2605; &#x2605; &#x2605; &#x2605;</span>
                                     </div>
                                 </div>
 
-                            </CardBody> */}
+                            </CardBody>
                         </Card>
                     </Row>
                     <Row>

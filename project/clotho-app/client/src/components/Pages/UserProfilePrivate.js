@@ -105,14 +105,26 @@ function UserProfilePrivate() {
                 <div className='col-2 col-lg-1'>
                     <img src={avi} alt={`${user.username}'s avatar`} className="img-fluid rounded-circle w-100" />
                 </div>
-                <div className='col-1 text-start'>
+                <div className='col-3 text-start'>
 
-                    <h2>{user.username}</h2>
-                    <p>{user.email}</p>
-                    <Link to="/editprofile">
-                        <Button color="primary">Edit Profile</Button>
-                    </Link>
+                    <h2 className='ps-2'>{user.username}</h2>
+                    
+                                    <div className=''>
+                                        <span className="m-2 text-muted">@{user.username}</span>
+                                    </div>
+                                    <div className=''>
+                                        <span className="m-2 text-danger">&#x2605; &#x2605; &#x2605; &#x2605; &#x2605;</span>
+                                    </div>
+
+
                 </div>
+                <div className='row my-5'>
+                <Link to="/editprofile">
+                <button className='btn border-dark fs-5 mb-2 w-25'>Edit Profile</button>
+
+         
+                    </Link>
+</div>
             </div>
             <div className='row m-5'></div>
 
@@ -126,14 +138,14 @@ function UserProfilePrivate() {
                         <Card className='border-0 rounded-0' onClick={!listing.isSold ? () => navigate(`/products/${listing.id}`) : undefined}>
                             <img className='border-0 rounded-0 card-img' top width="100%" src={listing.thumbnail} alt="listing image" />
                             {listing.isSold ? (
-                                <div className="card-img-overlay text-center align-middle">
+                                <div className="card-img-overlay text-center align-middle bg-dark bg-opacity-50">
                                     <div className="card-body d-flex align-items-center justify-content-center h-100 text-warning">
                                         <h4 className="card-title">SOLD</h4>
                                     </div>
                                 </div>
                             ) : (<></>)}
                         </Card>
-                        <Row className='px-3 fs-5'>
+                        <Row className='px-3 fs-5 fw-bold'>
                             ${listing.price}
                         </Row>
                     </Col>
@@ -149,17 +161,19 @@ function UserProfilePrivate() {
                 <div className='card my-5'>
                                         <div className='card-title m-3 mb-0'>
                         <h5>{order.createdAt.slice(0, 10)}</h5>
-                                <p className='fs-5'>Order #{order.id}</p>
+                                <p className='text-muted'>Order #{order.id}</p>
+                                <p className=''>Total: ${Number(order.total/100).toFixed(2)}</p>
+
                         </div>
 
 
 <div className='card-body'>
-    <Row>
+    <Row className='px-2'>
 {order.OrderItems.map(item => (
 
 <Col md="1" className="my-2 p-1" key={item.id}>
-    <Card className='border-0 rounded-0'>
-        <img className='border-0 rounded-0 card-img' top width="100%" src={item.thumbnail} alt="item image" />
+    <Card className='border-0 rounded-0' onClick={() => navigate(`/products/${item.Listing.id}`)}>
+        <img className='border-0 rounded-2 card-img' top width="100%" src={item.thumbnail} alt="item image" />
 
     </Card>
     <Row className='px-3 fs-5'>
