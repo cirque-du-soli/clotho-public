@@ -28,4 +28,5 @@ yarn-error.log*
 server/config/config.json
 
 #db sql inserts
-server/data.sql
+server/data.sqlnode_modules
+node_modules
