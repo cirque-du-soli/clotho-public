@@ -53,7 +53,7 @@ var routes = [
     {
         layout: "StandardLayout",
         path: "/:username",
-        name: "Test: Public profile (add username param)",
+        name: "Public profile",
         component: <UserProfile />,
     },
 

@@ -85,7 +85,7 @@ function Card2RPD() {
 
         } catch (err) {
             console.log("Error Code: 0066");
-            console.log(err); // TODO: Flash Messages?
+            console.log(err); // TODO: Flash Messages
         }
     }
 

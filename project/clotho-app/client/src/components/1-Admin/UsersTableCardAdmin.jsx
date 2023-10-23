@@ -35,7 +35,7 @@ function UsersTableCardAdmin() {
     }, [])
 
     useEffect(() => {
-        axiosJWT.get("/admin/users").then((response) => { //FIXME: ERROR HANDLING
+        axiosJWT.get("/admin/users").then((response) => { 
             setUsersList(response.data);
         }).catch((err) => {
             if (!err.response) {
