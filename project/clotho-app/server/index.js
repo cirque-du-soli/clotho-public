@@ -12,8 +12,8 @@ app.use(
 
     cors({
   
-      origin: ["https://sleepy-wave-79440-e840c0381b67.herokuapp.com","http://localhost:3000"],
-  
+      origin: ["https://clotho-frontend-e926130cfc7f.herokuapp.com/","http://localhost:3000"],
+      // why the fuck? //
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE","OPTION"],
   
       credentials: true,
