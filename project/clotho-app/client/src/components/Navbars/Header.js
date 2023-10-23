@@ -58,7 +58,7 @@ function Header() {
 
     // update state (re-renders header)
     setIsLoggedIn(!(sessionStorage.getItem('token') === '' || sessionStorage.getItem('token') === null));
-
+    setIsAdmin((sessionStorage.getItem('isAdmin') === 'true'));
     // set uname state for header
     setUname(sessionStorage.getItem('username'));
     setSignupUname(signupUname);

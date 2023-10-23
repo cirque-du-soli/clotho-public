@@ -60,7 +60,7 @@ function UsersTableCardAdmin() {
     //     alert('deleteUser() is under dev');
     // }  
 
-    if (sessionStorage.getItem('isAdmin') === true) {
+    if (sessionStorage.getItem('isAdmin') === "true") {
 
     
     return (
