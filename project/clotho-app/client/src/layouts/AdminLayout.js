@@ -16,6 +16,7 @@ import routes from "../util/routes.js";
 import Header from "../components/Navbars/Header";
 import TestSquarePlaceholder from '../components/PLACEHOLDERS/TestSquarePlaceholder';
 import Footer from "../components/Navbars/Footer";
+import PageNotFound from "../components/Pages/PageNotFound";
 
 
 const getRoutes = (routes) => {
@@ -34,14 +35,15 @@ function AdminLayout(props) {
 
     const mainPanelRef = useRef(null);
 
-    return (
+
+        return (
         <div className="App">
             <Header />
 
             {/* <Subheader /> */}
             <Footer />
-
-            <div className="main-panel" ref={mainPanelRef}>
+{(sessionStorage.getItem('isAdmin') === true) ? (
+                <div className="main-panel" ref={mainPanelRef}>
 
 
                 <Routes>
@@ -55,9 +57,14 @@ function AdminLayout(props) {
                     />
                 </Routes>
             </div>
+) : (<PageNotFound />)}
+
 
         </div>
     );
+    
+
+
 }
 
 export default AdminLayout;

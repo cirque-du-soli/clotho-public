@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useAxiosJWT from '../../hooks/useAxiosJWT';
 
 // reactstrap components
@@ -16,6 +16,9 @@ function UsersTable() {
 
     const axiosJWT = useAxiosJWT();
 
+    const errRef = useRef();
+    const [errorMessage, setErrorMessage] = useState('');
+
     // STATES
     const [usersList, setUsersList] = useState([]);
 
@@ -28,10 +31,27 @@ function UsersTable() {
         });
     }, []);
     */
+    useEffect(() => {
+        setErrorMessage('');
+    }, [])
+
    useEffect(() => {
        axiosJWT.get("/admin/users").then((response) => { //FIXME ERROR HANDLING
            setUsersList(response.data);
-       });
+       }).catch((err) => {
+                if (!err.response) {
+                    console.log(err);
+
+                    setErrorMessage('No Server Response');
+                } else if (err.response?.data?.message) {
+                    console.log(err);
+                    setErrorMessage(err.response.data.message);
+                } else {
+                    console.log(err);
+                    setErrorMessage("Submission failed");
+                }
+                errRef.current.focus();
+    });
    }, []);
 
     const viewUser = (id) => {

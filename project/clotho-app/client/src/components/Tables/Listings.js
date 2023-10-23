@@ -124,7 +124,7 @@ return (
         </InputGroup>
       </Col>
       </Row>
-      <Row>
+      <Row className="mb-4">
       <div className='col-md-2 offset-2 text-center'>
         <Dropdown isOpen={dropdownOpenCategory} toggle={() => setDropdownOpenCategory(prevState => !prevState)}>
           <DropdownToggle caret className="w-100">
@@ -166,7 +166,7 @@ return (
 
 
 
-    <Row>
+    <Row className="mt-5">
 
     {listings.map(listing => (
     <Col md="2" className="my-2 p-1" key={listing.id}>

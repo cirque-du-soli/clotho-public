@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useAxiosJWT from '../../hooks/useAxiosJWT';
 
 // reactstrap components
@@ -19,6 +19,8 @@ function UsersTableCardAdmin() {
     // STATES
     const [usersList, setUsersList] = useState([]);
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     // HOOKS
     /* 
     //Test Hook with sample JSON
@@ -28,11 +30,28 @@ function UsersTableCardAdmin() {
         });
     }, []);
     */
-   useEffect(() => {
-       axiosJWT.get("/admin/users").then((response) => { //FIXME: ERROR HANDLING
-           setUsersList(response.data);
-       });
-   }, []);
+    useEffect(() => {
+        setErrorMessage('');
+    }, [])
+
+    useEffect(() => {
+        axiosJWT.get("/admin/users").then((response) => { //FIXME: ERROR HANDLING
+            setUsersList(response.data);
+        }).catch((err) => {
+            if (!err.response) {
+                console.log(err);
+
+                setErrorMessage('No Server Response');
+            } else if (err.response?.data?.message) {
+                console.log(err);
+                setErrorMessage(err.response.data.message);
+            } else {
+                console.log(err);
+                setErrorMessage("Submission failed");
+            }
+        });
+    }, []);
+
 
     const viewUser = (id) => {
         alert('viewUser(id) not yet implemented');
@@ -40,12 +59,14 @@ function UsersTableCardAdmin() {
 
     const deleteUser = (id) => {
         alert('deleteUser() is under dev');
-        
-    }  
-    
+
+    }
+
+    if (sessionStorage.getItem('isAdmin') === true) {
+
+
     return (
         <>
-            
             <Card>
                 <CardHeader className='text-start-0'>
                     <CardTitle tag="h4">Users:</CardTitle>
@@ -80,7 +101,7 @@ function UsersTableCardAdmin() {
                                             <td>{val.createdAt}</td>
                                             <td>{val.updatedAt}</td>
                                             <td className="text-center">
-                                                <button 
+                                                <button
                                                     className="btn btn-secondary"
                                                     onClick={() => { viewUser(val.id) }}
                                                 >
@@ -88,7 +109,7 @@ function UsersTableCardAdmin() {
                                                 </button>
                                             </td>
                                             <td className="text-center">
-                                                <button 
+                                                <button
                                                     className="btn btn-danger"
                                                     onClick={() => { deleteUser(val.id) }}
                                                 >
@@ -106,6 +127,11 @@ function UsersTableCardAdmin() {
             </Card>
         </>
     );
+                        }
+                        return (
+                            <>
+                    <div><span>{errorMessage}</span></div>
+                    </>)
 }
 
 export default UsersTableCardAdmin;
