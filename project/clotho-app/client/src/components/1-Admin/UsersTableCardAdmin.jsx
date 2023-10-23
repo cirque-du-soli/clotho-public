@@ -28,20 +28,20 @@ function UsersTableCardAdmin() {
         });
     }, []);
     */
-   useEffect(() => {
+    useEffect(() => {
+       
        axiosJWT.get("/admin/users").then((response) => { //FIXME: ERROR HANDLING
            setUsersList(response.data);
        });
    }, []);
 
-    const viewUser = (id) => {
-        alert('viewUser(id) not yet implemented');
-    };
+    // const viewUser = (id) => {
+    //     alert('viewUser(id) not yet implemented');
+    // };
 
-    const deleteUser = (id) => {
-        alert('deleteUser() is under dev');
-        
-    }  
+    // const deleteUser = (id) => {
+    //     alert('deleteUser() is under dev');
+    // }  
     
     return (
         <>
@@ -79,7 +79,7 @@ function UsersTableCardAdmin() {
                                             {/* <td>{val.avatar}</td> */}
                                             <td>{val.createdAt}</td>
                                             <td>{val.updatedAt}</td>
-                                            <td className="text-center">
+                                            {/* <td className="text-center">
                                                 <button 
                                                     className="btn btn-secondary"
                                                     onClick={() => { viewUser(val.id) }}
@@ -94,7 +94,7 @@ function UsersTableCardAdmin() {
                                                 >
                                                     Delete User
                                                 </button>
-                                            </td>
+                                            </td> */}
                                         </tr>
                                     );
                                 })

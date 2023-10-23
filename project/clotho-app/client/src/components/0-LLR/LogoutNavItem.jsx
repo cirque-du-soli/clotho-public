@@ -1,4 +1,4 @@
-import { React, useRef, useState, useEffect } from 'react';
+import { React, useRef, useState, useEffect, useNavigate } from 'react';
 import useAxiosJWT from '../../hooks/useAxiosJWT';
 
 import {
@@ -7,8 +7,12 @@ import {
 } from 'reactstrap';
 import { redirect } from 'react-router';
 
+import { Navigate } from 'react-router-dom';
+
+
 function Logout({ props }) {
 
+const navigate = useNavigate;
     const errRef = useRef();
     const axiosJWT = useAxiosJWT();
 
@@ -18,7 +22,6 @@ function Logout({ props }) {
 
         try {
             const response = await axiosJWT.delete('/auth/logout');
-            console.log("response?.data");
             console.log(response?.data);
 
             sessionStorage.setItem('token', '');
@@ -28,9 +31,6 @@ function Logout({ props }) {
             sessionStorage.setItem('username', '');
             sessionStorage.setItem('avi', '');
 
-            
-            redirect('/test');
-            
             props.onSubmitProp(true, "Logged out successfully!");
 
             
@@ -52,17 +52,21 @@ function Logout({ props }) {
         }
     }
 
-    return (
-        <>
-            {
-                props.isLoggedIn
-                &&
-                <NavItem className="mx-auto mx-md-0">
-                    <NavLink href='#' className="nav-link" onClick={handleLogout}>Logout</NavLink>
-                </NavItem>
-            }
-        </>
-    )
+
+        return (
+            <>
+                {
+                    props.isLoggedIn
+                        ?
+                        <NavItem className="mx-auto mx-md-0">
+                            <NavLink href='#' className="nav-link" onClick={handleLogout}>Logout</NavLink>
+                        </NavItem>
+                        :
+                        <Navigate to="/" replace={true} />
+                }
+            </>
+        )
+    
 }
 
 export default Logout
