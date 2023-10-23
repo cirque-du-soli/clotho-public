@@ -38,7 +38,6 @@ function AdminLayout(props) {
         <div className="App">
             <Header />
 
-            {/* <Subheader /> */}
             <Footer />
 
             <div className="main-panel" ref={mainPanelRef}>
