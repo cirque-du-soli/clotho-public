@@ -8,6 +8,7 @@ import {
 
 function UserNavItem({ props }) {
 
+
     const popupTBD = () => {
         // pass params up to header to display popup
         props.onClickProp("info", "This will show " + props.uname +"'s profile...", props.uname);
