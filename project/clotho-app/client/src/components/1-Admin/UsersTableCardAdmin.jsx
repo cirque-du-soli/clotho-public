@@ -35,7 +35,7 @@ function UsersTableCardAdmin() {
     }, [])
 
     useEffect(() => {
-        axiosJWT.get("/admin/users").then((response) => { //FIXME: ERROR HANDLING
+        axiosJWT.get("/admin/users").then((response) => { 
             setUsersList(response.data);
         }).catch((err) => {
             if (!err.response) {
@@ -60,7 +60,7 @@ function UsersTableCardAdmin() {
     //     alert('deleteUser() is under dev');
     // }  
 
-    if (sessionStorage.getItem('isAdmin') === true) {
+    if (sessionStorage.getItem('isAdmin') === "true") {
 
     
     return (

@@ -41,7 +41,7 @@ import SignupModalNavItem from './HeaderItems/SignupModalNavItem';
 import LogoutNavItem from './HeaderItems/LogoutNavItem';
 */
 
-function Header() {
+function Header({ props }) {
 
 //  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -58,10 +58,11 @@ function Header() {
 
     // update state (re-renders header)
     setIsLoggedIn(!(sessionStorage.getItem('token') === '' || sessionStorage.getItem('token') === null));
-
+    setIsAdmin((sessionStorage.getItem('isAdmin') === 'true'));
     // set uname state for header
     setUname(sessionStorage.getItem('username'));
     setSignupUname(signupUname);
+
 
     // update popup
     let options = {

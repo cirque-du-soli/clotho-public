@@ -1,6 +1,6 @@
 // IMPORT: React
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
-import { useRef } from 'react';
+import { useRef, useState, React } from 'react';
 
 // IMPORT: Styles
 import '../assets/App.css';
@@ -12,6 +12,7 @@ import Subheader from "../components/Navbars/Subheader";
 
 // IMPORT: Routes
 import routes from "../util/routes.js";
+import EditProfile from "../components/Pages/EditProfile";
 
 const getRoutes = (routes) => {
     return routes.map((prop, key) => {
@@ -34,14 +35,17 @@ function StandardLayout() {
             console.log("StandardLayout.js: msg: " + msg);
             PopupAlert({ props: { msg: msg } });
         } */
+    const [uname, setUname] = useState(sessionStorage.getItem('username'));
+
 
     return (
         <div className="App">
-            <Header />
+            <Header props={{ uname: uname }} />
             {/* <Subheader /> */}
             <Footer />
             <div className="main-panel" ref={mainPanelRef}>
                 <Routes>
+                    <Route path="/settings" element={<EditProfile props={{ uname: uname}} />} />
 
                     {/* This adds all possible routes & views */}
                     {getRoutes(routes)}

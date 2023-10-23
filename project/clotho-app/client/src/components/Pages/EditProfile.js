@@ -6,7 +6,7 @@ import { Button, Form, FormGroup, Label, Input, Row, Card, CardBody, CardText, C
 import Avatar from '../Forms/Avatar';
 import { useNavigate } from 'react-router-dom';
 
-function EditProfile() {
+function EditProfile({ props }) {
 
   const axiosJWT = useAxiosJWT();
   const [currentPassword, setCurrentPassword] = useState('');
@@ -105,8 +105,8 @@ function EditProfile() {
                     <Input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='example@email.com' />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="email">Usename</Label>
-                    <Input type="text" name="username" id="username" value={email} onChange={(e) => setUsername(e.target.value)} placeholder='enter new username' />
+                    <Label for="email">Username</Label>
+                    <Input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder='enter new username' />
                   </FormGroup>
                   <button type="submit" className="btn border-dark w-100">Save changes</button>
                 </Form>
