@@ -74,25 +74,26 @@ app.get('/', (req, res) => {
 // {alter: true} // {force: true} // <-- use as arg in .sync() below if needed
 
 db.sequelize.sync().then(() => {
-    app.listen(process.env.PORT || 5000, () => {
+    app.listen(process.env.PORT || 3001, () => {
       console.log("server running on port " + process.env.PORT);
   });
   })
   .catch((err) => {
       console.error("Unable to connect to database : ", err);
       process.exit(1);
+  });
+  
+  
+/*   
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
     });
-  
-  //   const PORT = process.env.PORT || 5000;
-  //   app.listen(PORT, () => {
-  //     console.log(`Server is running on port ${PORT}`);
-  //   });
-  
+   */
   //   app.listen(process.env.PORT || 3000, () => {
   
-  //     console.log("server running on port " + process.env.DEV_PORT);
+  //     console.log("server running on port " + process.env.PORT);
   
   //   });
   
-  // });
-  })
+  });

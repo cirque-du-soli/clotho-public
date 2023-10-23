@@ -53,18 +53,16 @@ function UsersTableCardAdmin() {
     }, []);
 
 
-    const viewUser = (id) => {
-        alert('viewUser(id) not yet implemented');
-    };
-
-    const deleteUser = (id) => {
-        alert('deleteUser() is under dev');
-
-    }
+    // const viewUser = (id) => {
+    //     alert('viewUser(id) not yet implemented');
+    // };
+    // const deleteUser = (id) => {
+    //     alert('deleteUser() is under dev');
+    // }  
 
     if (sessionStorage.getItem('isAdmin') === true) {
 
-
+    
     return (
         <>
             <Card>
@@ -100,8 +98,8 @@ function UsersTableCardAdmin() {
                                             {/* <td>{val.avatar}</td> */}
                                             <td>{val.createdAt}</td>
                                             <td>{val.updatedAt}</td>
-                                            <td className="text-center">
-                                                <button
+                                            {/* <td className="text-center">
+                                                <button 
                                                     className="btn btn-secondary"
                                                     onClick={() => { viewUser(val.id) }}
                                                 >
@@ -115,7 +113,7 @@ function UsersTableCardAdmin() {
                                                 >
                                                     Delete User
                                                 </button>
-                                            </td>
+                                            </td> */}
                                         </tr>
                                     );
                                 })

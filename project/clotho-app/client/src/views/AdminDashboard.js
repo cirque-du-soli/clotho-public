@@ -21,6 +21,7 @@ import {
 import Card2RPD from "../components/1-Admin/NewUsersPerDayCardAdmin";
 import UsersTableCardAdmin from "../components/1-Admin/UsersTableCardAdmin";
 import LoaderSpinner from "../components/LoaderSpinner";
+import TabsAdmin from "../components/1-Admin/TabsAdmin";
 
 function AdminDashboard(props) {
 
@@ -28,39 +29,26 @@ function AdminDashboard(props) {
         <>
 
             <Container className="adminDashboardHolder p-0 text-center">
-
-
                 <Row>
                     <Col className="py-3">
                         <h1>Admin Dashboard</h1>
                     </Col>
                 </Row>
 
-                <Row className="p-3">
+                <Row className="px-3">
+                    <Col xs="12" lg="12">
+                        <TabsAdmin />
+                    </Col>
+                </Row>
+
+
+                {/* <Row className="p-3">
                     <Col xs="12" lg="6" className="mx-auto my-2">
                         <NewUserForm />
                     </Col>
                     <Col xs="12" lg="6" className="mx-auto my-2">
                         <PHCreateListing />
                     </Col>
-                </Row>
-                <Row className="px-3">
-                    <Col xs="12" lg="4">
-                        <Placeholder animation="glow">
-                            <p>Holder of places (Left)</p>
-                        </Placeholder>
-                    </Col>
-                    <Col xs="12" lg="4">
-                        <Placeholder animation="glow">
-                            <p>Hi. (Middle)</p>
-                        </Placeholder>
-                    </Col>
-                    <Col xs="12" lg="4">
-                        <Placeholder animation="glow">
-                            <p>The placiest holder (Right)</p>
-                        </Placeholder>
-                    </Col>
-
                 </Row>
                 <Row className="px-3">
                     <Col xs="12" lg="12">
@@ -71,7 +59,8 @@ function AdminDashboard(props) {
                     <Col xs="12" lg="12">
                         <UsersTableCardAdmin />
                     </Col>
-                </Row>
+                </Row> */}
+
 
             </Container>
 

@@ -17,3 +17,4 @@ export const axiosImg = axios.create({
     headers: {'Content-Type': 'multipart/form-data'},
     
 });
+

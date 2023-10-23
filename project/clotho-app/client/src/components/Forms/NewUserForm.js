@@ -156,10 +156,10 @@ function NewUserForm() {
                                 </FormGroup>
                             </Col>
                         </Row>
-                        <Row>
+                        {/* <Row>
                             <Col>
                                 <FormGroup>
-                                    <label>Image URL (will be input box)</label>
+                                    <label>Image URL placeholder -- user will provide</label>
                                     <Input
                                         id='newUserImgUrl'
                                         disabled
@@ -169,7 +169,7 @@ function NewUserForm() {
                                     />
                                 </FormGroup>
                             </Col>
-                        </Row>
+                        </Row> */}
                     </Form>
                 </CardBody>
                 <CardFooter>

@@ -40,7 +40,6 @@ function AdminLayout(props) {
         <div className="App">
             <Header />
 
-            {/* <Subheader /> */}
             <Footer />
 {(sessionStorage.getItem('isAdmin') === true) ? (
                 <div className="main-panel" ref={mainPanelRef}>
