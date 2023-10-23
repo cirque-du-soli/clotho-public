@@ -95,7 +95,7 @@ const ListingPage = () => {
 {images.map(img => (
     <Col md="12" className="my-2 p-1" key={img.id}>
         <Card className='border-0 rounded-0'>
-            <img className='border-0 rounded-0' top width="100%" src={img.url} alt="lisiting image" />
+            <img className='border-0 rounded-0' top width="100%" src={img.url} alt="listing image" />
             {listing.isSold ? (
                                 <div className="card-img-overlay text-center align-middle bg-white bg-opacity-50">
                                     <div className="card-body d-flex align-items-center justify-content-center h-100 text-warning">
